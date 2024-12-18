@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2024/12/17 21:25:14 by katakada         ###   ########.fr        #
+#    Updated: 2024/12/18 19:44:37 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,16 @@ MLX_DIR			=	minilibx/
 MLX				=	$(MLX_DIR)libmlx_Linux.a
 FRAMEWORKS		=	-lXext -lX11 -lm -lbsd
 
+MLX_MAC			=	$(MLX_DIR)libmlx_Darwin.a
+FRAMEWORKS_MAC	=	-L /usr/X11/include/../lib -lXext -lX11
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+	INCS += -I /usr/X11/include
+    MLX = $(MLX_MAC)
+    FRAMEWORKS = $(FRAMEWORKS_MAC)
+endif
 
 all:	$(NAME)
 
@@ -65,7 +75,7 @@ fclean:
 	make fclean -C $(LIBFT_DIR)
 	rm -rf $(MLX_DIR)
 	rm -rf $(OBJS_PATH)
-	rm -f $(NAME) $(NAME_BONUS)
+	rm -f $(NAME)
 
 re:		fclean all
 
