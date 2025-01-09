@@ -6,20 +6,11 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2024/12/19 21:26:24 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:27:31 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -61,7 +52,12 @@ int	destory(void *param)
 	exit(0);
 }
 
-int	main(void)
+int	summ(int a, int b)
+{
+	return (a + b);
+}
+
+int	AppMain(void)
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -93,3 +89,10 @@ int	main(void)
 	mlx_loop(mlx);
 	return (0);
 }
+
+#ifndef TEST
+int	main(void)
+{
+	return (AppMain());
+}
+#endif // TEST
