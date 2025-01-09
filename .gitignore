@@ -1,0 +1,10 @@
+
+
+build
+
+fdf
+src/minilibx
+
+*/**/*.o
+*/**/*.a
+.DS_Store
