@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2024/12/18 19:44:37 by katakada         ###   ########.fr        #
+#    Updated: 2025/01/09 23:42:58 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,19 @@ NAME			=	fdf
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 
-INCS			=	-I includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
+SRC_PATH		=	src/
+INCS			=	-I $(SRC_PATH)includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 
-SRCS_PATH		=	src/
+SRCS_PATH		=	$(SRC_PATH)src/
 SRCS			=	$(wildcard $(SRCS_PATH)*.c)
 
-OBJS_PATH		=	objs/
-OBJS			=	$(SRCS:src/%.c=objs/%.o)
+OBJS_PATH		=	$(SRC_PATH)objs/
+OBJS			=	$(SRCS:src/src/%.c=src/objs/%.o)
 
-LIBFT_DIR		=	libft/
+LIBFT_DIR		=	$(SRC_PATH)libft/
 LIBFT			=	$(LIBFT_DIR)libft.a
 
-MLX_DIR			=	minilibx/
+MLX_DIR			=	$(SRC_PATH)minilibx/
 MLX				=	$(MLX_DIR)libmlx_Linux.a
 FRAMEWORKS		=	-lXext -lX11 -lm -lbsd
 
