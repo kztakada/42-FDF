@@ -8,3 +8,4 @@ src/minilibx
 */**/*.o
 */**/*.a
 .DS_Store
+settings.json
