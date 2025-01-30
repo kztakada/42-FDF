@@ -6,13 +6,13 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 00:08:20 by katakada          #+#    #+#             */
-/*   Updated: 2024/12/02 00:09:41 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:44:07 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_vprintf(const char *format, va_list args)
+int	ft_vprintf(const char *format, va_list *args)
 {
 	int	count;
 

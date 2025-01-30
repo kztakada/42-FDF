@@ -6,13 +6,15 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:04:12 by katakada          #+#    #+#              #
-#    Updated: 2024/12/01 23:50:56 by katakada         ###   ########.fr        #
+#    Updated: 2025/01/30 13:39:59 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 PRINTF =	ft_printf/ft_printf.c \
+			ft_printf/ft_dprintf.c \
+			ft_printf/ft_vprintf.c \
 			ft_printf/print_format_funcs.c \
 			ft_printf/print_format_setters.c \
 			ft_printf/print_format_validator_order.c \
