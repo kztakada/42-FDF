@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/28 23:40:19 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:22:35 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define DEBUG 1
+# define IS_DEBUG 1
 
 # define LEFT_UP 0
 # define RIGHT_UP 1
@@ -30,12 +30,22 @@
 
 # define Z_HEIGHT_RATIO 10
 
+// hex base upper and lower
+# define HEX_LOWER_PREFIX "0x"
+# define HEX_UPPER_PREFIX "0X"
+# define HEX_LOWER_BASE "0123456789abcdef"
+# define HEX_UPPER_BASE "0123456789ABCDEF"
+
 // model colors are 5 levels
 # define COLOR_L0 0x432371
 # define COLOR_L1 0x714674
 # define COLOR_L2 0x9F6976
 # define COLOR_L3 0xCC8B79
 # define COLOR_L4 0xFAAE7B
+
+// screen size
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -50,12 +60,14 @@
 //////////////////////////////////////////////////////////////////////////////
 typedef struct s_vertex_fdf
 {
+	// inside fdf file
 	int				x_raw;
 	int				y_raw;
+	int				color;
+	int				z;
+	// balanced Value (Center of Gravity Correction Value)
 	int				x;
 	int				y;
-	int				z;
-	int				color;
 }					t_vertex_fdf;
 typedef struct s_model_fdf
 {
@@ -125,17 +137,15 @@ typedef struct s_view
 	int				offset_y;
 	t_model_fdf		*fdf;
 	t_camera		*camera;
-	t_settings		*settings;
 }					t_view;
 
-typedef struct s_views
+typedef struct s_multi_view
 {
-	t_view			*full;
 	t_view			*left_up;
 	t_view			*right_up;
 	t_view			*left_down;
 	t_view			*right_down;
-}					t_views;
+}					t_multi_view;
 
 typedef struct s_image
 {
@@ -163,6 +173,16 @@ typedef struct s_screen
 	t_mouse			*mouse;
 	t_settings		*settings;
 }					t_screen;
+
+// init_screen.c
+t_screen			*init_screen(const char *fdf_path);
+
+// load_lines.c
+void				load_lines(t_model_fdf *fdf, int fd);
+
+// load_util.c
+int					open_or_exit(const char *path, const char *file, int line);
+int					convert_hex_str_to_int(const char *str);
 
 // draw_view.c
 void				draw_view(t_view *view, t_image *image);
@@ -194,5 +214,8 @@ void				sys_func_error_exit(const char *err_msg, const char *file,
 						int line);
 void				forced_error_exit(const char *err_msg, const char *file,
 						int line);
+
+// ft_atoi_base.c
+unsigned int		ft_atoi_base(const char *str_src, const char *base);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/09 20:27:31 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:37:49 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 	int		offset;
@@ -61,7 +61,7 @@ int	AppMain(void)
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
+	t_image	img;
 
 	ft_printf("FDF Start\n");
 	mlx = mlx_init();
@@ -93,6 +93,7 @@ int	AppMain(void)
 #ifndef TEST
 int	main(void)
 {
-	return (AppMain());
+	er(__FILE__, __LINE__);
+	// return (AppMain());
 }
 #endif // TEST
