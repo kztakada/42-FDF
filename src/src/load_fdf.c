@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 01:30:57 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:33:18 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_model_fdf	load_fdf(const char *fdf_path)
 			* size_y_raw);
 	if (!fdf.yx_matrix)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
-	load_lines(&fdf, fd);
+	read_fdf_lines(&fdf, fd);
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
 	fdf = calc_balanced_x_y(fdf);

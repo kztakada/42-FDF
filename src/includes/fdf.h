@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 01:48:15 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:51:21 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,15 +181,14 @@ typedef struct s_screen
 // init_screen.c
 t_screen			*init_screen(const char *fdf_path);
 
+// load_fdf__calc_max_min_xyz.c
+t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
+// load_fdf__read_fdf_lines.c
+void				read_fdf_lines(t_model_fdf *fdf, int fd);
+// load_fdf__util.c
+int					open_or_exit(const char *path, const char *file, int line);
 // load_fdf.c
 t_model_fdf			load_fdf(const char *fdf_path);
-
-// load_lines.c
-void				load_lines(t_model_fdf *fdf, int fd);
-
-// load_fdf_util.c
-int					open_or_exit(const char *path, const char *file, int line);
-t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
 
 // draw_view.c
 void				draw_view(t_view *view, t_image *image);

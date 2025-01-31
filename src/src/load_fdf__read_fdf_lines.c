@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_lines.c                                       :+:      :+:    :+:   */
+/*   load_fdf__read_fdf_lines.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 00:26:27 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 00:25:15 by katakada         ###   ########.fr       */
+/*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
+/*   Updated: 2025/01/31 23:45:29 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	load_color(t_vertex_fdf *vertex, char *z_and_color_collection)
 		vertex->color = -1;
 }
 
-static void	load_oneline(t_model_fdf *fdf, char *line, int y)
+static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 {
 	char	**z_and_color_collection;
 	int		i_x;
@@ -60,7 +60,7 @@ static void	load_oneline(t_model_fdf *fdf, char *line, int y)
 	free(z_and_color_collection);
 }
 
-void	load_lines(t_model_fdf *fdf, int fd)
+void	read_fdf_lines(t_model_fdf *fdf, int fd)
 {
 	char	*line;
 	char	**z_and_color_collection;
@@ -72,7 +72,7 @@ void	load_lines(t_model_fdf *fdf, int fd)
 		line = get_next_line(fd);
 		if (line == NULL || *line == '\0')
 			break ;
-		load_oneline(fdf, line, i_y);
+		read_fdf_oneline(fdf, line, i_y);
 		i_y++;
 		free(line);
 	}
