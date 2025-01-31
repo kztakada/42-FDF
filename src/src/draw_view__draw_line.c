@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw_view__draw_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 13:54:35 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/19 16:10:17 by katakada         ###   ########.fr       */
+/*   Created: 2025/02/01 00:00:03 by katakada          #+#    #+#             */
+/*   Updated: 2025/02/01 00:00:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	unreflect_and_draw_dot(t_dot_of_view dot, t_line_spec line,
 	}
 }
 
-void	draw_line(t_dot_of_view start, t_dot_of_view end, t_view *view,
+static void	draw_line(t_dot_of_view start, t_dot_of_view end, t_view *view,
 		t_image *image)
 {
 	t_line_spec		line;

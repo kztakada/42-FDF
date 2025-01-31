@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 23:51:21 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 00:10:44 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,31 @@ typedef struct s_screen
 	t_settings		*settings;
 }					t_screen;
 
+// draw_view__draw_line__util.c
+void				put_pixel_to_image(int x, int y, int color, t_image *image);
+int					is_out_of_screen(t_dot_of_view start, t_dot_of_view end,
+						t_view *view);
+t_line_spec			reflect_line_to_smooth(t_dot_of_view *start,
+						t_dot_of_view *end);
+// draw_view__draw_line.c
+void				draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view,
+						t_image *image);
+void				draw_line_to_next_y(t_vertex_fdf s_fdf, t_view *view,
+						t_image *image);
+// draw_view__util.c
+t_vertex_fdf		computed_deepest_corner(t_view *view);
+// draw_view.c
+void				draw_view(t_view *view, t_image *image);
+
+// error_exit.c
+void				sys_func_error_exit(const char *err_msg, const char *file,
+						int line);
+void				forced_error_exit(const char *err_msg, const char *file,
+						int line);
+
+// ft_atoi_base.c
+unsigned int		ft_atoi_base(const char *str_src, const char *base);
+
 // init_screen.c
 t_screen			*init_screen(const char *fdf_path);
 
@@ -190,38 +215,13 @@ int					open_or_exit(const char *path, const char *file, int line);
 // load_fdf.c
 t_model_fdf			load_fdf(const char *fdf_path);
 
-// draw_view.c
-void				draw_view(t_view *view, t_image *image);
+// project_screen.c
+void				project_screen(t_view *view, t_image *image);
 
-// draw_view_util.c
-t_vertex_fdf		computed_deepest_corner(t_view *view);
-
-// draw_line.c
-void				draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view,
-						t_image *image);
-void				draw_line_to_next_y(t_vertex_fdf s_fdf, t_view *view,
-						t_image *image);
-
-// draw_line_util.c
-void				put_pixel_to_image(int x, int y, int color, t_image *image);
-int					is_out_of_screen(t_dot_of_view start, t_dot_of_view end,
-						t_view *view);
-t_line_spec			reflect_line_to_smooth(t_dot_of_view *start,
-						t_dot_of_view *end);
-
-// convert_fdf_to_view.c
+// util__convert_fdf_to_view.c
 t_dot_of_view		convert_fdf_to_view(t_vertex_fdf v_fdf, t_view *view);
 
-// fdf_util.c
+// util__fdf.c
 t_vertex_fdf		get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
-
-// error.c
-void				sys_func_error_exit(const char *err_msg, const char *file,
-						int line);
-void				forced_error_exit(const char *err_msg, const char *file,
-						int line);
-
-// ft_atoi_base.c
-unsigned int		ft_atoi_base(const char *str_src, const char *base);
 
 #endif
