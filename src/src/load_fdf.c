@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/30 23:43:13 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:30:57 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	calc_max_y_raw(const char *fdf_path)
 	return (size_y_raw - 1);
 }
 
-static t_model_fdf	add_balanced_x_y(t_model_fdf fdf)
+static t_model_fdf	calc_balanced_x_y(t_model_fdf fdf)
 {
 	int	x_offset;
 	int	y_offset;
@@ -86,7 +86,7 @@ static t_model_fdf	add_balanced_x_y(t_model_fdf fdf)
 	return (fdf);
 }
 
-static t_model_fdf	*load_fdf(const char *fdf_path)
+t_model_fdf	load_fdf(const char *fdf_path)
 {
 	int			fd;
 	t_model_fdf	fdf;
@@ -103,8 +103,8 @@ static t_model_fdf	*load_fdf(const char *fdf_path)
 	load_lines(&fdf, fd);
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
-	// 重心補正
-	fdf = add_balanced_x_y(fdf);
+	fdf = calc_balanced_x_y(fdf);
 	// x,y,zの最大値、最小値を計算
-	// fdf = calc_max_min(fdf);
+	// fdf = calc_max_min_xyz(fdf);
+	return (fdf);
 }

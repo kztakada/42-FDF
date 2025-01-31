@@ -1,8 +1,15 @@
 #include "load_fdf.h"
+
+
+
+#include "mock_get_next_line_bonus.h"
+#include "mock_fdf_stabs.h"
+
 #include "unity.h"
 
 void		setUp(void){};
 void		tearDown(void){};
+
 
 t_model_fdf	make_test_fdf(int size_x_raw, int size_y_raw)
 {
@@ -28,13 +35,13 @@ t_model_fdf	make_test_fdf(int size_x_raw, int size_y_raw)
 
 
 
-void	test_add_balanced_x_y(void)
+void	test_calc_balanced_x_y(void)
 {
 	t_model_fdf	fdf;
 	t_model_fdf	result;
 
 	fdf = make_test_fdf(3, 3);
-	result = add_balanced_x_y(fdf);
+	result = calc_balanced_x_y(fdf);
 	TEST_ASSERT_EQUAL_INT(-1, result.yx_matrix[0][0].x);
 	TEST_ASSERT_EQUAL_INT(0, result.yx_matrix[0][1].x);
 	TEST_ASSERT_EQUAL_INT(1, result.yx_matrix[0][2].x);

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/30 12:22:35 by katakada         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:48:15 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "./mlx.h"
 # include <math.h>
 # include <stdio.h>
+
+# ifdef TEST
+#  define static
+# endif
 
 # define TRUE 1
 # define FALSE 0
@@ -177,12 +181,15 @@ typedef struct s_screen
 // init_screen.c
 t_screen			*init_screen(const char *fdf_path);
 
+// load_fdf.c
+t_model_fdf			load_fdf(const char *fdf_path);
+
 // load_lines.c
 void				load_lines(t_model_fdf *fdf, int fd);
 
-// load_util.c
+// load_fdf_util.c
 int					open_or_exit(const char *path, const char *file, int line);
-int					convert_hex_str_to_int(const char *str);
+t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
 
 // draw_view.c
 void				draw_view(t_view *view, t_image *image);
