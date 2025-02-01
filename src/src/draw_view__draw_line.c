@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:00:03 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 18:57:57 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:03:07 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,16 @@ void	draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view, t_image *image)
 
 void	draw_line_to_next_y(t_vertex_fdf s_fdf, t_view *view, t_image *image)
 {
-	t_dot_of_view	start;
+	t_dot_of_view	start_dot;
+	int				next_y_raw;
 	t_vertex_fdf	*end_fdf;
-	t_dot_of_view	end;
+	t_dot_of_view	end_dot;
 
-	start = convert_fdf_to_view_dot(s_fdf, view);
-	end_fdf = get_vertex_fdf(s_fdf.x_raw, s_fdf.y_raw + 1, view->fdf);
+	start_dot = convert_fdf_to_view_dot(s_fdf, view);
+	next_y_raw = s_fdf.y_raw + 1;
+	end_fdf = get_vertex_fdf(s_fdf.x_raw, next_y_raw, view->fdf);
 	if (end_fdf == NULL)
 		forced_error_exit("fdf model data is invalid", __FILE__, __LINE__);
-	end = convert_fdf_to_view_dot(*end_fdf, view);
-	draw_line(start, end, view, image);
+	end_dot = convert_fdf_to_view_dot(*end_fdf, view);
+	draw_line(start_dot, end_dot, view, image);
 }
