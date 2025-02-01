@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util__convert_fdf_to_view.c                        :+:      :+:    :+:   */
+/*   util__convert_fdf_to_view_dot.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 00:07:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 00:07:17 by katakada         ###   ########.fr       */
+/*   Created: 2025/02/01 18:58:49 by katakada          #+#    #+#             */
+/*   Updated: 2025/02/01 18:58:49 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	rotate_z(int *x, int *y, double z_angle)
 	*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
 }
 
-t_dot_of_view	convert_fdf_to_view(t_vertex_fdf v_fdf, t_view *view)
+t_dot_of_view	convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view)
 {
 	t_dot_of_view	view_dot;
 
