@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   draw_view__draw_line__is_out_of_view.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 00:04:34 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/02 03:25:01 by katakada         ###   ########.fr       */
+/*   Created: 2025/02/02 00:40:17 by katakada          #+#    #+#             */
+/*   Updated: 2025/02/02 02:11:08 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "fdf.h"
 
-int	ft_dprintf(int fd, const char *format, ...)
+int	is_out_of_view(t_line_on_view *the_line, t_view *view)
 {
-	va_list	args;
-	int		count;
-
-	if (!format)
-		return (-1);
-	count = 0;
-	va_start(args, format);
-	count = ft_vdprintf(fd, format, &args);
-	va_end(args);
-	return (count);
+	if (is_dot_within_view(the_line->start_dot, view) == TRUE)
+		return (FALSE);
+	if (is_dot_within_view(the_line->end_dot, view) == TRUE)
+		return (FALSE);
+	if (is_crossing_view(*the_line, view) == TRUE)
+		return (FALSE);
+	return (TRUE);
 }

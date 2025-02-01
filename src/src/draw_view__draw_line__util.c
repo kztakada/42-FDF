@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line_util.c                                   :+:      :+:    :+:   */
+/*   draw_view__draw_line__util.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:47:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/21 16:47:38 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 02:58:23 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,99 +25,45 @@ void	put_pixel_to_image(int x, int y, int color, t_image *image)
 	}
 }
 
-t_line_spec	reflect_line_to_smooth(t_dot_of_view *start, t_dot_of_view *end)
+static void	swap_int(int *a, int *b)
 {
-	t_line_spec	line;
+	int	tmp;
 
-	line.is_steep = ft_abs(end->y - start->y) > ft_abs(end->x - start->x);
-	if (line.is_steep)
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	swap_xy_to_less_steep(t_line_on_view *line)
+{
+	swap_int(&line->start_dot.x, &line->start_dot.y);
+	swap_int(&line->end_dot.x, &line->end_dot.y);
+	if (line->start_dot.y > line->end_dot.y)
 	{
-		ft_swap(&start->x, &start->y);
-		ft_swap(&end->x, &end->y);
+		swap_int(&line->start_dot.x, &line->end_dot.x);
+		swap_int(&line->start_dot.y, &line->end_dot.y);
+		swap_int(&line->start_dot.z, &line->end_dot.z);
+		line->is_reversed = TRUE;
 	}
-	if (start->x > end->x)
+}
+
+void	calc_yz_gradient(t_line_on_view *line)
+{
+	float	dy;
+	float	dx;
+	float	dz;
+
+	dx = (float)(line->end_dot.x - line->start_dot.x);
+	dy = (float)(line->end_dot.y - line->start_dot.y);
+	dz = (float)(line->end_dot.z - line->start_dot.z);
+	if (dx == 0.0f)
 	{
-		ft_swap(&start->x, &end->x);
-		ft_swap(&start->y, &end->y);
-		ft_swap(&start->z, &end->z);
-		line.is_in_reverse = TRUE;
+		line->y_gradient = 1.f;
+		line->z_gradient = 1.f;
 	}
 	else
-		line.is_in_reverse = FALSE;
-	return (line);
-}
-
-static int	is_crossing(t_dot_of_view start, t_dot_of_view end,
-		t_dot_of_view left_up, t_dot_of_view right_up)
-{
-	double	delta1;
-	double	delta2;
-	double	delta3;
-	double	delta4;
-
-	delta1 = (right_up.x - left_up.x) * (start.y - left_up.y) - (right_up.y
-			- left_up.y) * (start.x - left_up.x);
-	delta2 = (right_up.x - left_up.x) * (end.y - left_up.y) - (right_up.y
-			- left_up.y) * (end.x - left_up.x);
-	delta3 = (end.x - start.x) * (left_up.y - start.y) - (end.y - start.y)
-		* (left_up.x - start.x);
-	delta4 = (end.x - start.x) * (right_up.y - start.y) - (end.y - start.y)
-		* (right_up.x - start.x);
-	if (delta1 * delta2 < 0 && delta3 * delta4 < 0)
-		return (TRUE);
-	return (FALSE);
-}
-
-static t_dot_of_view	corner_dot(int corner, t_view *view)
-{
-	t_dot_of_view	corner_dot;
-
-	corner_dot.x = 0;
-	corner_dot.y = 0;
-	if (corner == LEFT_UP)
-		return (corner_dot);
-	if (corner == RIGHT_UP)
 	{
-		corner_dot.x = view->width;
-		return (corner_dot);
+		line->y_gradient = dy / dx;
+		line->z_gradient = dz / dx;
 	}
-	if (corner == LEFT_DOWN)
-	{
-		corner_dot.y = view->height;
-		return (corner_dot);
-	}
-	if (corner == RIGHT_DOWN)
-	{
-		corner_dot.x = view->width;
-		corner_dot.y = view->height;
-		return (corner_dot);
-	}
-	return (corner_dot);
-}
-
-int	is_out_of_screen(t_dot_of_view start, t_dot_of_view end, t_view *view)
-{
-	t_dot_of_view	left_up;
-	t_dot_of_view	right_up;
-	t_dot_of_view	left_down;
-	t_dot_of_view	right_down;
-
-	left_up = corner_dot(LEFT_UP, view);
-	right_up = corner_dot(RIGHT_UP, view);
-	left_down = corner_dot(LEFT_DOWN, view);
-	right_down = corner_dot(RIGHT_DOWN, view);
-	if (start.x >= 0 && start.x < view->width && start.y >= 0
-		&& start.y < view->height)
-		return (FALSE);
-	if (end.x >= 0 && end.x < view->width && end.y >= 0 && end.y < view->height)
-		return (FALSE);
-	if (is_crossing(start, end, left_up, right_up) == FALSE)
-		return (FALSE);
-	if (is_crossing(start, end, left_up, left_down) == FALSE)
-		return (FALSE);
-	if (is_crossing(start, end, right_up, right_down) == FALSE)
-		return (FALSE);
-	if (is_crossing(start, end, left_down, right_down) == FALSE)
-		return (FALSE);
-	return (TRUE);
 }

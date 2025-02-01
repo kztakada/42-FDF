@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 18:57:19 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 03:21:24 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 # define RIGHT_UP 1
 # define LEFT_DOWN 2
 # define RIGHT_DOWN 3
+
+# define SIDE_TOP 0
+# define SIDE_BOTTOM 1
+# define SIDE_LEFT 2
+# define SIDE_RIGHT 3
 
 # define Z_HEIGHT_RATIO 10
 
@@ -87,7 +92,7 @@ typedef struct s_model_fdf
 }					t_model_fdf;
 
 // for view rendering
-typedef struct s_dot_of_view
+typedef struct s_dot_on_view
 {
 	int				x;
 	int				y;
@@ -97,14 +102,16 @@ typedef struct s_dot_of_view
 	int				color;
 	int				anti_alias_y;
 	int				anti_alias_color;
-}					t_dot_of_view;
-typedef struct s_line_spec
+}					t_dot_on_view;
+typedef struct s_line_on_view
 {
+	t_dot_on_view	start_dot;
+	t_dot_on_view	end_dot;
 	int				is_steep;
-	int				is_in_reverse;
+	int				is_reversed;
 	float			y_gradient;
 	float			z_gradient;
-}					t_line_spec;
+}					t_line_on_view;
 typedef struct s_camera
 {
 	int				zoom;
@@ -178,12 +185,21 @@ typedef struct s_screen
 	t_settings		*settings;
 }					t_screen;
 
+// draw_view__draw_line__get_color.c
+int					ft_get_color(int x, float factor, t_line_on_view *line);
+
+// draw_view__draw_line__is_out_of_view__util.c
+int					is_dot_within_view(t_dot_on_view dot, t_view *view);
+int					is_crossing_view(t_line_on_view the_line, t_view *view);
+
+// draw_view__draw_line__is_out_of_view.c
+int					is_out_of_view(t_line_on_view *the_line, t_view *view);
+
 // draw_view__draw_line__util.c
 void				put_pixel_to_image(int x, int y, int color, t_image *image);
-int					is_out_of_screen(t_dot_of_view start, t_dot_of_view end,
-						t_view *view);
-t_line_spec			reflect_line_to_smooth(t_dot_of_view *start,
-						t_dot_of_view *end);
+void				swap_xy_to_less_steep(t_line_on_view *line);
+void				calc_yz_gradient(t_line_on_view *line);
+
 // draw_view__draw_line.c
 void				draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view,
 						t_image *image);
@@ -216,12 +232,14 @@ int					open_or_exit(const char *path, const char *file, int line);
 t_model_fdf			load_fdf(const char *fdf_path);
 
 // project_screen.c
-void				project_screen(t_view *view, t_image *image);
+void				project_screen(t_screen *screen);
 
 // util__convert_fdf_to_view_dot.c
-t_dot_of_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);
+t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);
 
-// util__fdf.c
+// util.c
 t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
-
+int					get_int_abs(int n);
+t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
+						t_dot_on_view end_dot);
 #endif

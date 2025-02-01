@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util__fdf.c                                        :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 00:10:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 01:31:58 by katakada         ###   ########.fr       */
+/*   Created: 2025/02/02 00:46:24 by katakada          #+#    #+#             */
+/*   Updated: 2025/02/02 03:05:42 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,25 @@ t_vertex_fdf	*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf)
 		return (NULL);
 	else
 		return (&(fdf->yx_matrix[y_raw][x_raw]));
+}
+
+int	get_int_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+t_line_on_view	make_line_on_view(t_dot_on_view start_dot,
+		t_dot_on_view end_dot)
+{
+	t_line_on_view	line;
+
+	line.start_dot = start_dot;
+	line.end_dot = end_dot;
+	line.is_steep = get_int_abs(line.end_dot.y
+			- line.start_dot.y) > get_int_abs(line.end_dot.x
+			- line.start_dot.x);
+	line.is_reversed = FALSE;
+	return (line);
 }

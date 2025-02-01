@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:49:43 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 23:50:03 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 03:18:20 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ t_model_fdf	calc_max_min_xyz(t_model_fdf fdf)
 	fdf = calc_max_min_z(fdf);
 	fdf = calc_max_min_x(fdf);
 	fdf = calc_max_min_y(fdf);
+	return (fdf);
 }

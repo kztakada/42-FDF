@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 23:45:29 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 03:19:13 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 void	read_fdf_lines(t_model_fdf *fdf, int fd)
 {
 	char	*line;
-	char	**z_and_color_collection;
 	int		i_y;
 
 	i_y = 0;

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 01:15:50 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 03:26:17 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@
 // }
 int	AppMain(void)
 {
+	ft_printf("FDF Start\n");
 	return (0);
 }
 
 #ifndef TEST
 int	main(void)
 {
-	er(__FILE__, __LINE__);
-	// return (AppMain());
+	return (AppMain());
 }
 #endif // TEST
