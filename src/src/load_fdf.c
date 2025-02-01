@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/31 23:33:18 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:11:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ t_model_fdf	load_fdf(const char *fdf_path)
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
 	fdf = calc_balanced_x_y(fdf);
-	// x,y,zの最大値、最小値を計算
-	// fdf = calc_max_min_xyz(fdf);
+	fdf = calc_max_min_xyz(fdf);
 	return (fdf);
 }

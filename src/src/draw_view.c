@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:29:45 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/22 01:16:06 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:39:32 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ void	draw_view(t_view *view, t_image *image)
 	delta_x_raw = (drawing_start_fdf.x_raw > 0) * -2 + 1;
 	delta_y_raw = (drawing_start_fdf.y_raw > 0) * -2 + 1;
 	i_fdf = drawing_start_fdf;
-	while (i_fdf.y != NULL && is_y_included_in_fdf(i_fdf.y_raw, view->fdf))
+	while (is_y_included_in_fdf(i_fdf.y_raw, view->fdf))
 	{
-		while (i_fdf.x != NULL && is_x_included_in_fdf(i_fdf.x_raw, view->fdf))
+		while (is_x_included_in_fdf(i_fdf.x_raw, view->fdf))
 		{
 			if (!is_end_vertex_x(i_fdf.x_raw, view->fdf))
 				draw_line_to_next_x(i_fdf, view, image);
 			if (!is_end_vertex_y(i_fdf.y_raw, view->fdf))
 				draw_line_to_next_y(i_fdf, view, image);
-			i_fdf = get_vertex_fdf((i_fdf.x_raw + delta_x_raw), i_fdf.y_raw,
-					view->fdf);
+			i_fdf = *(get_vertex_fdf((i_fdf.x_raw + delta_x_raw), i_fdf.y_raw,
+						view->fdf));
 		}
-		i_fdf = get_vertex_fdf(drawing_start_fdf.x_raw, (i_fdf.y_raw
-					+ delta_y_raw), view->fdf);
+		i_fdf = *(get_vertex_fdf(drawing_start_fdf.x_raw, (i_fdf.y_raw
+						+ delta_y_raw), view->fdf));
 	}
 }

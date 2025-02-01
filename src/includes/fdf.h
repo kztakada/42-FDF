@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 00:10:44 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:27:23 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,6 @@ void				project_screen(t_view *view, t_image *image);
 t_dot_of_view		convert_fdf_to_view(t_vertex_fdf v_fdf, t_view *view);
 
 // util__fdf.c
-t_vertex_fdf		get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
+t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
 
 #endif

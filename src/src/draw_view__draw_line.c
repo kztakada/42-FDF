@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:00:03 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/01 00:00:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:33:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ static void	unreflect_and_draw_dot(t_dot_of_view dot, t_line_spec line,
 {
 	if (line.is_steep)
 	{
-		put_pixel_to_image(image, (dot.y - view->offset_x), (dot.x
-				- view->offset_y), dot.color);
-		put_pixel_to_image(image, (dot.anti_alias_y - view->offset_x), (dot.x
-				- view->offset_y), dot.anti_alias_color);
+		put_pixel_to_image((dot.y - view->offset_x), (dot.x - view->offset_y),
+			dot.color, image);
+		put_pixel_to_image((dot.anti_alias_y - view->offset_x), (dot.x
+				- view->offset_y), dot.anti_alias_color, image);
 	}
 	else
 	{
-		put_pixel_to_image(image, (dot.x - view->offset_x), (dot.y
-				- view->offset_y), dot.color);
-		put_pixel_to_image(image, (dot.x - view->offset_x), (dot.anti_alias_y
-				- view->offset_y), dot.anti_alias_color);
+		put_pixel_to_image((dot.x - view->offset_x), (dot.y - view->offset_y),
+			dot.color, image);
+		put_pixel_to_image((dot.x - view->offset_x), (dot.anti_alias_y
+				- view->offset_y), dot.anti_alias_color, image);
 	}
 }
 
@@ -88,27 +88,27 @@ static void	draw_line(t_dot_of_view start, t_dot_of_view end, t_view *view,
 void	draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view, t_image *image)
 {
 	t_dot_of_view	start;
-	t_vertex_fdf	end_fdf;
+	t_vertex_fdf	*end_fdf;
 	t_dot_of_view	end;
 
 	start = convert_fdf_to_view(s_fdf, view);
 	end_fdf = get_vertex_fdf(s_fdf.x_raw + 1, s_fdf.y_raw, view->fdf);
-	if (end_fdf.x == NULL || end_fdf.y == NULL)
+	if (end_fdf == NULL)
 		return ;
-	end = convert_fdf_to_view(end_fdf, view);
+	end = convert_fdf_to_view(*end_fdf, view);
 	draw_line(start, end, view, image);
 }
 
 void	draw_line_to_next_y(t_vertex_fdf s_fdf, t_view *view, t_image *image)
 {
 	t_dot_of_view	start;
-	t_vertex_fdf	end_fdf;
+	t_vertex_fdf	*end_fdf;
 	t_dot_of_view	end;
 
 	start = convert_fdf_to_view(s_fdf, view);
 	end_fdf = get_vertex_fdf(s_fdf.x_raw, s_fdf.y_raw + 1, view->fdf);
-	if (end_fdf.x == NULL || end_fdf.y == NULL)
+	if (end_fdf == NULL)
 		return ;
-	end = convert_fdf_to_view(end_fdf, view);
+	end = convert_fdf_to_view(*end_fdf, view);
 	draw_line(start, end, view, image);
 }
