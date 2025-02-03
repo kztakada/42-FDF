@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/02 03:26:17 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:46:05 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,42 @@
 // 	mlx_loop(mlx);
 // 	return (0);
 // }
-int	AppMain(void)
+int	AppMain(int argc, char *argv[])
 {
+	t_model_fdf	fdf;
+
+	// t_screen	*screen;
+	// t_view		*main_view;
+	// t_camera	camera;
 	ft_printf("FDF Start\n");
+	if (argc < 2)
+		forced_error_exit("No file name\n", __FILE__, __LINE__);
+	if (argc > 2)
+		forced_error_exit("Too many arguments\n", __FILE__, __LINE__);
+	// screen = init_screen(argv[1]);
+	fdf = load_fdf(argv[1]);
+	// camera = init_camera(ISOMETRIC);
+	// main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, &fdf, &camera);
+	ft_printf("max_x_raw: %d\n", fdf.max_x_raw);
+	ft_printf("max_y_raw: %d\n", fdf.max_y_raw);
+	ft_printf("max_x: %d\n", fdf.max_x);
+	ft_printf("max_y: %d\n", fdf.max_y);
+	ft_printf("max_z: %d\n", fdf.max_z);
+	ft_printf("min_x: %d\n", fdf.min_x);
+	ft_printf("min_y: %d\n", fdf.min_y);
+	ft_printf("min_z: %d\n", fdf.min_z);
+	ft_printf("vertex.x: %d\n", fdf.yx_matrix[0][0].x);
+	ft_printf("vertex.y: %d\n", fdf.yx_matrix[0][0].y);
+	ft_printf("vertex.z: %d\n", fdf.yx_matrix[0][0].z);
+	ft_printf("vertex.x_raw: %d\n", fdf.yx_matrix[0][0].x_raw);
+	ft_printf("vertex.y_raw: %d\n", fdf.yx_matrix[0][0].y_raw);
+	ft_printf("vertex.color: %d\n", fdf.yx_matrix[0][0].color);
 	return (0);
 }
 
 #ifndef TEST
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	return (AppMain());
+	return (AppMain(argc, argv));
 }
 #endif // TEST

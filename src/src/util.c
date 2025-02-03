@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 00:46:24 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/02 03:05:42 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:54:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,17 @@ t_line_on_view	make_line_on_view(t_dot_on_view start_dot,
 			- line.start_dot.x);
 	line.is_reversed = FALSE;
 	return (line);
+}
+
+void	flush_get_next_line(int fd)
+{
+	char	*line;
+
+	while (TRUE)
+	{
+		line = custom_get_next_line(fd);
+		if (line == NULL)
+			break ;
+		free(line);
+	}
 }

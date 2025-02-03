@@ -1,11 +1,67 @@
+#include "call_back_funcs.h"
 #include "load_fdf.h"
 #include "make_test_fdf.h"
 #include "mock_fdf_stabs.h"
-#include "mock_get_next_line_bonus.h"
 #include "unity.h"
 
 void	setUp(void){};
 void	tearDown(void){};
+
+void	setup_calc_max_x_raw(char *fdf_path, char *first_line)
+{
+	char	*run_file;
+	int		fd;
+
+	run_file = "src/src/load_fdf.c";
+	fd = 3;
+	open_or_exit_ExpectAndReturn(fdf_path, run_file, 22, fd);
+	custom_get_next_line_ExpectAndReturn(fd, first_line);
+	flush_get_next_line_Expect(fd);
+	close_ExpectAndReturn(fd, 0);
+}
+
+void	setup_calc_max_x_raw_with_error(char *fdf_path, char *first_line)
+{
+	char	*run_file;
+	int		fd;
+
+	run_file = "src/src/load_fdf.c";
+	fd = 3;
+	open_or_exit_ExpectAndReturn(fdf_path, run_file, 22, fd);
+	custom_get_next_line_ExpectAndReturn(fd, first_line);
+	forced_error_exit_Expect("Invalid fdf file (empty file)", run_file, 25);
+	forced_error_exit_AddCallback(forced_error_exit_ABORT);
+	// flush_get_next_line_Expect(fd);
+	// close_ExpectAndReturn(fd, 0);
+}
+
+void	test_calc_max_x_raw(void)
+{
+	char	*fdf_path;
+
+	fdf_path = "test.fdf";
+	setup_calc_max_x_raw_with_error(fdf_path, NULL);
+	if (TEST_PROTECT())
+		calc_max_x_raw(fdf_path);
+	setup_calc_max_x_raw_with_error(fdf_path, "");
+	if (TEST_PROTECT())
+		calc_max_x_raw(fdf_path);
+	setup_calc_max_x_raw(fdf_path, "1 2 3");
+	TEST_ASSERT_EQUAL_INT(2, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "1 2 3 ");
+	TEST_ASSERT_EQUAL_INT(2, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "1 2 3 4 ");
+	TEST_ASSERT_EQUAL_INT(3, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "-6 -67 -61 -38 9 -16 -16 32 56 16 ");
+	TEST_ASSERT_EQUAL_INT(9, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "1,0xffffff");
+	TEST_ASSERT_EQUAL_INT(0, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "1,0xff 1,0xff 0,0xff");
+	TEST_ASSERT_EQUAL_INT(2, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path,
+		" 1,0xff 1,0xff 0,0xff 0,0xff 0,0xff0 6,0xff00 10,0xff00 19,0xff00 21,0xff00 25,0xff00 28,0xff00 35,0xff00 39,0xff00 39,0xff00 40,0x802020 51,0x802020 50,0x802020 52,0x802020 56,0x802020 47,0x802020 51,0x802020 45,0x802020 57,0x802020 63,0x802020 70,0xffffff 99,0xffffff 94,0xffffff 77,0xffffff 133,0xffffff 121,0xffffff 83,0xffffff 86,0xffffff 74,0xffffff 68,0x802020 62,0x802020 55,0x802020 91,0xffffff 84,0xffffff 81,0xffffff 83,0xffffff 53,0x802020 61,0x802020");
+	TEST_ASSERT_EQUAL_INT(41, calc_max_x_raw(fdf_path));
+}
 
 void	test_calc_balanced_x_y(void)
 {

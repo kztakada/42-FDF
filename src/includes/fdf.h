@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/02 03:21:24 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:55:30 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@
 // screen size
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+
+// camera angles
+# define ISOMETRIC 0
+# define DIMETRIC 1
+# define TRIMETRIC 2
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -237,9 +242,13 @@ void				project_screen(t_screen *screen);
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);
 
+// util__custom_get_next_line.c
+char				*custom_get_next_line(int fd);
+
 // util.c
 t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
 int					get_int_abs(int n);
 t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
 						t_dot_on_view end_dot);
+void				flush_get_next_line(int fd);
 #endif
