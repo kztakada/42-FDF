@@ -1,9 +1,7 @@
 #include "helper_load_fdf.h"
 
-// #define OOE 22
-// #define FEE 25
-#define OOE 60
-#define FEE 63
+#define OOE 23
+#define FEE 26
 
 void	setup_calc_max_x_raw(char *fdf_path, char *first_line)
 {
