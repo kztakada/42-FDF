@@ -1,56 +1,32 @@
-#include "call_back_funcs.h"
+#include "helper_load_fdf.h"
 #include "load_fdf.h"
-#include "make_test_fdf.h"
-#include "mock_fdf_stabs.h"
-#include "unity.h"
+
+// stub
+#include "mock_stab_load_fdf.h"
+
+// using source file
+TEST_SOURCE_FILE("ft_strlen.c")
+TEST_SOURCE_FILE("ft_split.c")
+TEST_SOURCE_FILE("ft_substr.c")
+TEST_SOURCE_FILE("ft_memcpy.c")
+TEST_SOURCE_FILE("ft_strdup.c")
 
 void	setUp(void){};
 void	tearDown(void){};
 
-void	setup_calc_max_x_raw(char *fdf_path, char *first_line)
-{
-	char	*run_file;
-	int		fd;
-
-	run_file = "src/src/load_fdf.c";
-	fd = 3;
-	open_or_exit_ExpectAndReturn(fdf_path, run_file, 22, fd);
-	custom_get_next_line_ExpectAndReturn(fd, first_line);
-	flush_get_next_line_Expect(fd);
-	close_ExpectAndReturn(fd, 0);
-}
-
-void	setup_calc_max_x_raw_with_error(char *fdf_path, char *first_line)
-{
-	char	*run_file;
-	int		fd;
-
-	run_file = "src/src/load_fdf.c";
-	fd = 3;
-	open_or_exit_ExpectAndReturn(fdf_path, run_file, 22, fd);
-	custom_get_next_line_ExpectAndReturn(fd, first_line);
-	forced_error_exit_Expect("Invalid fdf file (empty file)", run_file, 25);
-	forced_error_exit_AddCallback(forced_error_exit_ABORT);
-	// flush_get_next_line_Expect(fd);
-	// close_ExpectAndReturn(fd, 0);
-}
-
+// calc_max_x_raw()
 void	test_calc_max_x_raw(void)
 {
 	char	*fdf_path;
 
 	fdf_path = "test.fdf";
-	setup_calc_max_x_raw_with_error(fdf_path, NULL);
-	if (TEST_PROTECT())
-		calc_max_x_raw(fdf_path);
-	setup_calc_max_x_raw_with_error(fdf_path, "");
-	if (TEST_PROTECT())
-		calc_max_x_raw(fdf_path);
 	setup_calc_max_x_raw(fdf_path, "1 2 3");
 	TEST_ASSERT_EQUAL_INT(2, calc_max_x_raw(fdf_path));
 	setup_calc_max_x_raw(fdf_path, "1 2 3 ");
 	TEST_ASSERT_EQUAL_INT(2, calc_max_x_raw(fdf_path));
 	setup_calc_max_x_raw(fdf_path, "1 2 3 4 ");
+	TEST_ASSERT_EQUAL_INT(3, calc_max_x_raw(fdf_path));
+	setup_calc_max_x_raw(fdf_path, "    1       2  3     4        ");
 	TEST_ASSERT_EQUAL_INT(3, calc_max_x_raw(fdf_path));
 	setup_calc_max_x_raw(fdf_path, "-6 -67 -61 -38 9 -16 -16 32 56 16 ");
 	TEST_ASSERT_EQUAL_INT(9, calc_max_x_raw(fdf_path));
@@ -63,6 +39,27 @@ void	test_calc_max_x_raw(void)
 	TEST_ASSERT_EQUAL_INT(41, calc_max_x_raw(fdf_path));
 }
 
+void	test_calc_max_x_raw_with_error__NULL(void)
+{
+	char	*fdf_path;
+
+	fdf_path = "test.fdf";
+	setup_calc_max_x_raw_with_error(fdf_path, NULL);
+	if (TEST_PROTECT())
+		calc_max_x_raw(fdf_path);
+}
+
+void	test_calc_max_x_raw_with_error__EMPTY(void)
+{
+	char	*fdf_path;
+
+	fdf_path = "test.fdf";
+	setup_calc_max_x_raw_with_error(fdf_path, "");
+	if (TEST_PROTECT())
+		calc_max_x_raw(fdf_path);
+}
+
+// calc_balanced_x_y()
 void	test_calc_balanced_x_y(void)
 {
 	t_model_fdf	fdf;

@@ -1,4 +1,4 @@
-#include "make_test_fdf.h"
+#include "common_make_test_fdf.h"
 
 t_model_fdf	make_test_fdf_xy_raw(int size_x_raw, int size_y_raw)
 {

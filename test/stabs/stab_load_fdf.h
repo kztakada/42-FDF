@@ -1,6 +1,7 @@
-#ifndef FDF_STABS_H
-# define FDF_STABS_H
-# include "../includes/fdf.h"
+#ifndef STAB_LOAD_FDF_H
+# define STAB_LOAD_FDF_H
+
+# include "fdf.h"
 # include <unistd.h>
 
 void		forced_error_exit(const char *err_msg, const char *file, int line);

@@ -1,6 +1,4 @@
 #include "load_fdf__calc_max_min_xyz.h"
-#include "make_test_fdf.h"
-#include "unity.h"
 
 void	setUp(void){};
 void	tearDown(void){};

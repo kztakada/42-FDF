@@ -1,7 +1,8 @@
-#ifndef CALL_BACK_FUNCS_H
-# define CALL_BACK_FUNCS_H
+#ifndef COMMON_ERROR_EXIT_H
+# define COMMON_ERROR_EXIT_H
 
-# include "../includes/fdf.h"
+// tester
+# include "unity.h"
 
 void	forced_error_exit_ABORT(const char *err_msg, const char *file, int line,
 			int count);

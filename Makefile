@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2025/01/09 23:42:58 by katakada         ###   ########.fr        #
+#    Updated: 2025/02/02 16:58:11 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@
 
 NAME			=	fdf
 
-CC				=	cc
+CC				=	cc 
+ifeq ($(DEBUG),1)
+	CC +=  -g -fsanitize=address
+endif
 CFLAGS			=	-Wall -Wextra -Werror
 
 SRC_PATH		=	src/

@@ -6,42 +6,16 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/03 19:00:25 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/05 00:48:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	calc_max_x_raw(const char *fdf_path)
-{
-	int		fd;
-	char	*line;
-	int		size_x_raw;
-	int		i;
-
-	fd = open_or_exit(fdf_path, __FILE__, __LINE__);
-	line = custom_get_next_line(fd);
-	if (line == NULL || *line == '\0')
-		forced_error_exit("Invalid fdf file (empty file)", __FILE__, __LINE__);
-	size_x_raw = 0;
-	i = 0;
-	while (line[i])
-	{
-		if ((line[i] != ' ') && (line[i + 1] == ' ' || line[i + 1] == '\0'))
-			size_x_raw++;
-		i++;
-	}
-	flush_get_next_line(fd);
-	if (close(fd) < 0)
-		sys_func_error_exit("close failed", __FILE__, __LINE__);
-	return (size_x_raw - 1);
-}
-
 // static int	calc_max_x_raw(const char *fdf_path)
 // {
 // 	int		fd;
 // 	char	*line;
-// 	char	**z_and_color_collection;
 // 	int		size_x_raw;
 // 	int		i;
 
@@ -51,28 +25,57 @@ static int	calc_max_x_raw(const char *fdf_path)
 // 		forced_error_exit("Invalid fdf file (empty file)", __FILE__, __LINE__);
 // 	size_x_raw = 0;
 // 	i = 0;
-// 	z_and_color_collection = ft_split(line, ' ');
-// 	while (z_and_color_collection[i])
+// 	while (line[i])
 // 	{
-// 		ft_printf("z_and_color_collection[%d]: %s\n", i,
-// 			z_and_color_collection[i]);
-// 		if (*z_and_color_collection[i] != '\n')
+// 		if ((line[i] != ' ') && (line[i + 1] == ' ' || line[i + 1] == '\0'))
 // 			size_x_raw++;
-// 		free(z_and_color_collection[i]);
 // 		i++;
 // 	}
-// 	ft_printf("size_x_raw: %d\n", size_x_raw);
-// 	while (TRUE)
-// 	{
-// 		if (line == NULL)
-// 			break ;
-// 		free(line);
-// 		line = custom_get_next_line(fd);
-// 	}
+// 	flush_get_next_line(fd);
 // 	if (close(fd) < 0)
 // 		sys_func_error_exit("close failed", __FILE__, __LINE__);
 // 	return (size_x_raw - 1);
 // }
+
+// size_t	ft_strlenn(const char *str_src)
+// {
+// 	size_t	str_len;
+
+// 	if (!str_src)
+// 		return (0);
+// 	str_len = 0;
+// 	while (str_src[str_len])
+// 		str_len++;
+// 	return (str_len);
+// }
+
+static int	calc_max_x_raw(const char *fdf_path)
+{
+	int		fd;
+	char	*line;
+	char	**z_and_color_collection;
+	int		size_x_raw;
+	int		i;
+
+	fd = open_or_exit(fdf_path, __FILE__, __LINE__);
+	line = custom_get_next_line(fd);
+	if (line == NULL || *line == '\0')
+		forced_error_exit("Invalid fdf file (empty file)", __FILE__, __LINE__);
+	size_x_raw = 0;
+	i = 0;
+	z_and_color_collection = ft_split(line, ' ');
+	while (z_and_color_collection[i])
+	{
+		if (*z_and_color_collection[i] != '\0')
+			size_x_raw++;
+		free(z_and_color_collection[i]);
+		i++;
+	}
+	flush_get_next_line(fd);
+	if (close(fd) < 0)
+		sys_func_error_exit("close failed", __FILE__, __LINE__);
+	return (size_x_raw - 1);
+}
 
 static int	calc_max_y_raw(const char *fdf_path)
 {
