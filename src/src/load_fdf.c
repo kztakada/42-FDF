@@ -6,13 +6,13 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 00:59:39 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:36:46 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	calc_max_x_raw(const char *fdf_path)
+static int	verify_not_empty_and_calc_max_x_raw(const char *fdf_path)
 {
 	int		fd;
 	char	*line;
@@ -25,8 +25,8 @@ static int	calc_max_x_raw(const char *fdf_path)
 	if (line == NULL || *line == '\0')
 		forced_error_exit("Invalid fdf file (empty file)", __FILE__, __LINE__);
 	size_x_raw = 0;
-	i = 0;
 	z_and_color_collection = ft_split(line, ' ');
+	i = 0;
 	while (z_and_color_collection[i])
 	{
 		if (*z_and_color_collection[i] != '\0')
@@ -92,7 +92,7 @@ t_model_fdf	load_fdf(const char *fdf_path)
 	t_model_fdf	fdf;
 	int			size_y_raw;
 
-	fdf.max_x_raw = calc_max_x_raw(fdf_path);
+	fdf.max_x_raw = verify_not_empty_and_calc_max_x_raw(fdf_path);
 	fdf.max_y_raw = calc_max_y_raw(fdf_path);
 	// ft_printf("max_x_raw: %d\n", fdf.max_x_raw);
 	// ft_printf("max_y_raw: %d\n", fdf.max_y_raw);

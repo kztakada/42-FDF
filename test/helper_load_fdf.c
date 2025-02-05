@@ -3,7 +3,7 @@
 #define OOE 23
 #define FEE 26
 
-void	setup_calc_max_x_raw(char *fdf_path, char *first_line)
+void	setup_for_calc_max_x_raw(char *fdf_path, char *first_line)
 {
 	char	*run_file;
 	int		fd;
@@ -16,7 +16,7 @@ void	setup_calc_max_x_raw(char *fdf_path, char *first_line)
 	close_ExpectAndReturn(fd, 0);
 }
 
-void	setup_calc_max_x_raw_with_error(char *fdf_path, char *first_line)
+void	setup_verify_not_empty_with_error(char *fdf_path, char *first_line)
 {
 	char	*run_file;
 	int		fd;

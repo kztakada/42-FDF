@@ -5,7 +5,7 @@
 // support
 # include "common_error_exit.h"
 
-void	setup_calc_max_x_raw(char *fdf_path, char *first_line);
-void	setup_calc_max_x_raw_with_error(char *fdf_path, char *first_line);
+void	setup_for_calc_max_x_raw(char *fdf_path, char *first_line);
+void	setup_verify_not_empty_with_error(char *fdf_path, char *first_line);
 
 #endif

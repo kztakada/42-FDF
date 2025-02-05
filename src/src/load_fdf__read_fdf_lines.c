@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/02 20:53:52 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:34:19 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 	int		size_x_raw;
 
 	size_x_raw = fdf->max_x_raw + 1;
-	ft_printf("size_x_raw: %d\n", size_x_raw);
+	// ft_printf("size_x_raw: %d\n", size_x_raw);
 	fdf->yx_matrix[y] = (t_vertex_fdf *)malloc(sizeof(t_vertex_fdf)
 			* size_x_raw);
 	if (!fdf->yx_matrix[y])
