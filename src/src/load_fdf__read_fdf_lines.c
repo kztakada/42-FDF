@@ -6,11 +6,21 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 11:34:19 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:24:49 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	convert_to_lower(char *str)
+{
+	while (*str)
+	{
+		if ('A' <= *str && *str <= 'Z')
+			*str += 32;
+		str++;
+	}
+}
 
 static int	convert_hex_str_to_int(const char *str)
 {
@@ -20,7 +30,10 @@ static int	convert_hex_str_to_int(const char *str)
 	else if (ft_strncmp(str, HEX_UPPER_PREFIX, 2) == 0)
 		return (ft_atoi_base(str, HEX_UPPER_BASE));
 	else
+	{
+		convert_to_lower(str);
 		return (ft_atoi_base(str, HEX_LOWER_BASE));
+	}
 }
 
 static void	load_color(t_vertex_fdf *vertex, char *z_and_color_collection)
