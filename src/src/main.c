@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 00:56:08 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:43:47 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	AppMain(int argc, char *argv[])
 
 	// t_screen	*screen;
 	// t_view		*main_view;
-	// t_camera	camera;
 	ft_printf("FDF Start\n");
 	if (argc < 2)
 		forced_error_exit("No file name\n", __FILE__, __LINE__);
@@ -103,8 +102,7 @@ int	AppMain(int argc, char *argv[])
 		forced_error_exit("Too many arguments\n", __FILE__, __LINE__);
 	// screen = init_screen(argv[1]);
 	fdf = load_fdf(argv[1]);
-	// camera = init_camera(ISOMETRIC);
-	// main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, &fdf, &camera);
+	// main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, ISOMETRIC, &fdf);
 	ft_printf("max_x_raw: %d\n", fdf.max_x_raw);
 	ft_printf("max_y_raw: %d\n", fdf.max_y_raw);
 	ft_printf("max_x: %d\n", fdf.max_x);

@@ -6,47 +6,51 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 12:24:49 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:27:56 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	convert_to_lower(char *str)
+static int	convert_hex_str_to_int(const char *hex_str)
 {
-	while (*str)
+	ft_printf("color_str: %s\n", hex_str);
+	if (ft_strncmp(hex_str, HEX_LOWER_PREFIX, 2) == 0)
+		return (ft_atoi_base(hex_str, HEX_LOWER_BASE));
+	else if (ft_strncmp(hex_str, HEX_UPPER_PREFIX, 2) == 0)
+		return (ft_atoi_base(hex_str, HEX_UPPER_BASE));
+	else if (get_first_letter_case(hex_str) == LOWER_CASE)
+		return (ft_atoi_base(hex_str, HEX_LOWER_BASE));
+	else if (get_first_letter_case(hex_str) == UPPER_CASE)
+		return (ft_atoi_base(hex_str, HEX_UPPER_BASE));
+	else
 	{
-		if ('A' <= *str && *str <= 'Z')
-			*str += 32;
-		str++;
+		forced_error_exit("Invalid fdf file (invalid altitude color value)",
+			__FILE__, __LINE__);
+		return (-1);
 	}
 }
 
-static int	convert_hex_str_to_int(const char *str)
+char	*skip_z(char *z_and_color)
 {
-	ft_printf("color_str: %s\n", str);
-	if (ft_strncmp(str, HEX_LOWER_PREFIX, 2) == 0)
-		return (ft_atoi_base(str, HEX_LOWER_BASE));
-	else if (ft_strncmp(str, HEX_UPPER_PREFIX, 2) == 0)
-		return (ft_atoi_base(str, HEX_UPPER_BASE));
-	else
-	{
-		convert_to_lower(str);
-		return (ft_atoi_base(str, HEX_LOWER_BASE));
-	}
+	while (z_and_color[0] && z_and_color[0] != ',')
+		z_and_color++;
+	return (z_and_color);
 }
 
-static void	load_color(t_vertex_fdf *vertex, char *z_and_color_collection)
+static int	read_color(char *verified_altitude)
 {
-	while (z_and_color_collection[0] && z_and_color_collection[0] != ',')
-		z_and_color_collection++;
-	if (z_and_color_collection[0] == ',')
+	char	*color;
+
+	verified_altitude = skip_z(verified_altitude);
+	if (verified_altitude[0] == ',')
 	{
-		z_and_color_collection++;
-		vertex->color = convert_hex_str_to_int(z_and_color_collection);
+		verified_altitude[0] = '\0';
+		color = verified_altitude + 1;
+		return (convert_hex_str_to_int(color));
 	}
 	else
-		vertex->color = -1;
+		return (-1);
 }
 
 static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
@@ -67,8 +71,9 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 	{
 		fdf->yx_matrix[y][x_i].x_raw = x_i;
 		fdf->yx_matrix[y][x_i].y_raw = y;
+		verify_altitude_format(z_and_color_collection[x_i], __FILE__, __LINE__);
 		fdf->yx_matrix[y][x_i].z = ft_atoi(z_and_color_collection[x_i]);
-		load_color(&fdf->yx_matrix[y][x_i], z_and_color_collection[x_i]);
+		fdf->yx_matrix[y][x_i].color = read_color(z_and_color_collection[x_i]);
 		free(z_and_color_collection[x_i]);
 		x_i++;
 	}

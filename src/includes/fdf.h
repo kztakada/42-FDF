@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/03 18:55:30 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:10:51 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # define FALSE 0
 
 # define IS_DEBUG 1
+
+# define LOWER_CASE 0
+# define UPPER_CASE 1
+# define NO_CASE -1
 
 # define LEFT_UP 0
 # define RIGHT_UP 1
@@ -56,10 +60,11 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 
-// camera angles
+// camera projection mode
 # define ISOMETRIC 0
-# define DIMETRIC 1
-# define TRIMETRIC 2
+# define FRONT_VIEW 1
+# define TOP_VIEW 2
+# define SIDE_VIEW 3
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -86,6 +91,8 @@ typedef struct s_vertex_fdf
 typedef struct s_model_fdf
 {
 	t_vertex_fdf	**yx_matrix;
+	int				size_x_raw;
+	int				size_y_raw;
 	int				max_x_raw;
 	int				max_y_raw;
 	int				max_x;
@@ -224,11 +231,24 @@ void				forced_error_exit(const char *err_msg, const char *file,
 // ft_atoi_base.c
 unsigned int		ft_atoi_base(const char *str_src, const char *base);
 
+// init_camera.c
+t_camera			*init_camera(int projection_mode, const char *file,
+						int line);
 // init_screen.c
 t_screen			*init_screen(const char *fdf_path);
+// init_view.c
+t_view				*init_view(int view_width, int view_height,
+						int projection_mode, t_model_fdf *fdf);
 
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
+// load_fdf__read_fdf_lines__util.c
+int					is_int_str(const char *str);
+int					has_sign(const char *str);
+int					get_first_letter_case(const char *str);
+// load_fdf__read_fdf_lines__verify_altitude_format.c
+int					verify_altitude_format(char *z_and_color, const char *file,
+						int line);
 // load_fdf__read_fdf_lines.c
 void				read_fdf_lines(t_model_fdf *fdf, int fd);
 // load_fdf__util.c
@@ -251,4 +271,5 @@ int					get_int_abs(int n);
 t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
 						t_dot_on_view end_dot);
 void				flush_get_next_line(int fd);
+void				free_all(char **str_collection);
 #endif

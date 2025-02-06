@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 00:46:24 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/03 18:54:09 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:55:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,17 @@ void	flush_get_next_line(int fd)
 			break ;
 		free(line);
 	}
+}
+
+void	free_all(char **str_collection)
+{
+	int	i;
+
+	i = 0;
+	while (str_collection[i])
+	{
+		free(str_collection[i]);
+		i++;
+	}
+	free(str_collection);
 }

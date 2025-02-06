@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 11:36:46 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:42:55 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,17 @@ t_model_fdf	load_fdf(const char *fdf_path)
 {
 	int			fd;
 	t_model_fdf	fdf;
-	int			size_y_raw;
 
 	fdf.max_x_raw = verify_not_empty_and_calc_max_x_raw(fdf_path);
+	fdf.size_x_raw = fdf.max_x_raw + 1;
 	fdf.max_y_raw = calc_max_y_raw(fdf_path);
 	// ft_printf("max_x_raw: %d\n", fdf.max_x_raw);
 	// ft_printf("max_y_raw: %d\n", fdf.max_y_raw);
-	size_y_raw = fdf.max_y_raw + 1;
+	fdf.size_y_raw = fdf.max_y_raw + 1;
 	// ft_printf("size_y_raw: %d\n", size_y_raw);
 	fd = open_or_exit(fdf_path, __FILE__, __LINE__);
 	fdf.yx_matrix = (t_vertex_fdf **)malloc(sizeof(t_vertex_fdf *)
-			* size_y_raw);
+			* fdf.size_y_raw);
 	if (!fdf.yx_matrix)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
 	read_fdf_lines(&fdf, fd);
