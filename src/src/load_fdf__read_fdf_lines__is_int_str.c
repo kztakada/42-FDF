@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 00:49:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/06 18:50:37 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:18:03 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,4 @@ int	is_int_str(const char *str)
 	if (!is_within_int_max_min_range(str))
 		return (FALSE);
 	return (TRUE);
-}
-
-int	has_sign(const char *str)
-{
-	while (*str)
-	{
-		if (*str == '-' || *str == '+')
-			return (TRUE);
-		str++;
-	}
-	return (FALSE);
-}
-
-int	get_first_letter_case(const char *str)
-{
-	while (*str)
-	{
-		if ('a' <= *str && *str <= 'f')
-			return (LOWER_CASE);
-		if ('A' <= *str && *str <= 'F')
-			return (UPPER_CASE);
-		str++;
-	}
-	return (NO_CASE);
 }

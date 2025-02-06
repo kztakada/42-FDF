@@ -7,6 +7,7 @@
 // support
 # include "common_error_exit.h"
 
+#define SUCCESS_CASE__valid(z_a_color) success_case__valid((z_a_color),(__LINE__))
 #define ERROR_CASE__is_not_numeric(z_a_color) error_case__is_not_numeric((z_a_color),(__LINE__))
 #define ERROR_CASE__has_hex_lowerheader_but_not_hex(z_a_color) error_case__has_hex_lowerheader_but_not_hex((z_a_color),(__LINE__))
 #define ERROR_CASE__has_hex_upperheader_but_not_hex(z_a_color) error_case__has_hex_upperheader_but_not_hex((z_a_color),(__LINE__))
@@ -27,6 +28,7 @@
 
 #define EXECUTOR_FILE "src/src/load_fdf__read_fdf_lines__verify_altitude_format.c"
 
+void	success_case__valid(char *z_and_color, int line);
 void	error_case__is_not_numeric(char *z_and_color, int line);
 void	error_case__has_hex_lowerheader_but_not_hex(char *z_and_color, int line);
 void	error_case__has_hex_upperheader_but_not_hex(char *z_and_color, int line);

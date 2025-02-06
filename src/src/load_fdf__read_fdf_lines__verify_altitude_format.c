@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 01:17:41 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/06 18:50:07 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:02:44 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,6 @@ static int	is_end_of_str(const char *str)
 		return (TRUE);
 	if (str[0] == '\0')
 		return (TRUE);
-	return (FALSE);
-}
-
-static int	is_hex_base_str(const char *str, char *base, const char *file,
-		int line)
-{
-	while (*str)
-	{
-		if (!(base[0] <= *str && *str <= base[9]) && !(base[10] <= *str
-				&& *str <= base[15]))
-		{
-			forced_error_exit("Invalid fdf file (invalid altitude color value)",
-				file, line);
-			return (FALSE);
-		}
-		str++;
-	}
-	return (TRUE);
-}
-
-static int	is_hex_str(const char *str)
-{
-	if (ft_strncmp(str, HEX_LOWER_PREFIX, 2) == 0)
-	{
-		str += 2;
-		return (is_hex_base_str(str, HEX_LOWER_BASE, __FILE__, __LINE__));
-	}
-	if (ft_strncmp(str, HEX_UPPER_PREFIX, 2) == 0)
-	{
-		str += 2;
-		return (is_hex_base_str(str, HEX_UPPER_BASE, __FILE__, __LINE__));
-	}
-	if (has_sign(str))
-		forced_error_exit("Invalid fdf file (invalid altitude color value)",
-			__FILE__, __LINE__);
-	if (is_int_str(str))
-		return (TRUE);
-	if (get_first_letter_case(str) == LOWER_CASE)
-		return (is_hex_base_str(str, HEX_LOWER_BASE, __FILE__, __LINE__));
-	if (get_first_letter_case(str) == UPPER_CASE)
-		return (is_hex_base_str(str, HEX_UPPER_BASE, __FILE__, __LINE__));
 	return (FALSE);
 }
 
@@ -77,8 +36,10 @@ int	verify_altitude_format(char *z_and_color, const char *file, int line)
 				file, line), FALSE);
 	if (is_end_of_str(delimited_by_comma[1]))
 		return (free_all(delimited_by_comma), TRUE);
-	if (is_hex_str(delimited_by_comma[1])
-		&& is_end_of_str(delimited_by_comma[2]))
+	if (!is_end_of_str(delimited_by_comma[2]))
+		return (forced_error_exit("Invalid fdf file (too many commas)", file,
+				line), FALSE);
+	if (is_hex_str(delimited_by_comma[1]))
 		return (free_all(delimited_by_comma), TRUE);
 	else
 	{
