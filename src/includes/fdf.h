@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/07 14:27:28 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:51:05 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,14 +243,16 @@ t_view				*init_view(int view_width, int view_height,
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
 // load_fdf__read_fdf_lines__is_hex_str.c
+int					convert_hex_str_to_int(const char *hex_str);
 int					get_first_letter_case(const char *str);
 int					is_hex_str(const char *str);
 // load_fdf__read_fdf_lines__is_int_str.c
+int					has_invalid_sign(const char *str);
 int					is_int_str(const char *str);
 
 // load_fdf__read_fdf_lines__validate_altitude_format.c
-int					validate_altitude_format(char *z_and_color, const char *file,
-						int line);
+int					validate_altitude_format(char *z_and_color,
+						const char *file, int line);
 // load_fdf__read_fdf_lines.c
 void				read_fdf_lines(t_model_fdf *fdf, int fd);
 // load_fdf__util.c
