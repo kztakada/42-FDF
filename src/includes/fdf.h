@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/07 00:19:10 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:27:28 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,8 +248,8 @@ int					is_hex_str(const char *str);
 // load_fdf__read_fdf_lines__is_int_str.c
 int					is_int_str(const char *str);
 
-// load_fdf__read_fdf_lines__verify_altitude_format.c
-int					verify_altitude_format(char *z_and_color, const char *file,
+// load_fdf__read_fdf_lines__validate_altitude_format.c
+int					validate_altitude_format(char *z_and_color, const char *file,
 						int line);
 // load_fdf__read_fdf_lines.c
 void				read_fdf_lines(t_model_fdf *fdf, int fd);

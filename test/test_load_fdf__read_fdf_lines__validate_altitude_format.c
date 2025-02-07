@@ -1,8 +1,8 @@
-#include "helper_load_fdf__read_fdf_lines__verify_altitude_format.h"
-#include "load_fdf__read_fdf_lines__verify_altitude_format.h"
+#include "helper_load_fdf__read_fdf_lines__validate_altitude_format.h"
+#include "load_fdf__read_fdf_lines__validate_altitude_format.h"
 
 // stub
-#include "mock_stab_load_fdf__read_fdf_lines__verify_altitude_format.h"
+#include "mock_stab_load_fdf__read_fdf_lines__validate_altitude_format.h"
 
 // using source file
 TEST_SOURCE_FILE("ft_strlen.c")
@@ -18,7 +18,7 @@ TEST_SOURCE_FILE("load_fdf__read_fdf_lines__is_hex_str.c")
 void	setUp(void){};
 void	tearDown(void){};
 
-void	test_verify_altitude_format__valid(void)
+void	test_validate_altitude_format__valid(void)
 {
 	SUCCESS_CASE__valid("1,0xffffff");
 	SUCCESS_CASE__valid("0,0xffffff");
@@ -44,7 +44,7 @@ void	test_verify_altitude_format__valid(void)
 	SUCCESS_CASE__valid("1,FFFFFFFF");
 }
 
-void	test_verify_altitude_format__with_error__invalid_z(void)
+void	test_validate_altitude_format__with_error__invalid_z(void)
 {
 	//
 	ERROR_CASE__is_not_numeric("a,0xffffff");

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 01:17:41 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/07 00:02:44 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:27:28 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_end_of_str(const char *str)
 	return (FALSE);
 }
 
-int	verify_altitude_format(char *z_and_color, const char *file, int line)
+int	validate_altitude_format(char *z_and_color, const char *file, int line)
 {
 	char	**delimited_by_comma;
 

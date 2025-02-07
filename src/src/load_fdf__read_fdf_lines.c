@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/06 16:27:56 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:27:28 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 	{
 		fdf->yx_matrix[y][x_i].x_raw = x_i;
 		fdf->yx_matrix[y][x_i].y_raw = y;
-		verify_altitude_format(z_and_color_collection[x_i], __FILE__, __LINE__);
+		validate_altitude_format(z_and_color_collection[x_i], __FILE__, __LINE__);
 		fdf->yx_matrix[y][x_i].z = ft_atoi(z_and_color_collection[x_i]);
 		fdf->yx_matrix[y][x_i].color = read_color(z_and_color_collection[x_i]);
 		free(z_and_color_collection[x_i]);

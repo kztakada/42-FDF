@@ -1,9 +1,9 @@
-#ifndef HELPER_LOAD_FDF__READ_FDF_LINES__VERIFY_ALTITUDE_FORMAT_H
-# define HELPER_LOAD_FDF__READ_FDF_LINES__VERIFY_ALTITUDE_FORMAT_H
+#ifndef HELPER_LOAD_FDF__READ_FDF_LINES__VALIDATE_ALTITUDE_FORMAT_H
+# define HELPER_LOAD_FDF__READ_FDF_LINES__VALIDATE_ALTITUDE_FORMAT_H
 
 #include "fdf.h"
 
-#include "mock_stab_load_fdf__read_fdf_lines__verify_altitude_format.h"
+#include "mock_stab_load_fdf__read_fdf_lines__validate_altitude_format.h"
 // support
 # include "common_error_exit.h"
 
@@ -26,7 +26,7 @@
 #define CALLER_FILE "src/src/load_fdf__read_fdf_lines.c"
 #define CALLER_LINE 74
 
-#define EXECUTOR_FILE "src/src/load_fdf__read_fdf_lines__verify_altitude_format.c"
+#define EXECUTOR_FILE "src/src/load_fdf__read_fdf_lines__validate_altitude_format.c"
 
 void	success_case__valid(char *z_and_color, int line);
 void	error_case__is_not_numeric(char *z_and_color, int line);
