@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:10:00 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:35:06 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define SIDE_LEFT 2
 # define SIDE_RIGHT 3
 
+# define Z_SCALE_DEFAULT 10
 # define Z_HEIGHT_RATIO 10
 
 // hex base upper and lower
@@ -139,7 +140,6 @@ typedef struct s_camera
 typedef struct s_settings
 {
 	int				projection_mode;
-	int				z_scale;
 }					t_settings;
 
 // for mouse control
@@ -158,6 +158,7 @@ typedef struct s_view
 	int				height;
 	int				offset_x;
 	int				offset_y;
+	int				z_scale;
 	t_model_fdf		*fdf;
 	t_camera		*camera;
 }					t_view;
