@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:33:31 by katakada          #+#    #+#             */
-/*   Updated: 2025/01/29 14:35:26 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:08:50 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static t_image	*init_image(void *mlx_ptr, int img_width, int img_height)
 			&image->line_length, &image->endian);
 	if (!image->addr)
 		sys_func_error_exit("mlx_get_data_addr failed", __FILE__, __LINE__);
+	image->width = img_width;
+	image->height = img_height;
 	return (image);
 }
 

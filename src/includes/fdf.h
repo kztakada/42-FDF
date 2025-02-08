@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/07 18:51:05 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:10:00 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,28 +197,33 @@ typedef struct s_screen
 	t_settings		*settings;
 }					t_screen;
 
+// draw_view__draw_line__draw_dot_line.c
+void				draw_dot_line(t_line_on_view *line, t_view *view,
+						t_image *image);
 // draw_view__draw_line__get_color.c
 int					ft_get_color(int x, float factor, t_line_on_view *line);
-
 // draw_view__draw_line__is_out_of_view__util.c
 int					is_dot_within_view(t_dot_on_view dot, t_view *view);
 int					is_crossing_view(t_line_on_view the_line, t_view *view);
-
 // draw_view__draw_line__is_out_of_view.c
 int					is_out_of_view(t_line_on_view *the_line, t_view *view);
-
 // draw_view__draw_line__util.c
-void				put_pixel_to_image(int x, int y, int color, t_image *image);
 void				swap_xy_to_less_steep(t_line_on_view *line);
+void				swap_start_end_xyz(t_line_on_view *line);
 void				calc_yz_gradient(t_line_on_view *line);
-
 // draw_view__draw_line.c
-void				draw_line_to_next_x(t_vertex_fdf s_fdf, t_view *view,
+void				draw_line_to_next_x(t_vertex_fdf start_raws, t_view *view,
 						t_image *image);
-void				draw_line_to_next_y(t_vertex_fdf s_fdf, t_view *view,
+void				draw_line_to_next_y(t_vertex_fdf start_raws, t_view *view,
 						t_image *image);
 // draw_view__util.c
 t_vertex_fdf		computed_deepest_corner(t_view *view);
+int					is_end_vertex_x(int fdf_x_raw, t_model_fdf *fdf,
+						int delta_x_raw);
+int					is_end_vertex_y(int fdf_y_raw, t_model_fdf *fdf,
+						int delta_y_raw);
+t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
+						t_dot_on_view end_dot);
 // draw_view.c
 void				draw_view(t_view *view, t_image *image);
 
@@ -272,8 +277,6 @@ char				*custom_get_next_line(int fd);
 // util.c
 t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
 int					get_int_abs(int n);
-t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
-						t_dot_on_view end_dot);
 void				flush_get_next_line(int fd);
 void				free_all(char **str_collection);
 #endif

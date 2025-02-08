@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/06 00:43:47 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/08 00:45:05 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,18 @@
 int	AppMain(int argc, char *argv[])
 {
 	t_model_fdf	fdf;
+	t_screen	*screen;
+	t_view		*main_view;
 
-	// t_screen	*screen;
-	// t_view		*main_view;
 	ft_printf("FDF Start\n");
 	if (argc < 2)
 		forced_error_exit("No file name\n", __FILE__, __LINE__);
 	if (argc > 2)
 		forced_error_exit("Too many arguments\n", __FILE__, __LINE__);
-	// screen = init_screen(argv[1]);
+	screen = init_screen(argv[1]);
 	fdf = load_fdf(argv[1]);
-	// main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, ISOMETRIC, &fdf);
+	ft_printf("size_x_raw: %d\n", fdf.size_x_raw);
+	ft_printf("size_y_raw: %d\n", fdf.size_y_raw);
 	ft_printf("max_x_raw: %d\n", fdf.max_x_raw);
 	ft_printf("max_y_raw: %d\n", fdf.max_y_raw);
 	ft_printf("max_x: %d\n", fdf.max_x);
@@ -117,6 +118,11 @@ int	AppMain(int argc, char *argv[])
 	ft_printf("vertex.x_raw: %d\n", fdf.yx_matrix[0][0].x_raw);
 	ft_printf("vertex.y_raw: %d\n", fdf.yx_matrix[0][0].y_raw);
 	ft_printf("vertex.color: %d\n", fdf.yx_matrix[0][0].color);
+	main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, ISOMETRIC, &fdf);
+	printf("main_view->camera->zoom: %d\n", main_view->camera->zoom);
+	draw_view(main_view, screen->image);
+	project_screen(screen);
+	mlx_loop(screen->mlx);
 	return (0);
 }
 

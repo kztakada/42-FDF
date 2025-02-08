@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:16:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/05 20:24:14 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/08 03:00:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ t_camera	*init_camera(int projection_mode, const char *file, int line)
 		*camera = get_side_view_camera();
 	else
 		forced_error_exit("Invalid projection mode", file, line);
+	camera->z_offset = 10000000;
 	return (camera);
 }
