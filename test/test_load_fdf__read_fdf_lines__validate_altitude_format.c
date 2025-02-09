@@ -52,6 +52,8 @@ void	test_validate_altitude_format__valid(void)
 	SUCCESS_CASE__valid("1,+7FFFFFFF");
 	SUCCESS_CASE__valid("1,-0");
 	SUCCESS_CASE__valid("-0,-0");
+	SUCCESS_CASE__valid("1,0xFFFFFF");
+	SUCCESS_CASE__valid("1,0Xffffff");
 }
 
 void	test_validate_altitude_format__with_error__invalid_z(void)

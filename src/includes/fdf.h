@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:35:06 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/09 23:29:23 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 # define COLOR_L4 0xFAAE7B
 
 // screen size
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1920 / 5 * 3
+# define SCREEN_HEIGHT 1080 / 5 * 3
 
 // camera projection mode
 # define ISOMETRIC 0
@@ -250,7 +250,6 @@ t_view				*init_view(int view_width, int view_height,
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
 // load_fdf__read_fdf_lines__is_hex_str.c
 int					convert_hex_str_to_int(const char *hex_str);
-int					get_first_letter_case(const char *str);
 int					is_hex_str(const char *str);
 // load_fdf__read_fdf_lines__is_int_str.c
 int					has_invalid_sign(const char *str);
