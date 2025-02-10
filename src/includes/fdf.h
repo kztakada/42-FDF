@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 01:16:55 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:37:47 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,10 +219,6 @@ void				draw_line_to_next_y(t_vertex_fdf start_raws, t_view *view,
 						t_image *image);
 // draw_view__util.c
 t_vertex_fdf		computed_deepest_corner(t_view *view);
-int					is_end_vertex_x(int fdf_x_raw, t_model_fdf *fdf,
-						int delta_x_raw);
-int					is_end_vertex_y(int fdf_y_raw, t_model_fdf *fdf,
-						int delta_y_raw);
 t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
 						t_dot_on_view end_dot);
 // draw_view.c
