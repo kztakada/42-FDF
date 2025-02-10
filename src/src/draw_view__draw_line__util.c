@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:47:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:02:53 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 01:45:47 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void	swap_start_end_xyz(t_line_on_view *line)
 	swap_int(&line->start_dot.y, &line->end_dot.y);
 	swap_int(&line->start_dot.z, &line->end_dot.z);
 	line->is_reversed = TRUE;
+}
+
+void	swap_xy_to_restore_steep(t_anti_aliased_dot *dot)
+{
+	swap_int(&dot->x, &dot->y);
 }
 
 void	calc_yz_gradient(t_line_on_view *line)

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 17:37:47 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 02:02:29 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 # define HEX_UPPER_PREFIX "0X"
 # define HEX_LOWER_BASE "0123456789abcdef"
 # define HEX_UPPER_BASE "0123456789ABCDEF"
+
+// shift bit color
+# define RED_SHIFT 16
+# define GREEN_SHIFT 8
+# define BLUE_SHIFT 0
 
 // model colors are 5 levels
 # define COLOR_L0 0x432371
@@ -105,16 +110,22 @@ typedef struct s_model_fdf
 }					t_model_fdf;
 
 // for view rendering
-typedef struct s_dot_on_view
+typedef struct s_anti_aliased_dot
 {
 	int				x;
 	int				y;
 	int				z;
 	float			y_f;
 	float			z_f;
+	int				top_color;
+	int				bottom_color;
+}					t_anti_aliased_dot;
+typedef struct s_dot_on_view
+{
+	int				x;
+	int				y;
+	int				z;
 	int				color;
-	int				anti_alias_y;
-	int				anti_alias_color;
 }					t_dot_on_view;
 typedef struct s_line_on_view
 {
@@ -198,11 +209,13 @@ typedef struct s_screen
 	t_settings		*settings;
 }					t_screen;
 
+// draw_view__draw_line__calc_dot_color.c
+void				calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
+						t_line_on_view *line);
+
 // draw_view__draw_line__draw_dot_line.c
 void				draw_dot_line(t_line_on_view *line, t_view *view,
 						t_image *image);
-// draw_view__draw_line__get_color.c
-int					ft_get_color(int x, float factor, t_line_on_view *line);
 // draw_view__draw_line__is_out_of_view__util.c
 int					is_dot_within_view(t_dot_on_view dot, t_view *view);
 int					is_crossing_view(t_line_on_view the_line, t_view *view);
@@ -211,6 +224,7 @@ int					is_out_of_view(t_line_on_view *the_line, t_view *view);
 // draw_view__draw_line__util.c
 void				swap_xy_to_less_steep(t_line_on_view *line);
 void				swap_start_end_xyz(t_line_on_view *line);
+void				swap_xy_to_restore_steep(t_anti_aliased_dot *dot);
 void				calc_yz_gradient(t_line_on_view *line);
 // draw_view__draw_line.c
 void				draw_line_to_next_x(t_vertex_fdf start_raws, t_view *view,

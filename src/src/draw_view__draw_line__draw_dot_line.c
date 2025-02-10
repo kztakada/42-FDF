@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:27:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:03:18 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 02:11:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,66 +25,60 @@ static void	put_pixel_to_image(int x, int y, int color, t_image *image)
 	}
 }
 
-static void	draw_dot(t_dot_on_view dot_line, t_line_on_view *line, t_view *view,
-		t_image *image)
+static int	is_within_view(t_anti_aliased_dot drawing_dot, t_view *view)
 {
-	int	x;
-	int	y;
+	if (drawing_dot.x < 0 || drawing_dot.x >= view->width)
+		return (FALSE);
+	if (drawing_dot.y < 0 || drawing_dot.y >= view->height)
+		return (FALSE);
+	return (TRUE);
+}
+
+static void	draw_dot(t_anti_aliased_dot drawing_dot, t_line_on_view *line,
+		t_view *view, t_image *image)
+{
 	int	anti_alias_x;
 	int	anti_alias_y;
 
 	if (line->is_steep)
 	{
-		x = dot_line.y - view->offset_x;
-		y = dot_line.x - view->offset_y;
-		anti_alias_x = dot_line.anti_alias_y - view->offset_x;
-		anti_alias_y = dot_line.x - view->offset_y;
+		swap_xy_to_restore_steep(&drawing_dot);
+		anti_alias_x = drawing_dot.x + 1;
+		anti_alias_y = drawing_dot.y;
 	}
 	else
 	{
-		x = dot_line.x - view->offset_x;
-		y = dot_line.y - view->offset_y;
-		anti_alias_x = dot_line.x - view->offset_x;
-		anti_alias_y = dot_line.anti_alias_y - view->offset_y;
+		anti_alias_x = drawing_dot.x;
+		anti_alias_y = drawing_dot.y + 1;
 	}
-	put_pixel_to_image(x, y, dot_line.color, image);
-	put_pixel_to_image(anti_alias_x, anti_alias_y, dot_line.anti_alias_color,
+	if (!is_within_view(drawing_dot, view))
+		return ;
+	drawing_dot.x = drawing_dot.x - view->offset_x;
+	drawing_dot.y = drawing_dot.y - view->offset_y;
+	anti_alias_x = anti_alias_x - view->offset_x;
+	anti_alias_y = anti_alias_y - view->offset_y;
+	put_pixel_to_image(drawing_dot.x, drawing_dot.y, drawing_dot.top_color,
 		image);
-}
-
-static float	ft_fpart(float n)
-{
-	if (n > 0.f)
-		return (n - (int)n);
-	return (n - ((int)n + 1.f));
-}
-
-static float	ft_rfpart(float n)
-{
-	return (1.f - ft_fpart(n));
+	put_pixel_to_image(anti_alias_x, anti_alias_y, drawing_dot.bottom_color,
+		image);
 }
 
 void	draw_dot_line(t_line_on_view *line, t_view *view, t_image *image)
 {
-	t_dot_on_view	dot_line;
+	t_anti_aliased_dot	drawing_dot;
 
-	dot_line.y_f = (float)line->start_dot.y;
-	dot_line.z_f = (float)line->start_dot.z;
-	dot_line.x = line->start_dot.x;
-	while (dot_line.x <= line->end_dot.x)
+	drawing_dot.y_f = (float)line->start_dot.y;
+	drawing_dot.z_f = (float)line->start_dot.z;
+	drawing_dot.x = line->start_dot.x;
+	while (drawing_dot.x <= line->end_dot.x)
 	{
-		if (dot_line.z_f < view->camera->z_offset)
+		if (drawing_dot.z_f < view->camera->z_offset)
 		{
-			dot_line.y = (int)dot_line.y_f;
-			dot_line.color = ft_get_color(dot_line.x, ft_rfpart(dot_line.y_f),
-					line);
-			dot_line.anti_alias_y = (int)dot_line.y_f + 1;
-			dot_line.anti_alias_color = ft_get_color(dot_line.x,
-					ft_fpart(dot_line.y_f), line);
-			draw_dot(dot_line, line, view, image);
+			calc_anti_alias_dots(&drawing_dot, line);
+			draw_dot(drawing_dot, line, view, image);
 		}
-		dot_line.y_f += line->y_gradient;
-		dot_line.z_f += line->z_gradient;
-		dot_line.x++;
+		drawing_dot.y_f += line->y_gradient;
+		drawing_dot.z_f += line->z_gradient;
+		drawing_dot.x++;
 	}
 }

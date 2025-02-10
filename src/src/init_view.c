@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:54:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 01:26:53 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 02:11:58 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	set_camera_zoom_to_fit_view_whole(t_camera *camera, int view_width,
 		camera->zoom = view_height / fdf->size_y_raw / 2;
 	if (camera->zoom < 1)
 		camera->zoom = 1;
+	camera->zoom = 100;
 }
 
 t_view	*init_view(int view_width, int view_height, int projection_mode,
