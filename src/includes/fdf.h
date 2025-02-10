@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 23:29:23 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/10 01:16:55 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 # define COLOR_L4 0xFAAE7B
 
 // screen size
-# define SCREEN_WIDTH 1920 / 5 * 3
-# define SCREEN_HEIGHT 1080 / 5 * 3
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 // camera projection mode
 # define ISOMETRIC 0

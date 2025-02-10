@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:16:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/08 03:00:37 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/10 01:49:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_camera	get_front_view_camera(void)
 	t_camera	camera;
 
 	camera.zoom = 0;
-	camera.x_angle = 0;
+	camera.x_angle = 1.570796327;
 	camera.y_angle = 0;
 	camera.z_angle = 0;
 	camera.x_offset = 0;
@@ -59,9 +59,9 @@ static t_camera	get_side_view_camera(void)
 	t_camera	camera;
 
 	camera.zoom = 0;
-	camera.x_angle = 0;
+	camera.x_angle = 1.570796327;
 	camera.y_angle = 0;
-	camera.z_angle = 0;
+	camera.z_angle = 1.570796327;
 	camera.x_offset = 0;
 	camera.y_offset = 0;
 	camera.z_offset = 0;
