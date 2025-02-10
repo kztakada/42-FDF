@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:02:38 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 00:55:27 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/10 01:11:42 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	is_end_vertex_x(int fdf_x_raw, t_model_fdf *fdf, int delta_x_raw)
 	}
 	else
 	{
-		if (fdf_x_raw == 0)
+		if (fdf_x_raw == fdf->max_x_raw)
+			// if (fdf_x_raw == 0)
 			return (TRUE);
 	}
 	return (FALSE);
@@ -71,7 +72,8 @@ int	is_end_vertex_y(int fdf_y_raw, t_model_fdf *fdf, int delta_y_raw)
 	}
 	else
 	{
-		if (fdf_y_raw == 0)
+		// if (fdf_y_raw == 0)
+		if (fdf_y_raw == fdf->max_y_raw)
 			return (TRUE);
 	}
 	return (FALSE);
