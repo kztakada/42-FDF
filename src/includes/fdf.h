@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 18:44:56 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:45:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ typedef struct s_screen
 	void			*mlx_win;
 	//	image data
 	t_image			*image;
+	// views
+	t_screen_views	*views;
 	//	user interface
 	t_mouse			*mouse;
 	t_settings		*settings;
@@ -297,8 +299,7 @@ t_model_fdf			load_fdf(const char *fdf_path);
 void				draw_multi_view(t_multi_view *multi_view, t_image *image);
 
 // project_screen.c
-void				project_screen(t_screen *screen,
-						t_screen_views *screen_views);
+void				project_screen(t_screen *screen);
 
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);

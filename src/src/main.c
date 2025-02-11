@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 18:51:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:46:25 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@
 
 int	AppMain(int argc, char *argv[])
 {
-	t_model_fdf		fdf;
-	t_screen		*screen;
-	t_screen_views	*screen_views;
+	t_model_fdf	fdf;
+	t_screen	*screen;
 
 	// t_view		*main_view;
 	ft_printf("FDF Start\n");
@@ -61,9 +60,9 @@ int	AppMain(int argc, char *argv[])
 	ft_printf("vertex.x_raw: %d\n", fdf.yx_matrix[0][0].x_raw);
 	ft_printf("vertex.y_raw: %d\n", fdf.yx_matrix[0][0].y_raw);
 	ft_printf("vertex.color: %d\n", fdf.yx_matrix[0][0].color);
-	screen_views = init_screen_views(&fdf);
+	screen->views = init_screen_views(&fdf);
 	// printf("main_view->camera->zoom: %d\n", main_view->camera->zoom);
-	project_screen(screen, screen_views);
+	project_screen(screen);
 	mlx_loop(screen->mlx);
 	return (0);
 }

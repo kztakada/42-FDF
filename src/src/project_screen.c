@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:28:53 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 18:51:11 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:45:32 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ static void	put_buckground_color(t_image *image, int color)
 	}
 }
 
-static void	draw_screen(t_screen *screen, t_screen_views *screen_views)
+static void	draw_screen(t_screen *screen)
 {
 	ft_bzero(screen->image->addr, screen->image->width * screen->image->height
 		* (screen->image->bits_per_pixel / 8));
 	put_buckground_color(screen->image, 0x040404);
 	if (screen->settings->screen_mode == MAIN_SCREEN)
-		draw_view(screen_views->main_view, screen->image);
+		draw_view(screen->views->main_view, screen->image);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
-		draw_multi_view(screen_views->multi_view, screen->image);
+		draw_multi_view(screen->views->multi_view, screen->image);
 }
 
-void	project_screen(t_screen *screen, t_screen_views *screen_views)
+void	project_screen(t_screen *screen)
 {
-	draw_screen(screen, screen_views);
+	draw_screen(screen);
 	// mlx_string_put(mlx, mlx_win, 100, 100, 0x00FFFF00, "Hello world!");
 	mlx_put_image_to_window(screen->mlx, screen->mlx_win, screen->image->img, 0,
 		0);
