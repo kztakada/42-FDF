@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 21:45:48 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:49:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "./mlx.h"
 # include <math.h>
 # include <stdio.h>
+# include <time.h>
 
 # ifdef TEST
 #  define static
@@ -83,6 +84,10 @@
 // screen mode
 # define MAIN_SCREEN 0
 # define MULTI_SCREEN 1
+
+// frame time
+# define FRAME_RATE 120
+# define FRAME_TIME (1000 / FRAME_RATE)
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
