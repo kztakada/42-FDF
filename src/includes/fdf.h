@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 02:02:29 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:44:56 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,23 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 
+// view size
+# define MAIN_VIEW_WIDTH 1920
+# define MAIN_VIEW_HEIGHT 1080
+# define MULTI_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH) / 2
+# define MULTI_VIEW_HEIGHT 540
+# define CONSOLE_WIDTH 200
+# define CONSOLE_HEIGHT 1080
+
 // camera projection mode
 # define ISOMETRIC 0
 # define FRONT_VIEW 1
 # define TOP_VIEW 2
 # define SIDE_VIEW 3
+
+// screen mode
+# define MAIN_SCREEN 0
+# define MULTI_SCREEN 1
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -151,6 +163,7 @@ typedef struct s_camera
 typedef struct s_settings
 {
 	int				projection_mode;
+	int				screen_mode;
 }					t_settings;
 
 // for mouse control
@@ -181,6 +194,12 @@ typedef struct s_multi_view
 	t_view			*left_down;
 	t_view			*right_down;
 }					t_multi_view;
+
+typedef struct s_screen_views
+{
+	t_view			*main_view;
+	t_multi_view	*multi_view;
+}					t_screen_views;
 
 typedef struct s_image
 {
@@ -252,9 +271,8 @@ t_camera			*init_camera(int projection_mode, const char *file,
 						int line);
 // init_screen.c
 t_screen			*init_screen(const char *fdf_path);
-// init_view.c
-t_view				*init_view(int view_width, int view_height,
-						int projection_mode, t_model_fdf *fdf);
+// init_views.c
+t_screen_views		*init_screen_views(t_model_fdf *fdf);
 
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
@@ -275,8 +293,12 @@ int					open_or_exit(const char *path, const char *file, int line);
 // load_fdf.c
 t_model_fdf			load_fdf(const char *fdf_path);
 
+// malti_view.c
+void				draw_multi_view(t_multi_view *multi_view, t_image *image);
+
 // project_screen.c
-void				project_screen(t_screen *screen);
+void				project_screen(t_screen *screen,
+						t_screen_views *screen_views);
 
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);

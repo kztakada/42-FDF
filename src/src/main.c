@@ -6,30 +6,11 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 01:52:45 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:51:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
-// {
-// 	char	*dst;
-// 	int		offset;
-
-// 	offset = (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	dst = data->addr + offset;
-// 	*(unsigned int *)dst = color;
-// }
-
-// void	error_exit(char *format, char *message)
-// {
-// 	if (message == NULL)
-// 		ft_printf(format);
-// 	else
-// 		ft_printf(format, message);
-// 	exit(1);
-// }
 
 // int	key_hook(int keycode, void *param)
 // {
@@ -45,59 +26,18 @@
 // 	return (0);
 // }
 
-// int	destory(void *param)
-// {
-// 	(void)param;
-// 	ft_printf("destory\n");
-// 	exit(0);
-// }
-
 // int	summ(int a, int b)
 // {
 // 	return (a + b);
 // }
 
-// int	AppMain(void)
-// {
-// 	void	*mlx;
-// 	void	*mlx_win;
-// 	t_image	img;
-
-// 	ft_printf("FDF Start\n");
-// 	mlx = mlx_init();
-// 	if (mlx == NULL)
-// 		error_exit("Error: mlx_init failed\n", NULL);
-// 	mlx_win = mlx_new_window(mlx, 800, 600, "My Window");
-// 	if (mlx_win == NULL)
-// 		error_exit("Error: mlx_new_window failed\n", NULL);
-// 	// mlx_string_put(mlx, mlx_win, 100, 100, 0x00FFFF00, "Hello world!");
-// 	img.img = mlx_new_image(mlx, 1920, 1080);
-// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-// 			&img.endian);
-// 	ft_printf("bits_per_pixel: %d\n", img.bits_per_pixel);
-// 	ft_printf("line_length: %d\n", img.line_length);
-// 	// img.bits_per_pixel = 1;
-// 	// img.line_length = 10;
-// 	my_mlx_pixel_put(&img, 5, 5, 0x00FFFF00);
-// 	my_mlx_pixel_put(&img, 10, 10, 0x00FFFF00);
-// 	ft_printf("addr: %s\n", img.addr);
-// 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-// 	// mlx_key_hook(mlx_win, key_hook, NULL);
-// 	// mlx_mouse_hook(mlx_win, mouse_hook, NULL);
-// 	mlx_hook(mlx_win, 4, 1L << 2, destory, NULL);
-// 	mlx_hook(mlx_win, 17, 0, destory, NULL);
-// 	mlx_loop(mlx);
-// 	return (0);
-// }
 int	AppMain(int argc, char *argv[])
 {
-	t_model_fdf	fdf;
-	t_screen	*screen;
-	t_view		*main_view;
-	t_view		*second_view;
-	t_view		*third_view;
-	t_view		*fourth_view;
+	t_model_fdf		fdf;
+	t_screen		*screen;
+	t_screen_views	*screen_views;
 
+	// t_view		*main_view;
 	ft_printf("FDF Start\n");
 	if (argc < 2)
 		forced_error_exit("No file name\n", __FILE__, __LINE__);
@@ -121,22 +61,9 @@ int	AppMain(int argc, char *argv[])
 	ft_printf("vertex.x_raw: %d\n", fdf.yx_matrix[0][0].x_raw);
 	ft_printf("vertex.y_raw: %d\n", fdf.yx_matrix[0][0].y_raw);
 	ft_printf("vertex.color: %d\n", fdf.yx_matrix[0][0].color);
-	main_view = init_view(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ISOMETRIC, &fdf);
-	second_view = init_view(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, FRONT_VIEW,
-			&fdf);
-	second_view->offset_y = SCREEN_HEIGHT / 2 * -1;
-	third_view = init_view(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, TOP_VIEW, &fdf);
-	third_view->offset_x = SCREEN_WIDTH / 2 * -1;
-	fourth_view = init_view(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SIDE_VIEW,
-			&fdf);
-	fourth_view->offset_x = SCREEN_WIDTH / 2 * -1;
-	fourth_view->offset_y = SCREEN_HEIGHT / 2 * -1;
-	printf("main_view->camera->zoom: %d\n", main_view->camera->zoom);
-	draw_view(main_view, screen->image);
-	draw_view(second_view, screen->image);
-	draw_view(third_view, screen->image);
-	draw_view(fourth_view, screen->image);
-	project_screen(screen);
+	screen_views = init_screen_views(&fdf);
+	// printf("main_view->camera->zoom: %d\n", main_view->camera->zoom);
+	project_screen(screen, screen_views);
 	mlx_loop(screen->mlx);
 	return (0);
 }
