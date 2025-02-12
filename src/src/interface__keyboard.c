@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 22:44:42 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:10:16 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	key_hook(int keycode, void *param)
 {
 	t_screen	*screen;
 
-	// 	ft_printf("keycode: %d\n", keycode);
+	ft_printf("keycode: %d\n", keycode);
 	screen = (t_screen *)param;
 	if (keycode == KEY_ESC)
 		close_window(screen);
@@ -64,7 +64,7 @@ int	key_hook(int keycode, void *param)
 		toggle_auto_rotate_z(screen);
 	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT || keycode == KEY_UP
 		|| keycode == KEY_DOWN)
-		translate_fdf_model(keycode, screen);
+		translate_camera_pos(keycode, screen);
 	else if (keycode == KEY_PLUS || keycode == KEY_MINUS)
 		alter_z_scale(keycode, screen);
 	return (0);

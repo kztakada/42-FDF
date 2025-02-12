@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 23:48:48 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:03:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,6 @@ typedef struct s_view
 {
 	int				width;
 	int				height;
-	int				transrate_x;
-	int				transrate_y;
 	int				offset_x;
 	int				offset_y;
 	int				z_scale;
@@ -307,8 +305,8 @@ t_screen			*init_screen(const char *fdf_path);
 // init_views.c
 t_screen_views		*init_screen_views(t_model_fdf *fdf);
 
-// interface__keyboard__translate_fdf_model.c
-void				translate_fdf_model(int keycode, t_screen *screen);
+// interface__keyboard__translate_camera_pos.c
+void				translate_camera_pos(int keycode, t_screen *screen);
 // interface__keyboard.c
 int					key_hook(int keycode, void *param);
 // interface__mouse__mouse_down.c

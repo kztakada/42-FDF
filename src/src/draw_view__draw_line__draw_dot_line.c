@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:27:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 23:52:35 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:06:59 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,9 @@ static void	put_pixel_to_image(int x, int y, int color, t_image *image)
 
 static int	is_within_view(t_anti_aliased_dot drawing_dot, t_view *view)
 {
-	int	dot_x;
-	int	dot_y;
-
-	dot_x = drawing_dot.x - view->transrate_x;
-	dot_y = drawing_dot.y - view->transrate_y;
-	if (dot_x < 0 || dot_x >= view->width)
+	if (drawing_dot.x < 0 || drawing_dot.x >= view->width)
 		return (FALSE);
-	if (dot_y < 0 || dot_y >= view->height)
+	if (drawing_dot.y < 0 || drawing_dot.y >= view->height)
 		return (FALSE);
 	return (TRUE);
 }
@@ -58,10 +53,10 @@ static void	draw_dot(t_anti_aliased_dot drawing_dot, t_line_on_view *line,
 	}
 	if (!is_within_view(drawing_dot, view))
 		return ;
-	drawing_dot.x = drawing_dot.x - view->offset_x - view->transrate_x;
-	drawing_dot.y = drawing_dot.y - view->offset_y - view->transrate_y;
-	anti_alias_x = anti_alias_x - view->offset_x - view->transrate_x;
-	anti_alias_y = anti_alias_y - view->offset_y - view->transrate_y;
+	drawing_dot.x = drawing_dot.x - view->offset_x;
+	drawing_dot.y = drawing_dot.y - view->offset_y;
+	anti_alias_x = anti_alias_x - view->offset_x;
+	anti_alias_y = anti_alias_y - view->offset_y;
 	put_pixel_to_image(drawing_dot.x, drawing_dot.y, drawing_dot.top_color,
 		image);
 	put_pixel_to_image(anti_alias_x, anti_alias_y, drawing_dot.bottom_color,

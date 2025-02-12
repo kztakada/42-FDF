@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 00:40:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/13 00:27:13 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:48:43 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ int	is_crossing_view(t_line_on_view the_line, t_view *view)
 	view_side_bottom = get_view_side_line(SIDE_BOTTOM, view);
 	view_side_left = get_view_side_line(SIDE_LEFT, view);
 	view_side_right = get_view_side_line(SIDE_RIGHT, view);
-	if (are_crossing(the_line, view_side_top) == FALSE)
-		return (FALSE);
-	if (are_crossing(the_line, view_side_left) == FALSE)
-		return (FALSE);
-	if (are_crossing(the_line, view_side_right) == FALSE)
-		return (FALSE);
-	if (are_crossing(the_line, view_side_bottom) == FALSE)
-		return (FALSE);
-	return (TRUE);
+	if (are_crossing(the_line, view_side_top))
+		return (TRUE);
+	if (are_crossing(the_line, view_side_left))
+		return (TRUE);
+	if (are_crossing(the_line, view_side_right))
+		return (TRUE);
+	if (are_crossing(the_line, view_side_bottom))
+		return (TRUE);
+	return (FALSE);
 }
