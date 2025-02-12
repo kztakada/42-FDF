@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 23:49:48 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:41:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,32 @@
 # define MAIN_SCREEN 0
 # define MULTI_SCREEN 1
 
+// auto rotate z
+# define STOP 0
+# define ROTATE_L 1
+# define ROTATE_R 2
+
 // frame time
 # define FRAME_RATE 120
 # define FRAME_TIME (1000 / FRAME_RATE)
+
+// key code
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_PLUS 61
+# define KEY_MINUS 45
+# define KEY_SPACE 32
+# define KEY_R 114
+
+// mouse code
+# define MOUSE_LEFT 1
+# define MOUSE_RIGHT 2
+# define MOUSE_MIDDLE 3
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -169,6 +192,7 @@ typedef struct s_settings
 {
 	int				projection_mode;
 	int				screen_mode;
+	int				auto_rotate_z;
 }					t_settings;
 
 // for mouse control
@@ -185,6 +209,8 @@ typedef struct s_view
 {
 	int				width;
 	int				height;
+	int				transrate_x;
+	int				transrate_y;
 	int				offset_x;
 	int				offset_y;
 	int				z_scale;
@@ -280,6 +306,13 @@ t_camera			*init_camera(int projection_mode, const char *file,
 t_screen			*init_screen(const char *fdf_path);
 // init_views.c
 t_screen_views		*init_screen_views(t_model_fdf *fdf);
+
+// interface__keyboard__translate_fdf_model.c
+void				translate_fdf_model(int keycode, t_screen *screen);
+// interface__keyboard.c
+int					key_hook(int keycode, void *param);
+// interface__util.c
+int					close_window(void *param);
 
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);

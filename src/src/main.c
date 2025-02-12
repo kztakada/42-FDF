@@ -6,18 +6,12 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 00:11:27 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:44:22 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// int	key_hook(int keycode, void *param)
-// {
-// 	(void)param;
-// 	ft_printf("keycode: %d\n", keycode);
-// 	return (0);
-// }
 // int	mouse_hook(int button, int x, int y, void *param)
 // {
 // 	(void)param;
@@ -51,6 +45,22 @@ int	loop_runner(void *param)
 	return (0);
 }
 
+void	set_user_interface(t_screen *screen)
+{
+	mlx_key_hook(screen->mlx_win, key_hook, screen);
+	// mlx_hook(screen->mlx_win, 4, 1L << 2, ft_mouse_down, screen);
+	// mlx_hook(screen->mlx_win, 5, 1L << 3, ft_mouse_up, screen);
+	// mlx_hook(screen->mlx_win, 6, 1L << 6, ft_mouse_move, screen);
+	mlx_hook(screen->mlx_win, 17, 0, close_window, screen);
+}
+
+void	reset_settings(t_screen *screen)
+{
+	screen->settings->projection_mode = ISOMETRIC;
+	screen->settings->screen_mode = MAIN_SCREEN;
+	screen->settings->auto_rotate_z = STOP;
+}
+
 int	AppMain(int argc, char *argv[])
 {
 	t_model_fdf	fdf;
@@ -64,6 +74,8 @@ int	AppMain(int argc, char *argv[])
 	screen = init_screen(argv[1]);
 	fdf = load_fdf(argv[1]);
 	screen->views = init_screen_views(&fdf);
+	reset_settings(screen);
+	set_user_interface(screen);
 	mlx_loop_hook(screen->mlx, loop_runner, screen);
 	mlx_loop(screen->mlx);
 	return (0);
