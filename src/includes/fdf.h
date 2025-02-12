@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 22:41:09 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:48:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ typedef struct s_settings
 // for mouse control
 typedef struct s_mouse
 {
-	int				code;
+	int				button;
 	int				x;
 	int				y;
 	int				prev_x;
@@ -311,8 +311,11 @@ t_screen_views		*init_screen_views(t_model_fdf *fdf);
 void				translate_fdf_model(int keycode, t_screen *screen);
 // interface__keyboard.c
 int					key_hook(int keycode, void *param);
+// interface__mouse__mouse_down.c
+int					mouse_down(int button, int x, int y, void *param);
 // interface__util.c
 int					close_window(void *param);
+double				reset_angles(double angle);
 
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);

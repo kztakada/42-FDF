@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 22:44:22 by katakada         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:48:23 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	loop_runner(void *param)
 void	set_user_interface(t_screen *screen)
 {
 	mlx_key_hook(screen->mlx_win, key_hook, screen);
-	// mlx_hook(screen->mlx_win, 4, 1L << 2, ft_mouse_down, screen);
+	mlx_hook(screen->mlx_win, 4, 1L << 2, mouse_down, screen);
 	// mlx_hook(screen->mlx_win, 5, 1L << 3, ft_mouse_up, screen);
 	// mlx_hook(screen->mlx_win, 6, 1L << 6, ft_mouse_move, screen);
 	mlx_hook(screen->mlx_win, 17, 0, close_window, screen);
