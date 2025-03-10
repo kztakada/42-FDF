@@ -68,6 +68,7 @@ void	calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
 	float	bottom_color_ratio;
 
 	drawing_dot->y = (int)drawing_dot->y_f;
+	drawing_dot->z = (int)drawing_dot->z_f;
 	base_color = get_base_color(drawing_dot, line);
 	if (drawing_dot->y_f > 0.f)
 		bottom_color_ratio = drawing_dot->y_f - (int)drawing_dot->y_f;
