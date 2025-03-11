@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:28:53 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/13 00:02:59 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:45:46 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	draw_screen(t_screen *screen)
 		draw_multi_view(screen->views->multi_view, screen->image);
 }
 
-static void	add_degree(double *angle, double delta)
+static void	shift_degree(double *angle, double delta)
 {
 	double	new_angle;
 
@@ -61,37 +61,25 @@ static void	add_degree(double *angle, double delta)
 
 static void	auto_rote_z(t_screen *screen)
 {
+	double	delta;
+
+	delta = 0;
+	if (screen->settings->auto_rotate_z == ROTATE_L)
+		delta = +0.01;
+	else if (screen->settings->auto_rotate_z == ROTATE_R)
+		delta = -0.01;
 	if (screen->settings->screen_mode == MAIN_SCREEN)
-	{
-		if (screen->settings->auto_rotate_z == ROTATE_L)
-			add_degree(&screen->views->main_view->camera->z_angle, +0.01);
-		else if (screen->settings->auto_rotate_z == ROTATE_R)
-			add_degree(&screen->views->main_view->camera->z_angle, -0.01);
-	}
+		shift_degree(&screen->views->main_view->camera->z_angle, delta);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
 	{
-		if (screen->settings->auto_rotate_z == ROTATE_L)
-		{
-			add_degree(&screen->views->multi_view->left_up->camera->z_angle,
-				+0.01);
-			add_degree(&screen->views->multi_view->right_up->camera->z_angle,
-				+0.01);
-			add_degree(&screen->views->multi_view->left_down->camera->z_angle,
-				+0.01);
-			add_degree(&screen->views->multi_view->right_down->camera->z_angle,
-				+0.01);
-		}
-		else if (screen->settings->auto_rotate_z == ROTATE_R)
-		{
-			add_degree(&screen->views->multi_view->left_up->camera->z_angle,
-				-0.01);
-			add_degree(&screen->views->multi_view->right_up->camera->z_angle,
-				-0.01);
-			add_degree(&screen->views->multi_view->left_down->camera->z_angle,
-				-0.01);
-			add_degree(&screen->views->multi_view->right_down->camera->z_angle,
-				-0.01);
-		}
+		shift_degree(&screen->views->multi_view->left_up->camera->z_angle,
+			delta);
+		shift_degree(&screen->views->multi_view->right_up->camera->z_angle,
+			delta);
+		shift_degree(&screen->views->multi_view->left_down->camera->z_angle,
+			delta);
+		shift_degree(&screen->views->multi_view->right_down->camera->z_angle,
+			delta);
 	}
 }
 
