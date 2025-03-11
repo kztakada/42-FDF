@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/13 01:03:37 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:38:12 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@
 # define MOUSE_MIDDLE 3
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
+
+// mouse scale factor
+# define MOUSE_SCALE 0.002
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
@@ -311,6 +314,15 @@ void				translate_camera_pos(int keycode, t_screen *screen);
 int					key_hook(int keycode, void *param);
 // interface__mouse__mouse_down.c
 int					mouse_down(int button, int x, int y, void *param);
+// interface__mouse__mouse_move__rotate_camera_angle.c
+void				rotate_camera_angle_xy(int mouse_x, int mouse_y,
+						t_screen *screen);
+void				rotate_camera_angle_z(int mouse_x, int mouse_y,
+						t_screen *screen);
+// interface__mouse__mouse_move.c
+int					mouse_move(int x, int y, void *param);
+// interface__mouse__mouse_up.c
+int					mouse_up(int button, int x, int y, void *param);
 // interface__util.c
 int					close_window(void *param);
 double				reset_angles(double angle);
