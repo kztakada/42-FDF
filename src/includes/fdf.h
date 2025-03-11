@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 14:38:12 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:06:16 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@
 # define KEY_MINUS 45
 # define KEY_SPACE 32
 # define KEY_R 114
+# define KEY_C 99
 
 // mouse code
 # define MOUSE_LEFT 1
@@ -300,7 +301,15 @@ void				forced_error_exit(const char *err_msg, const char *file,
 // ft_atoi_base.c
 unsigned int		ft_atoi_base(const char *str_src, const char *base);
 
+// init_camera__camera_assets.c
+t_camera			get_isometric_camera(void);
+t_camera			get_front_view_camera(void);
+t_camera			get_top_view_camera(void);
+t_camera			get_side_view_camera(void);
+
 // init_camera.c
+void				setup_camera_zoom_to_fit_view_whole(t_camera *camera,
+						int view_width, int view_height, t_model_fdf *fdf);
 t_camera			*init_camera(int projection_mode, const char *file,
 						int line);
 // init_screen.c
@@ -308,6 +317,8 @@ t_screen			*init_screen(const char *fdf_path);
 // init_views.c
 t_screen_views		*init_screen_views(t_model_fdf *fdf);
 
+// interface__keyboard__reset_displayed_view.c
+void				reset_displayed_view(t_screen *screen);
 // interface__keyboard__translate_camera_pos.c
 void				translate_camera_pos(int keycode, t_screen *screen);
 // interface__keyboard.c
@@ -351,6 +362,10 @@ void				draw_multi_view(t_multi_view *multi_view, t_image *image);
 
 // project_screen.c
 void				project_screen(t_screen *screen);
+
+// setup_mlx_hooks.c
+void				setup_loop_exec_hook(t_screen *screen);
+void				setup_user_action_hooks(t_screen *screen);
 
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);

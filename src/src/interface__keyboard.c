@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/13 01:10:16 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:12:14 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,18 @@ static void	toggle_screen_mode(t_screen *screen)
 
 static void	alter_z_scale(int keycode, t_screen *screen)
 {
+	int	delta;
+
+	delta = 0;
 	if (keycode == KEY_PLUS)
-	{
-		screen->views->main_view->z_scale += 1;
-		screen->views->multi_view->left_up->z_scale += 1;
-		screen->views->multi_view->right_up->z_scale += 1;
-		screen->views->multi_view->left_down->z_scale += 1;
-		screen->views->multi_view->right_down->z_scale += 1;
-	}
+		delta = +1;
 	else if (keycode == KEY_MINUS)
-	{
-		screen->views->main_view->z_scale -= 1;
-		screen->views->multi_view->left_up->z_scale -= 1;
-		screen->views->multi_view->right_up->z_scale -= 1;
-		screen->views->multi_view->left_down->z_scale -= 1;
-		screen->views->multi_view->right_down->z_scale -= 1;
-	}
+		delta = -1;
+	screen->views->main_view->z_scale += delta;
+	screen->views->multi_view->left_up->z_scale += delta;
+	screen->views->multi_view->right_up->z_scale += delta;
+	screen->views->multi_view->left_down->z_scale += delta;
+	screen->views->multi_view->right_down->z_scale += delta;
 }
 
 static void	toggle_auto_rotate_z(t_screen *screen)
@@ -60,6 +56,8 @@ int	key_hook(int keycode, void *param)
 		close_window(screen);
 	else if (keycode == KEY_SPACE)
 		toggle_screen_mode(screen);
+	else if (keycode == KEY_C)
+		reset_displayed_view(screen);
 	else if (keycode == KEY_R)
 		toggle_auto_rotate_z(screen);
 	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT || keycode == KEY_UP

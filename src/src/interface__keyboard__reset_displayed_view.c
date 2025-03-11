@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   interface__keyboard__reset_displayed_view.c        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/11 17:05:25 by katakada          #+#    #+#             */
+/*   Updated: 2025/03/11 17:05:50 by katakada         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+static void	copy_camera(t_camera *dest, t_camera src)
+{
+	dest->zoom = src.zoom;
+	dest->x_angle = src.x_angle;
+	dest->y_angle = src.y_angle;
+	dest->z_angle = src.z_angle;
+	dest->x_offset = src.x_offset;
+	dest->y_offset = src.y_offset;
+	dest->z_offset = src.z_offset;
+}
+
+static void	reset_view(t_view *view, t_camera preset)
+{
+	copy_camera(view->camera, preset);
+	setup_camera_zoom_to_fit_view_whole(view->camera, view->width, view->height,
+		view->fdf);
+	view->z_scale = Z_SCALE_DEFAULT;
+}
+
+void	reset_displayed_view(t_screen *screen)
+{
+	if (screen->settings->screen_mode == MAIN_SCREEN)
+		reset_view(screen->views->main_view, get_isometric_camera());
+	else if (screen->settings->screen_mode == MULTI_SCREEN)
+	{
+		reset_view(screen->views->multi_view->left_up, get_side_view_camera());
+		reset_view(screen->views->multi_view->right_up, get_top_view_camera());
+		reset_view(screen->views->multi_view->left_down,
+			get_isometric_camera());
+		reset_view(screen->views->multi_view->right_down,
+			get_front_view_camera());
+	}
+}

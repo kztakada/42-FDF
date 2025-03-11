@@ -6,25 +6,11 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:04 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/11 18:46:05 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:30:06 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	set_camera_zoom_to_fit_view_whole(t_camera *camera, int view_width,
-		int view_height, t_model_fdf *fdf)
-{
-	printf("view_width: %d view_height: %d\n", view_width, view_height);
-	printf("fdf->size_x_raw: %d fdf->size_y_raw: %d\n", fdf->size_x_raw,
-		fdf->size_y_raw);
-	camera->zoom = view_width / fdf->size_x_raw / 2;
-	if (camera->zoom > view_height / fdf->size_y_raw / 2)
-		camera->zoom = view_height / fdf->size_y_raw / 2;
-	if (camera->zoom < 1)
-		camera->zoom = 1;
-	// camera->zoom = 100;
-}
 
 static t_view	*init_view(int view_width, int view_height, int projection_mode,
 		t_model_fdf *fdf)
@@ -38,7 +24,7 @@ static t_view	*init_view(int view_width, int view_height, int projection_mode,
 	view->height = view_height;
 	view->z_scale = Z_SCALE_DEFAULT;
 	view->camera = init_camera(projection_mode, __FILE__, __LINE__);
-	set_camera_zoom_to_fit_view_whole(view->camera, view_width, view_height,
+	setup_camera_zoom_to_fit_view_whole(view->camera, view_width, view_height,
 		fdf);
 	view->fdf = fdf;
 	return (view);

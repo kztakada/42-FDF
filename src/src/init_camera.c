@@ -6,66 +6,20 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:16:17 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/13 00:30:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:33:46 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_camera	get_isometric_camera(void)
+void	setup_camera_zoom_to_fit_view_whole(t_camera *camera, int view_width,
+		int view_height, t_model_fdf *fdf)
 {
-	t_camera	camera;
-
-	camera.zoom = 0;
-	camera.x_angle = 0.955316618;
-	camera.y_angle = 0;
-	camera.z_angle = 0.785398163;
-	camera.x_offset = 0;
-	camera.y_offset = 0;
-	camera.z_offset = 0;
-	return (camera);
-}
-
-static t_camera	get_front_view_camera(void)
-{
-	t_camera	camera;
-
-	camera.zoom = 0;
-	camera.x_angle = 1.570796327;
-	camera.y_angle = 0;
-	camera.z_angle = 0;
-	camera.x_offset = 0;
-	camera.y_offset = 0;
-	camera.z_offset = 0;
-	return (camera);
-}
-
-static t_camera	get_top_view_camera(void)
-{
-	t_camera	camera;
-
-	camera.zoom = 0;
-	camera.x_angle = 0;
-	camera.y_angle = 0;
-	camera.z_angle = 0;
-	camera.x_offset = 0;
-	camera.y_offset = 0;
-	camera.z_offset = 0;
-	return (camera);
-}
-
-static t_camera	get_side_view_camera(void)
-{
-	t_camera	camera;
-
-	camera.zoom = 0;
-	camera.x_angle = 1.570796327;
-	camera.y_angle = 0;
-	camera.z_angle = 1.570796327;
-	camera.x_offset = 0;
-	camera.y_offset = 0;
-	camera.z_offset = 0;
-	return (camera);
+	camera->zoom = view_width / fdf->size_x_raw / 2;
+	if (camera->zoom > view_height / fdf->size_y_raw / 2)
+		camera->zoom = view_height / fdf->size_y_raw / 2;
+	if (camera->zoom < 1)
+		camera->zoom = 1;
 }
 
 t_camera	*init_camera(int projection_mode, const char *file, int line)
