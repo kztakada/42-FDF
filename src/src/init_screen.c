@@ -6,16 +6,15 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:33:31 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/12 01:50:01 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:03:08 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static t_image	*init_image(void *mlx_ptr, int img_width, int img_height)
-
 {
-	t_image *image;
+	t_image	*image;
 
 	image = (t_image *)malloc(sizeof(t_image));
 	if (!image)
