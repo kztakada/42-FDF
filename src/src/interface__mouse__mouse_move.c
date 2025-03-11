@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 23:59:55 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 13:45:22 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/12 00:56:42 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	mouse_move(int mouse_x, int mouse_y, void *param)
 	if (screen->mouse->button == MOUSE_LEFT)
 		shift_camera_offset_xy(mouse_x, mouse_y, screen);
 	else if (screen->mouse->button == MOUSE_MIDDLE)
-		rotate_camera_angle_z(mouse_x, mouse_y, screen);
-	else if (screen->mouse->button == MOUSE_RIGHT)
 		rotate_camera_angle_xy(mouse_x, mouse_y, screen);
+	else if (screen->mouse->button == MOUSE_RIGHT)
+		rotate_camera_angle_z_by_mouse(mouse_x, mouse_y, screen);
 	if (screen->mouse->button == MOUSE_LEFT
 		|| screen->mouse->button == MOUSE_RIGHT
 		|| screen->mouse->button == MOUSE_MIDDLE)

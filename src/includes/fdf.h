@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:49:50 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/12 01:21:36 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 
+// screen background color
+# define SCREEN_BG_COLOR 0x040404
+
 // view size
 # define MAIN_VIEW_WIDTH 1920
 # define MAIN_VIEW_HEIGHT 1080
@@ -76,6 +79,7 @@
 # define CONSOLE_HEIGHT 1080
 
 // camera projection mode
+# define FREE -1
 # define ISOMETRIC 0
 # define FRONT_VIEW 1
 # define TOP_VIEW 2
@@ -108,8 +112,8 @@
 
 // mouse code
 # define MOUSE_LEFT 1
-# define MOUSE_RIGHT 2
-# define MOUSE_MIDDLE 3
+# define MOUSE_MIDDLE 2
+# define MOUSE_RIGHT 3
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 
@@ -328,7 +332,7 @@ int					mouse_down(int button, int x, int y, void *param);
 // interface__mouse__mouse_move__rotate_camera_angle.c
 void				rotate_camera_angle_xy(int mouse_x, int mouse_y,
 						t_screen *screen);
-void				rotate_camera_angle_z(int mouse_x, int mouse_y,
+void				rotate_camera_angle_z_by_mouse(int mouse_x, int mouse_y,
 						t_screen *screen);
 // interface__mouse__mouse_move.c
 int					mouse_move(int x, int y, void *param);
@@ -336,7 +340,7 @@ int					mouse_move(int x, int y, void *param);
 int					mouse_up(int button, int x, int y, void *param);
 // interface__util.c
 int					close_window(void *param);
-double				reset_angles(double angle);
+void				rotate_angle(double *angle, double delta);
 
 // load_fdf__calc_max_min_xyz.c
 t_model_fdf			calc_max_min_xyz(t_model_fdf fdf);
@@ -360,8 +364,8 @@ t_model_fdf			load_fdf(const char *fdf_path);
 // malti_view.c
 void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
-// project_screen.c
-void				project_screen(t_screen *screen);
+// projection_exec.c
+void				projection_exec(t_screen *screen);
 
 // setup_mlx_hooks.c
 void				setup_loop_exec_hook(t_screen *screen);

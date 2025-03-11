@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   project_screen.c                                   :+:      :+:    :+:   */
+/*   projection_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 00:28:53 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:39:29 by katakada         ###   ########.fr       */
+/*   Created: 2025/03/12 01:22:09 by katakada          #+#    #+#             */
+/*   Updated: 2025/03/12 01:22:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,54 +44,46 @@ static void	draw_screen(t_screen *screen)
 {
 	ft_bzero(screen->image->addr, screen->image->width * screen->image->height
 		* (screen->image->bits_per_pixel / 8));
-	put_buckground_color(screen->image, 0x040404);
+	put_buckground_color(screen->image, SCREEN_BG_COLOR);
 	if (screen->settings->screen_mode == MAIN_SCREEN)
 		draw_view(screen->views->main_view, screen);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
 		draw_multi_view(screen->views->multi_view, screen);
 }
 
-static void	shift_degree(double *angle, double delta)
-{
-	double	new_angle;
-
-	new_angle = *angle + delta;
-	*angle = reset_angles(new_angle);
-}
-
-static void	auto_rote_z(t_screen *screen)
+static void	auto_rotate_camera_angle_z(t_screen *screen)
 {
 	double	delta;
 
+	if (screen->settings->auto_rotate_z == STOP)
+		return ;
 	delta = 0;
 	if (screen->settings->auto_rotate_z == ROTATE_L)
 		delta = +0.01;
 	else if (screen->settings->auto_rotate_z == ROTATE_R)
 		delta = -0.01;
 	if (screen->settings->screen_mode == MAIN_SCREEN)
-		shift_degree(&screen->views->main_view->camera->z_angle, delta);
+		rotate_angle(&screen->views->main_view->camera->z_angle, delta);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
 	{
-		shift_degree(&screen->views->multi_view->left_up->camera->z_angle,
+		rotate_angle(&screen->views->multi_view->left_up->camera->z_angle,
 			delta);
-		shift_degree(&screen->views->multi_view->right_up->camera->z_angle,
+		rotate_angle(&screen->views->multi_view->right_up->camera->z_angle,
 			delta);
-		shift_degree(&screen->views->multi_view->left_down->camera->z_angle,
+		rotate_angle(&screen->views->multi_view->left_down->camera->z_angle,
 			delta);
-		shift_degree(&screen->views->multi_view->right_down->camera->z_angle,
+		rotate_angle(&screen->views->multi_view->right_down->camera->z_angle,
 			delta);
 	}
 }
 
-void	project_screen(t_screen *screen)
+void	projection_exec(t_screen *screen)
 {
-	auto_rote_z(screen);
+	auto_rotate_camera_angle_z(screen);
 	draw_screen(screen);
 	// mlx_string_put(mlx, mlx_win, 100, 100, 0x00FFFF00, "Hello world!");
 	mlx_put_image_to_window(screen->mlx, screen->mlx_win, screen->image->img, 0,
 		0);
 	// draw_instructions(screen);
 	// draw_debag(screen);
-	// mlx_key_hook(mlx_win, key_hook, NULL);
-	// mlx_mouse_hook(mlx_win, mouse_hook, NULL);
 }
