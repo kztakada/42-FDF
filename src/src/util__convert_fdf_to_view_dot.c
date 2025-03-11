@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:58:49 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:32:51 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:23:41 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static void	rotate_z(int *x, int *y, double z_angle)
 	*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
 }
 
-t_dot_on_view	convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view)
+t_dot_on_view	convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view,
+		int z_scale)
 {
 	t_dot_on_view	view_dot;
 
@@ -72,8 +73,7 @@ t_dot_on_view	convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view)
 		view_dot.color = calc_default_color(view_dot.z, view->fdf);
 	view_dot.x = v_fdf.x * view->camera->zoom;
 	view_dot.y = v_fdf.y * view->camera->zoom;
-	view_dot.z = view_dot.z * view->camera->zoom * view->z_scale
-		/ Z_HEIGHT_RATIO;
+	view_dot.z = view_dot.z * view->camera->zoom * z_scale / Z_HEIGHT_RATIO;
 	rotate_z(&view_dot.x, &view_dot.y, view->camera->z_angle);
 	rotate_y(&view_dot.x, &view_dot.z, view->camera->y_angle);
 	rotate_x(&view_dot.y, &view_dot.z, view->camera->x_angle);

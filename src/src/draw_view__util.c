@@ -6,26 +6,26 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:02:38 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 17:37:34 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:51:17 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static t_vertex_fdf	calc_deeper_corner(t_vertex_fdf deepest_temp,
-		t_vertex_fdf candidate, t_view *view)
+		t_vertex_fdf candidate, t_view *view, int z_scale)
 {
 	t_dot_on_view	deepest_temp_dot;
 	t_dot_on_view	candidate_dot;
 
-	deepest_temp_dot = convert_fdf_to_view_dot(deepest_temp, view);
-	candidate_dot = convert_fdf_to_view_dot(candidate, view);
+	deepest_temp_dot = convert_fdf_to_view_dot(deepest_temp, view, z_scale);
+	candidate_dot = convert_fdf_to_view_dot(candidate, view, z_scale);
 	if (candidate_dot.z < deepest_temp_dot.z)
 		return (candidate);
 	return (deepest_temp);
 }
 
-t_vertex_fdf	computed_deepest_corner(t_view *view)
+t_vertex_fdf	computed_deepest_corner(t_view *view, int z_scale)
 {
 	t_vertex_fdf	*left_up;
 	t_vertex_fdf	*right_up;
@@ -41,9 +41,12 @@ t_vertex_fdf	computed_deepest_corner(t_view *view)
 	if (!left_up || !right_up || !left_down || !right_down)
 		forced_error_exit("vertex is NULL", __FILE__, __LINE__);
 	deepest_corner = *left_up;
-	deepest_corner = calc_deeper_corner(deepest_corner, *right_up, view);
-	deepest_corner = calc_deeper_corner(deepest_corner, *left_down, view);
-	deepest_corner = calc_deeper_corner(deepest_corner, *right_down, view);
+	deepest_corner = calc_deeper_corner(deepest_corner, *right_up, view,
+			z_scale);
+	deepest_corner = calc_deeper_corner(deepest_corner, *left_down, view,
+			z_scale);
+	deepest_corner = calc_deeper_corner(deepest_corner, *right_down, view,
+			z_scale);
 	return (deepest_corner);
 }
 

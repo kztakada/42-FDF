@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:06:16 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:49:50 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,6 @@ typedef struct s_view
 	int				height;
 	int				offset_x;
 	int				offset_y;
-	int				z_scale;
 	t_model_fdf		*fdf;
 	t_camera		*camera;
 }					t_view;
@@ -258,6 +257,7 @@ typedef struct s_screen
 	t_image			*image;
 	// views
 	t_screen_views	*views;
+	int				z_scale;
 	//	user interface
 	t_mouse			*mouse;
 	t_settings		*settings;
@@ -282,15 +282,15 @@ void				swap_xy_to_restore_steep(t_anti_aliased_dot *dot);
 void				calc_yz_gradient(t_line_on_view *line);
 // draw_view__draw_line.c
 void				draw_line_to_next_x(t_vertex_fdf start_raws, t_view *view,
-						t_image *image);
+						t_screen *screen);
 void				draw_line_to_next_y(t_vertex_fdf start_raws, t_view *view,
-						t_image *image);
+						t_screen *screen);
 // draw_view__util.c
-t_vertex_fdf		computed_deepest_corner(t_view *view);
+t_vertex_fdf		computed_deepest_corner(t_view *view, int z_scale);
 t_line_on_view		make_line_on_view(t_dot_on_view start_dot,
 						t_dot_on_view end_dot);
 // draw_view.c
-void				draw_view(t_view *view, t_image *image);
+void				draw_view(t_view *view, t_screen *screen);
 
 // error_exit.c
 void				sys_func_error_exit(const char *err_msg, const char *file,
@@ -358,7 +358,7 @@ int					open_or_exit(const char *path, const char *file, int line);
 t_model_fdf			load_fdf(const char *fdf_path);
 
 // malti_view.c
-void				draw_multi_view(t_multi_view *multi_view, t_image *image);
+void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
 // project_screen.c
 void				project_screen(t_screen *screen);
@@ -368,7 +368,8 @@ void				setup_loop_exec_hook(t_screen *screen);
 void				setup_user_action_hooks(t_screen *screen);
 
 // util__convert_fdf_to_view_dot.c
-t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view);
+t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view,
+						int z_scale);
 
 // util__custom_get_next_line.c
 char				*custom_get_next_line(int fd);

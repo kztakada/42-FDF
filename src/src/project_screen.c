@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:28:53 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 14:45:46 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:39:29 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void	draw_screen(t_screen *screen)
 		* (screen->image->bits_per_pixel / 8));
 	put_buckground_color(screen->image, 0x040404);
 	if (screen->settings->screen_mode == MAIN_SCREEN)
-		draw_view(screen->views->main_view, screen->image);
+		draw_view(screen->views->main_view, screen);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
-		draw_multi_view(screen->views->multi_view, screen->image);
+		draw_multi_view(screen->views->multi_view, screen);
 }
 
 static void	shift_degree(double *angle, double delta)

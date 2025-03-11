@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:29:45 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/10 17:50:30 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:50:07 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static int	has_next_y(int fdf_y_raw, t_model_fdf *fdf)
 	return (TRUE);
 }
 
-void	draw_view(t_view *view, t_image *image)
+void	draw_view(t_view *view, t_screen *screen)
 {
 	t_vertex_fdf	drawing_start_fdf;
 	t_vertex_fdf	raw_only_use;
 	int				delta_x_raw;
 	int				delta_y_raw;
 
-	drawing_start_fdf = computed_deepest_corner(view);
+	drawing_start_fdf = computed_deepest_corner(view, screen->z_scale);
 	delta_x_raw = (drawing_start_fdf.x_raw > 0) * -2 + 1;
 	delta_y_raw = (drawing_start_fdf.y_raw > 0) * -2 + 1;
 	raw_only_use = drawing_start_fdf;
@@ -62,9 +62,9 @@ void	draw_view(t_view *view, t_image *image)
 		while (is_included_x_raw_in_fdf(raw_only_use.x_raw, view->fdf))
 		{
 			if (has_next_x(raw_only_use.x_raw, view->fdf))
-				draw_line_to_next_x(raw_only_use, view, image);
+				draw_line_to_next_x(raw_only_use, view, screen);
 			if (has_next_y(raw_only_use.y_raw, view->fdf))
-				draw_line_to_next_y(raw_only_use, view, image);
+				draw_line_to_next_y(raw_only_use, view, screen);
 			raw_only_use.x_raw += delta_x_raw;
 		}
 		raw_only_use.x_raw = drawing_start_fdf.x_raw;

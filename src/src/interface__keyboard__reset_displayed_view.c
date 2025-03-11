@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 17:05:25 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:05:50 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:22:31 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	reset_view(t_view *view, t_camera preset)
 	copy_camera(view->camera, preset);
 	setup_camera_zoom_to_fit_view_whole(view->camera, view->width, view->height,
 		view->fdf);
-	view->z_scale = Z_SCALE_DEFAULT;
 }
 
 void	reset_displayed_view(t_screen *screen)

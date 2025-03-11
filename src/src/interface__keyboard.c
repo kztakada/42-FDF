@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:12:14 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:59:58 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	toggle_screen_mode(t_screen *screen)
 		screen->settings->screen_mode = MAIN_SCREEN;
 }
 
-static void	alter_z_scale(int keycode, t_screen *screen)
+static void	translate_z_scale(int keycode, t_screen *screen)
 {
 	int	delta;
 
@@ -29,11 +29,7 @@ static void	alter_z_scale(int keycode, t_screen *screen)
 		delta = +1;
 	else if (keycode == KEY_MINUS)
 		delta = -1;
-	screen->views->main_view->z_scale += delta;
-	screen->views->multi_view->left_up->z_scale += delta;
-	screen->views->multi_view->right_up->z_scale += delta;
-	screen->views->multi_view->left_down->z_scale += delta;
-	screen->views->multi_view->right_down->z_scale += delta;
+	screen->z_scale += delta;
 }
 
 static void	toggle_auto_rotate_z(t_screen *screen)
@@ -64,6 +60,6 @@ int	key_hook(int keycode, void *param)
 		|| keycode == KEY_DOWN)
 		translate_camera_pos(keycode, screen);
 	else if (keycode == KEY_PLUS || keycode == KEY_MINUS)
-		alter_z_scale(keycode, screen);
+		translate_z_scale(keycode, screen);
 	return (0);
 }
