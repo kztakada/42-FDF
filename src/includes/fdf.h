@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 01:21:36 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:38:15 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 # define FDF_H
 
 # include "../libft/includes/libft.h"
+# include "./for_test.h"
 # include "./mlx.h"
 # include <math.h>
 # include <stdio.h>
 # include <time.h>
-
-# ifdef TEST
-#  define static
-# endif
 
 # define TRUE 1
 # define FALSE 0
@@ -68,15 +65,84 @@
 # define SCREEN_HEIGHT 1080
 
 // screen background color
-# define SCREEN_BG_COLOR 0x040404
+# define SCREEN_BG 0x040404
+# define CONSOLE_BG 0x222222
+# define NAMEPLATE_BG 0x161616
+
+// screen text color
+# define TXT_C0 0xFFFFFF
+
+// info text line settings
+# define INFO_BASE_OFFSET_Y 20
+# define INFO_OFFSET_X 5
+# define INFO_OFFSET_Y 0
+# define LINE_SPACE 20
+# define LINE_HALF_SPACE (LINE_SPACE / 2)
+# define BOL (INFO_OFFSET_X) // beginning of line
+# define I_ROW01 (INFO_BASE_OFFSET_Y + INFO_OFFSET_Y)
+# define I_ROW02 (I_ROW01 + LINE_SPACE)
+# define I_ROW03 (I_ROW02 + LINE_SPACE)
+# define I_ROW04 (I_ROW03 + LINE_SPACE)
+# define I_ROW05 (I_ROW04 + LINE_SPACE)
+# define I_ROW06 (I_ROW05 + LINE_HALF_SPACE)
+# define I_ROW07 (I_ROW06 + LINE_SPACE)
+# define I_ROW08 (I_ROW07 + LINE_SPACE)
+# define I_ROW09 (I_ROW08 + LINE_SPACE)
+# define I_ROW10 (I_ROW09 + LINE_SPACE)
+# define I_ROW11 (I_ROW10 + LINE_SPACE)
+# define I_ROW12 (I_ROW11)
+# define I_ROW13 (I_ROW12 + LINE_SPACE)
+# define I_ROW14 (I_ROW13 + LINE_SPACE)
+# define I_ROW15 (I_ROW14 + LINE_HALF_SPACE)
+# define I_ROW16 (I_ROW15 + LINE_SPACE)
+# define I_ROW17 (I_ROW16 + LINE_HALF_SPACE)
+# define I_ROW18 (I_ROW17 + LINE_SPACE)
+# define I_ROW19 (I_ROW18 + LINE_SPACE)
+# define I_ROW20 (I_ROW19 + LINE_SPACE)
+# define I_ROW21 (I_ROW20 + LINE_SPACE)
+# define I_ROW22 (I_ROW21 + LINE_HALF_SPACE)
+# define I_ROW23 (I_ROW22 + LINE_SPACE)
+# define I_ROW24 (I_ROW23 + LINE_SPACE)
+# define I_ROW25 (I_ROW24 + LINE_SPACE)
+# define I_ROW26 (I_ROW25 + LINE_SPACE)
+# define I_ROW27 (I_ROW26 + LINE_SPACE)
+# define I_ROW28 (I_ROW27 + LINE_SPACE)
+
+// info text
+# define G_INFO_L01 "OPERATION EXPLANATION"
+# define G_INFO_L03 "MOUSE WHEEL"
+# define G_INFO_L04 "Up:     Zoom in"
+# define G_INFO_L05 "Down:   Zoom out"
+# define G_INFO_L13 "KEYBOARD"
+# define G_INFO_L14 "Esc:    Close window"
+# define G_INFO_L16 "Space:  Switch view mode"
+# define G_INFO_L18 "Left:   Move camera to left"
+# define G_INFO_L19 "Right:  Move camera to right"
+# define G_INFO_L20 "Up:     Move camera to up"
+# define G_INFO_L21 "Down:   Move camera to down"
+# define G_INFO_L23 "+:      increment model z scale"
+# define G_INFO_L24 "-:      decrement model z scale"
+# define G_INFO_L26 "C:      Reset camera position"
+# define G_INFO_L27 "R:      Switch auto rotate z"
+
+# define MAIN_L07 "MOUSE DRAG"
+# define MAIN_L08 "Left:   Translate camera xy"
+# define MAIN_L09 "Middle: Rotate camera xy"
+# define MAIN_L10 "Right:  Rotate camera z"
+
+# define MULTI_L07 "MOUSE CLICK"
+# define MULTI_L08 "Left:   Select projection"
 
 // view size
-# define MAIN_VIEW_WIDTH 1920
-# define MAIN_VIEW_HEIGHT 1080
+# define MAIN_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH)
+# define MAIN_VIEW_HEIGHT (SCREEN_HEIGHT)
 # define MULTI_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH) / 2
-# define MULTI_VIEW_HEIGHT 540
+# define MULTI_VIEW_HEIGHT (SCREEN_HEIGHT / 2)
 # define CONSOLE_WIDTH 200
-# define CONSOLE_HEIGHT 1080
+# define CONSOLE_HEIGHT (SCREEN_HEIGHT)
+# define NAMEPLATE_WIDTH 100
+# define NAMEPLATE_HEIGHT 32
+# define NAMEPLATE_OFFSET_X 16
 
 // camera projection mode
 # define FREE -1
@@ -267,6 +333,13 @@ typedef struct s_screen
 	t_settings		*settings;
 }					t_screen;
 
+typedef struct s_rectangle
+{
+	int				width;
+	int				height;
+	int				color;
+}					t_rectangle;
+
 // draw_view__draw_line__calc_dot_color.c
 void				calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
 						t_line_on_view *line);
@@ -364,6 +437,18 @@ t_model_fdf			load_fdf(const char *fdf_path);
 // malti_view.c
 void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
+// projection_exec__draw_info__util.c
+int					np_offset_x(t_view *view);
+int					np_offset_y(t_view *view);
+// projection_exec__draw_info.c
+void				draw_info(t_screen *screen);
+// projection_exec__draw_screen__util.c
+void				put_rectangle(t_image *image, t_rectangle *rectangle,
+						int start_x, int start_y);
+int					v_offset_x(t_view *view);
+int					v_offset_y(t_view *view);
+// projection_exec__draw_screen.c
+void				draw_screen(t_screen *screen);
 // projection_exec.c
 void				projection_exec(t_screen *screen);
 
@@ -383,4 +468,5 @@ t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
 int					get_int_abs(int n);
 void				flush_get_next_line(int fd);
 void				free_all(char **str_collection);
+
 #endif

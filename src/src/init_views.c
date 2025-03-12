@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:04 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:21:21 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:31:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ t_screen_views	*init_screen_views(t_model_fdf *fdf)
 	screen_views = (t_screen_views *)malloc(sizeof(t_screen_views));
 	if (!screen_views)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
-	screen_views->main_view = init_view(SCREEN_WIDTH, SCREEN_HEIGHT, ISOMETRIC,
-			fdf);
+	screen_views->main_view = init_view(MAIN_VIEW_WIDTH, MAIN_VIEW_HEIGHT,
+			ISOMETRIC, fdf);
+	screen_views->main_view->offset_x -= CONSOLE_WIDTH;
 	screen_views->multi_view = init_multi_view(fdf);
 	return (screen_views);
 }
