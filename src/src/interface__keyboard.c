@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:59:58 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:23:14 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ static void	toggle_auto_rotate_z(t_screen *screen)
 		screen->settings->auto_rotate_z = STOP;
 }
 
+static void	toggle_debug_mode(t_screen *screen)
+{
+	if (screen->settings->is_debug == TRUE)
+		screen->settings->is_debug = FALSE;
+	else
+		screen->settings->is_debug = TRUE;
+}
+
 int	key_hook(int keycode, void *param)
 {
 	t_screen	*screen;
@@ -56,6 +64,8 @@ int	key_hook(int keycode, void *param)
 		reset_displayed_view(screen);
 	else if (keycode == KEY_R)
 		toggle_auto_rotate_z(screen);
+	else if (keycode == KEY_D)
+		toggle_debug_mode(screen);
 	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT || keycode == KEY_UP
 		|| keycode == KEY_DOWN)
 		translate_camera_pos(keycode, screen);

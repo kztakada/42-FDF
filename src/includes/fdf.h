@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 13:18:12 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:44:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@
 # define G_INFO_L23 "+:      increment model z scale"
 # define G_INFO_L24 "-:      decrement model z scale"
 # define G_INFO_L26 "C:      Reset camera position"
-# define G_INFO_L27 "R:      Switch auto rotate z"
+# define G_INFO_L27 "R:      Toggle auto rotate z"
+# define G_INFO_L28 "D:      Toggle debug mode"
 
 # define MAIN_L07 "MOUSE DRAG"
 # define MAIN_L08 "Left:   Translate camera xy"
@@ -175,6 +176,7 @@
 # define KEY_SPACE 32
 # define KEY_R 114
 # define KEY_C 99
+# define KEY_D 100
 
 // mouse code
 # define MOUSE_LEFT 1
@@ -267,6 +269,7 @@ typedef struct s_settings
 	int				projection_mode;
 	int				screen_mode;
 	int				auto_rotate_z;
+	int				is_debug;
 }					t_settings;
 
 // for mouse control

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:33:31 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:53:13 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:24:40 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_screen	*init_screen(const char *fdf_path)
 	screen->settings = (t_settings *)malloc(sizeof(t_settings));
 	if (!screen->settings)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
+	screen->settings->is_debug = FALSE;
 	screen->z_scale = Z_SCALE_DEFAULT;
 	return (screen);
 }
