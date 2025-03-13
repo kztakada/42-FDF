@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 17:05:25 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 17:43:21 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:45:57 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	copy_camera(t_camera *dest, t_camera src)
 	dest->z_angle = src.z_angle;
 	dest->x_offset = src.x_offset;
 	dest->y_offset = src.y_offset;
-	dest->z_offset = src.z_offset;
 }
 
 static void	reset_view(t_view *view, t_camera preset)

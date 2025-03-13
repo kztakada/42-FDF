@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:48:52 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 00:13:42 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:41:41 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	put_camera_status(t_screen *screen, t_view *view, int x, int y)
 		"x_offset");
 	mlx_string_put(screen->mlx, screen->mlx_win, x, y + 120, TXT_C0,
 		"y_offset");
-	mlx_string_put(screen->mlx, screen->mlx_win, x, y + 140, TXT_C0,
-		"z_offset");
+	mlx_string_put(screen->mlx, screen->mlx_win, x, y + 140, TXT_C0, "z_scale");
 	mlx_string_put(screen->mlx, screen->mlx_win, x + 80, y + 20, TXT_C0,
 		ft_itoa(view->camera->zoom));
 	mlx_string_put(screen->mlx, screen->mlx_win, x + 80, y + 40, TXT_C0,
@@ -60,7 +59,7 @@ void	put_camera_status(t_screen *screen, t_view *view, int x, int y)
 	mlx_string_put(screen->mlx, screen->mlx_win, x + 80, y + 120, TXT_C0,
 		ft_itoa(view->camera->y_offset));
 	mlx_string_put(screen->mlx, screen->mlx_win, x + 80, y + 140, TXT_C0,
-		ft_itoa(view->camera->z_offset));
+		ft_itoa(screen->z_scale));
 }
 
 void	draw_debag_main_view(t_screen *screen)

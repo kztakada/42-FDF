@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:16:31 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 20:50:27 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:31:50 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	put_console_color(t_image *image)
 	t_rectangle	rectangle;
 
 	rectangle.width = CONSOLE_WIDTH;
-	rectangle.height = CONSOLE_HEIGHT;
+	rectangle.height = SCREEN_HEIGHT;
 	rectangle.color = CONSOLE_BG;
 	put_rectangle(image, &rectangle, 0, 0);
 }

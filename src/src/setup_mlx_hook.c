@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:29:44 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 01:25:39 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:29:30 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ static void	exec_by_frame_rate(void (*func_projection_exec)(t_screen *),
 	static clock_t	last_time = 0;
 	clock_t			current_time;
 	double			elapsed_time;
+	double			one_frame_time;
 
+	one_frame_time = PER_MILLI_SEC / FRAME_RATE;
 	current_time = clock();
-	elapsed_time = (double)(current_time - last_time) / CLOCKS_PER_SEC * 1000;
-	if (elapsed_time >= FRAME_TIME)
+	elapsed_time = (double)(current_time - last_time) / CLOCKS_PER_SEC
+		* PER_MILLI_SEC;
+	if (elapsed_time >= one_frame_time)
 	{
 		func_projection_exec(screen);
 		last_time = current_time;

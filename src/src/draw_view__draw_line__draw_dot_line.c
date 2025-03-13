@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:27:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/14 01:37:26 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:39:08 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,8 @@ void	draw_dot_line(t_line_on_view *line, t_view *view, t_image *image)
 	drawing_dot.x = line->start_dot.x;
 	while (drawing_dot.x <= line->end_dot.x)
 	{
-		// if (drawing_dot.z_f < view->camera->z_offset)
-		// {
 		calc_anti_alias_dots(&drawing_dot, line);
 		draw_dot(drawing_dot, line, view, image);
-		// }
 		drawing_dot.y_f += line->y_gradient;
 		drawing_dot.z_f += line->z_gradient;
 		drawing_dot.x++;

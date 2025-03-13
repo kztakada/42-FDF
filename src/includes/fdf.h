@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 22:40:29 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:40:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,7 @@
 # define MULTI_INFO_M02 "Left:   Select projection"
 
 // view size
-# define MAIN_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH)
-# define MAIN_VIEW_HEIGHT (SCREEN_HEIGHT)
-# define MULTI_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH) / 2
-# define MULTI_VIEW_HEIGHT (SCREEN_HEIGHT / 2)
 # define CONSOLE_WIDTH 200
-# define CONSOLE_HEIGHT (SCREEN_HEIGHT)
 # define NAMEPLATE_WIDTH 100
 # define NAMEPLATE_HEIGHT 32
 # define NAMEPLATE_OFFSET_X 16
@@ -164,7 +159,7 @@
 
 // frame time
 # define FRAME_RATE 120
-# define FRAME_TIME (1000 / FRAME_RATE)
+# define PER_MILLI_SEC 1000
 
 // key code
 # define KEY_ESC 65307
@@ -264,7 +259,6 @@ typedef struct s_camera
 	double			z_angle;
 	int				x_offset;
 	int				y_offset;
-	int				z_offset;
 }					t_camera;
 
 // for global settings
