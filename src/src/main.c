@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 15:33:33 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:45:30 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	reset_settings(t_screen *screen)
 {
 	screen->settings->projection_mode = ISOMETRIC;
 	screen->settings->screen_mode = MAIN_SCREEN;
+	screen->settings->auto_rotate_x = STOP;
+	screen->settings->auto_rotate_y = STOP;
 	screen->settings->auto_rotate_z = STOP;
 }
 

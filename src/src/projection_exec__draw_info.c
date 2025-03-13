@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:18:44 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 17:51:51 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:37:10 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 static void	draw_global_info(void *mlx, void *win)
 {
-	mlx_string_put(mlx, win, BOL, I_ROW01, TXT_C0, G_INFO_L01);
-	mlx_string_put(mlx, win, BOL, I_ROW03, TXT_C0, G_INFO_L03);
-	mlx_string_put(mlx, win, BOL, I_ROW04, TXT_C0, G_INFO_L04);
-	mlx_string_put(mlx, win, BOL, I_ROW05, TXT_C0, G_INFO_L05);
-	mlx_string_put(mlx, win, BOL, I_ROW13, TXT_C0, G_INFO_L13);
-	mlx_string_put(mlx, win, BOL, I_ROW14, TXT_C0, G_INFO_L14);
-	mlx_string_put(mlx, win, BOL, I_ROW16, TXT_C0, G_INFO_L16);
-	mlx_string_put(mlx, win, BOL, I_ROW18, TXT_C0, G_INFO_L18);
-	mlx_string_put(mlx, win, BOL, I_ROW19, TXT_C0, G_INFO_L19);
-	mlx_string_put(mlx, win, BOL, I_ROW20, TXT_C0, G_INFO_L20);
-	mlx_string_put(mlx, win, BOL, I_ROW21, TXT_C0, G_INFO_L21);
-	mlx_string_put(mlx, win, BOL, I_ROW23, TXT_C0, G_INFO_L23);
-	mlx_string_put(mlx, win, BOL, I_ROW24, TXT_C0, G_INFO_L24);
-	mlx_string_put(mlx, win, BOL, I_ROW26, TXT_C0, G_INFO_L26);
-	mlx_string_put(mlx, win, BOL, I_ROW27, TXT_C0, G_INFO_L27);
+	mlx_string_put(mlx, win, BOL, G_L01, TXT_C0, G_INFO_L01);
+	mlx_string_put(mlx, win, BOL, G_M01, TXT_C0, G_INFO_M01);
+	mlx_string_put(mlx, win, BOL, G_M02, TXT_C0, G_INFO_M02);
+	mlx_string_put(mlx, win, BOL, G_M03, TXT_C0, G_INFO_M03);
+	mlx_string_put(mlx, win, BOL, G_K01, TXT_C0, G_INFO_K01);
+	mlx_string_put(mlx, win, BOL, G_K02, TXT_C0, G_INFO_K02);
+	mlx_string_put(mlx, win, BOL, G_K03, TXT_C0, G_INFO_K03);
+	mlx_string_put(mlx, win, BOL, G_K04, TXT_C0, G_INFO_K04);
+	mlx_string_put(mlx, win, BOL, G_K05, TXT_C0, G_INFO_K05);
+	mlx_string_put(mlx, win, BOL, G_K06, TXT_C0, G_INFO_K06);
+	mlx_string_put(mlx, win, BOL, G_K07, TXT_C0, G_INFO_K07);
+	mlx_string_put(mlx, win, BOL, G_K08, TXT_C0, G_INFO_K08);
+	mlx_string_put(mlx, win, BOL, G_K09, TXT_C0, G_INFO_K09);
+	mlx_string_put(mlx, win, BOL, G_K10, TXT_C0, G_INFO_K10);
+	mlx_string_put(mlx, win, BOL, G_K11, TXT_C0, G_INFO_K11);
+	mlx_string_put(mlx, win, BOL, G_K12, TXT_C0, G_INFO_K12);
+	mlx_string_put(mlx, win, BOL, G_K13, TXT_C0, G_INFO_K13);
+	mlx_string_put(mlx, win, BOL, G_K14, TXT_C0, G_INFO_K14);
 }
 
 static char	*get_main_p_mode(t_screen *screen)
@@ -48,14 +51,7 @@ static char	*get_main_p_mode(t_screen *screen)
 
 static void	draw_main_view_info(t_screen *screen)
 {
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW07, TXT_C0,
-		MAIN_L07);
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW08, TXT_C0,
-		MAIN_L08);
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW09, TXT_C0,
-		MAIN_L09);
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW10, TXT_C0,
-		MAIN_L10);
+	draw_mouse_drug_info(screen);
 	mlx_string_put(screen->mlx, screen->mlx_win,
 		np_offset_x(screen->views->main_view),
 		np_offset_y(screen->views->main_view), TXT_C0, get_main_p_mode(screen));
@@ -63,10 +59,10 @@ static void	draw_main_view_info(t_screen *screen)
 
 static void	draw_multi_view_info(t_screen *screen)
 {
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW07, TXT_C0,
-		MULTI_L07);
-	mlx_string_put(screen->mlx, screen->mlx_win, BOL, I_ROW08, TXT_C0,
-		MULTI_L08);
+	if (screen->settings->is_debug == TRUE)
+		draw_mouse_drug_info(screen);
+	else
+		draw_mouse_click_info(screen);
 	mlx_string_put(screen->mlx, screen->mlx_win,
 		np_offset_x(screen->views->multi_view->left_up),
 		np_offset_y(screen->views->multi_view->left_up), TXT_C0, "FRONT VIEW");

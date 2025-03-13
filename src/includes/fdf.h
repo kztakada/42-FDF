@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 17:22:08 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 22:40:29 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,65 +74,66 @@
 
 // info text line settings
 # define INFO_BASE_OFFSET_Y 20
-# define INFO_OFFSET_X 5
-# define INFO_OFFSET_Y 0
-# define LINE_SPACE 20
-# define LINE_HALF_SPACE (LINE_SPACE / 2)
-# define BOL (INFO_OFFSET_X) // beginning of line
-# define I_ROW01 (INFO_BASE_OFFSET_Y + INFO_OFFSET_Y)
-# define I_ROW02 (I_ROW01 + LINE_SPACE)
-# define I_ROW03 (I_ROW02 + LINE_SPACE)
-# define I_ROW04 (I_ROW03 + LINE_SPACE)
-# define I_ROW05 (I_ROW04 + LINE_SPACE)
-# define I_ROW06 (I_ROW05 + LINE_HALF_SPACE)
-# define I_ROW07 (I_ROW06 + LINE_SPACE)
-# define I_ROW08 (I_ROW07 + LINE_SPACE)
-# define I_ROW09 (I_ROW08 + LINE_SPACE)
-# define I_ROW10 (I_ROW09 + LINE_SPACE)
-# define I_ROW11 (I_ROW10 + LINE_SPACE)
-# define I_ROW12 (I_ROW11)
-# define I_ROW13 (I_ROW12 + LINE_SPACE)
-# define I_ROW14 (I_ROW13 + LINE_SPACE)
-# define I_ROW15 (I_ROW14 + LINE_HALF_SPACE)
-# define I_ROW16 (I_ROW15 + LINE_SPACE)
-# define I_ROW17 (I_ROW16 + LINE_HALF_SPACE)
-# define I_ROW18 (I_ROW17 + LINE_SPACE)
-# define I_ROW19 (I_ROW18 + LINE_SPACE)
-# define I_ROW20 (I_ROW19 + LINE_SPACE)
-# define I_ROW21 (I_ROW20 + LINE_SPACE)
-# define I_ROW22 (I_ROW21 + LINE_HALF_SPACE)
-# define I_ROW23 (I_ROW22 + LINE_SPACE)
-# define I_ROW24 (I_ROW23 + LINE_SPACE)
-# define I_ROW25 (I_ROW24 + LINE_SPACE)
-# define I_ROW26 (I_ROW25 + LINE_SPACE)
-# define I_ROW27 (I_ROW26 + LINE_SPACE)
-# define I_ROW28 (I_ROW27 + LINE_SPACE)
+# define LINE_SPACE 18
+# define BOL 5 // beginning of line
+# define G_L01 20
+# define G_M01 60
+# define G_M02 78
+# define G_M03 96
+
+# define M_M01 126
+# define M_M02 144
+# define M_M03 162
+# define M_M04 180
+
+# define G_K01 220
+# define G_K02 238
+# define G_K03 256
+# define G_K04 274
+# define G_K05 292
+# define G_K06 310
+# define G_K07 336
+# define G_K08 354
+# define G_K09 380
+# define G_K10 398
+# define G_K11 416
+# define G_K12 442
+# define G_K13 460
+# define G_K14 486
 
 // info text
 # define G_INFO_L01 "OPERATION EXPLANATION"
-# define G_INFO_L03 "MOUSE WHEEL"
-# define G_INFO_L04 "Up:     Zoom in"
-# define G_INFO_L05 "Down:   Zoom out"
-# define G_INFO_L13 "KEYBOARD"
-# define G_INFO_L14 "Esc:    Close window"
-# define G_INFO_L16 "Space:  Switch view mode"
-# define G_INFO_L18 "Left:   Move camera to left"
-# define G_INFO_L19 "Right:  Move camera to right"
-# define G_INFO_L20 "Up:     Move camera to up"
-# define G_INFO_L21 "Down:   Move camera to down"
-# define G_INFO_L23 "+:      increment model z scale"
-# define G_INFO_L24 "-:      decrement model z scale"
-# define G_INFO_L26 "C:      Reset camera position"
-# define G_INFO_L27 "R:      Toggle auto rotate z"
-# define G_INFO_L28 "D:      Toggle debug mode"
 
-# define MAIN_L07 "MOUSE DRAG"
-# define MAIN_L08 "Left:   Translate camera xy"
-# define MAIN_L09 "Middle: Rotate camera xy"
-# define MAIN_L10 "Right:  Rotate camera z"
+# define G_INFO_M01 "MOUSE WHEEL"
+# define G_INFO_M02 "Up:     Zoom in"
+# define G_INFO_M03 "Down:   Zoom out"
 
-# define MULTI_L07 "MOUSE CLICK"
-# define MULTI_L08 "Left:   Select projection"
+# define G_INFO_K01 "KEYBOARD"
+# define G_INFO_K02 "Space:  Switch view mode"
+# define G_INFO_K03 "Left:   Move camera to left"
+# define G_INFO_K04 "Right:  Move camera to right"
+# define G_INFO_K05 "Up:     Move camera to up"
+# define G_INFO_K06 "Down:   Move camera to down"
+
+# define G_INFO_K07 "+:      increment model z scale"
+# define G_INFO_K08 "-:      decrement model z scale"
+
+# define G_INFO_K09 "X:      Toggle auto rotate x"
+# define G_INFO_K10 "Y:      Toggle auto rotate y"
+# define G_INFO_K11 "Z:      Toggle auto rotate z"
+
+# define G_INFO_K12 "C:      Reset camera position"
+# define G_INFO_K13 "D:      Switch debug mode"
+
+# define G_INFO_K14 "Esc:    Close window"
+
+# define MAIN_INFO_M01 "MOUSE DRAG"
+# define MAIN_INFO_M02 "Left:   Translate camera xy"
+# define MAIN_INFO_M03 "Middle: Rotate camera xy"
+# define MAIN_INFO_M04 "Right:  Rotate camera z"
+
+# define MULTI_INFO_M01 "MOUSE CLICK"
+# define MULTI_INFO_M02 "Left:   Select projection"
 
 // view size
 # define MAIN_VIEW_WIDTH (SCREEN_WIDTH - CONSOLE_WIDTH)
@@ -177,6 +178,9 @@
 # define KEY_R 114
 # define KEY_C 99
 # define KEY_D 100
+# define KEY_X 120
+# define KEY_Y 121
+# define KEY_Z 122
 
 // mouse code
 # define MOUSE_LEFT 1
@@ -269,6 +273,8 @@ typedef struct s_settings
 	int				projection_mode;
 	int				is_moved;
 	int				screen_mode;
+	int				auto_rotate_x;
+	int				auto_rotate_y;
 	int				auto_rotate_z;
 	int				is_debug;
 }					t_settings;
@@ -400,6 +406,8 @@ t_screen_views		*init_screen_views(t_model_fdf *fdf);
 
 // interface__keyboard__reset_displayed_view.c
 void				reset_displayed_view(t_screen *screen);
+// nterface__keyboard__toggle_auto_rotate.c
+void				toggle_auto_rotate(t_screen *screen, int keycode);
 // interface__keyboard__translate_camera_pos.c
 void				translate_camera_pos(int keycode, t_screen *screen);
 // interface__keyboard.c
@@ -441,11 +449,15 @@ t_model_fdf			load_fdf(const char *fdf_path);
 // malti_view.c
 void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
+// projection_exec__auto_rotate_camera_angle.c
+void				auto_rotate_camera_angle(t_screen *screen);
 // projection_exec__draw_debag.c
 void				draw_debag(t_screen *screen);
 // projection_exec__draw_info__util.c
 int					np_offset_x(t_view *view);
 int					np_offset_y(t_view *view);
+void				draw_mouse_drug_info(t_screen *screen);
+void				draw_mouse_click_info(t_screen *screen);
 // projection_exec__draw_info.c
 void				draw_info(t_screen *screen);
 // projection_exec__draw_screen__util.c
