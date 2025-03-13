@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:58:49 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:23:41 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:34:52 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	rotate_x(int *y, int *z, double x_angle)
 	int	prev_y;
 
 	prev_y = *y;
-	*y = prev_y * cos(x_angle) - *z * sin(x_angle);
+	*y = prev_y * cos(x_angle) + *z * -sin(x_angle);
 	*z = prev_y * sin(x_angle) + *z * cos(x_angle);
 }
 
@@ -48,7 +48,7 @@ static void	rotate_y(int *x, int *z, double y_angle)
 
 	prev_x = *x;
 	*x = prev_x * cos(y_angle) + *z * sin(y_angle);
-	*z = prev_x * -sin(y_angle) + *z * cos(y_angle);
+	*z = *z * cos(y_angle) + prev_x * -sin(y_angle);
 }
 
 static void	rotate_z(int *x, int *y, double z_angle)
@@ -57,7 +57,7 @@ static void	rotate_z(int *x, int *y, double z_angle)
 
 	prev.x = *x;
 	prev.y = *y;
-	*x = prev.x * cos(z_angle) - prev.y * sin(z_angle);
+	*x = prev.x * cos(z_angle) + prev.y * -sin(z_angle);
 	*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
 }
 
