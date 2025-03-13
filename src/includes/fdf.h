@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 22:38:15 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:18:12 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,6 +437,8 @@ t_model_fdf			load_fdf(const char *fdf_path);
 // malti_view.c
 void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
+// projection_exec__draw_debag.c
+void				draw_debag(t_screen *screen);
 // projection_exec__draw_info__util.c
 int					np_offset_x(t_view *view);
 int					np_offset_y(t_view *view);

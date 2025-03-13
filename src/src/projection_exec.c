@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 01:22:09 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 20:51:25 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:50:14 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	projection_exec(t_screen *screen)
 	mlx_put_image_to_window(screen->mlx, screen->mlx_win, screen->image->img, 0,
 		0);
 	draw_info(screen);
-	// draw_debag(screen);
+	if (IS_DEBUG)
+		draw_debag(screen);
 }
