@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 15:23:14 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:49:41 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static void	toggle_auto_rotate_z(t_screen *screen)
 	else if (screen->settings->auto_rotate_z == ROTATE_L)
 		screen->settings->auto_rotate_z = ROTATE_R;
 	else if (screen->settings->auto_rotate_z == ROTATE_R)
+	{
 		screen->settings->auto_rotate_z = STOP;
+		screen->settings->is_moved = TRUE;
+	}
 }
 
 static void	toggle_debug_mode(t_screen *screen)

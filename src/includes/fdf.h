@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 15:44:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:22:08 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ typedef struct s_camera
 typedef struct s_settings
 {
 	int				projection_mode;
+	int				is_moved;
 	int				screen_mode;
 	int				auto_rotate_z;
 	int				is_debug;
@@ -406,7 +407,7 @@ int					key_hook(int keycode, void *param);
 // interface__mouse__mouse_down.c
 int					mouse_down(int button, int x, int y, void *param);
 // interface__mouse__mouse_move__rotate_camera_angle.c
-void				rotate_camera_angle_xy(int mouse_x, int mouse_y,
+void				rotate_camera_angle_xy_by_mouse(int mouse_x, int mouse_y,
 						t_screen *screen);
 void				rotate_camera_angle_z_by_mouse(int mouse_x, int mouse_y,
 						t_screen *screen);

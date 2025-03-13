@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 17:05:25 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:22:31 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:43:21 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,25 @@ static void	reset_view(t_view *view, t_camera preset)
 
 void	reset_displayed_view(t_screen *screen)
 {
+	screen->settings->is_moved = FALSE;
 	if (screen->settings->screen_mode == MAIN_SCREEN)
-		reset_view(screen->views->main_view, get_isometric_camera());
+	{
+		if (screen->settings->projection_mode == ISOMETRIC)
+			reset_view(screen->views->main_view, get_isometric_camera());
+		else if (screen->settings->projection_mode == FRONT_VIEW)
+			reset_view(screen->views->main_view, get_front_view_camera());
+		else if (screen->settings->projection_mode == TOP_VIEW)
+			reset_view(screen->views->main_view, get_top_view_camera());
+		else if (screen->settings->projection_mode == SIDE_VIEW)
+			reset_view(screen->views->main_view, get_side_view_camera());
+	}
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
 	{
-		reset_view(screen->views->multi_view->left_up, get_side_view_camera());
+		reset_view(screen->views->multi_view->left_up, get_front_view_camera());
 		reset_view(screen->views->multi_view->right_up, get_top_view_camera());
 		reset_view(screen->views->multi_view->left_down,
 			get_isometric_camera());
 		reset_view(screen->views->multi_view->right_down,
-			get_front_view_camera());
+			get_side_view_camera());
 	}
 }

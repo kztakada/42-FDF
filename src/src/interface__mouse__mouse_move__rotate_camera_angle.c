@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:36:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 00:52:54 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:23:05 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static void	rotate_angle_xy(int mouse_x, int mouse_y, t_camera *camera,
 	rotate_angle(&camera->y_angle, delta_y);
 }
 
-void	rotate_camera_angle_xy(int mouse_x, int mouse_y, t_screen *screen)
+void	rotate_camera_angle_xy_by_mouse(int mouse_x, int mouse_y,
+		t_screen *screen)
 {
+	screen->settings->is_moved = TRUE;
 	if (screen->settings->screen_mode == MAIN_SCREEN)
 		rotate_angle_xy(mouse_x, mouse_y, screen->views->main_view->camera,
 			screen->mouse);
@@ -55,6 +57,7 @@ static void	rotate_angle_z_by_mouse(int mouse_x, int mouse_y, t_camera *camera,
 void	rotate_camera_angle_z_by_mouse(int mouse_x, int mouse_y,
 		t_screen *screen)
 {
+	screen->settings->is_moved = TRUE;
 	if (screen->settings->screen_mode == MAIN_SCREEN)
 		rotate_angle_z_by_mouse(mouse_x, mouse_y,
 			screen->views->main_view->camera, screen->mouse);

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 23:45:41 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 15:38:17 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:27:47 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,9 @@ static void	shift_camera_zoom(int button, t_screen *screen)
 
 void	switch_main_view_projection(t_screen *screen, int dest_projection)
 {
-	t_camera	*prev_camera;
-
-	prev_camera = screen->views->main_view->camera;
-	if (dest_projection == ISOMETRIC)
-		screen->views->main_view->camera = init_camera(ISOMETRIC, __FILE__,
-				__LINE__);
-	else if (dest_projection == FRONT_VIEW)
-		screen->views->main_view->camera = init_camera(FRONT_VIEW, __FILE__,
-				__LINE__);
-	else if (dest_projection == TOP_VIEW)
-		screen->views->main_view->camera = init_camera(TOP_VIEW, __FILE__,
-				__LINE__);
-	else if (dest_projection == SIDE_VIEW)
-		screen->views->main_view->camera = init_camera(SIDE_VIEW, __FILE__,
-				__LINE__);
-	setup_camera_zoom_to_fit_view_whole(screen->views->main_view->camera,
-		screen->views->main_view->width, screen->views->main_view->height,
-		screen->views->main_view->fdf);
-	free(prev_camera);
 	screen->settings->projection_mode = dest_projection;
 	screen->settings->screen_mode = MAIN_SCREEN;
+	reset_displayed_view(screen);
 }
 
 static void	select_area_for_switch_projection(t_screen *screen, int mouse_x,

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:18:44 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 21:01:18 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:51:51 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ static void	draw_global_info(void *mlx, void *win)
 	mlx_string_put(mlx, win, BOL, I_ROW27, TXT_C0, G_INFO_L27);
 }
 
-static char	*get_p_mode(t_screen *screen)
+static char	*get_main_p_mode(t_screen *screen)
 {
+	if (screen->settings->is_moved == TRUE)
+		return ("FREE");
 	if (screen->settings->projection_mode == ISOMETRIC)
 		return ("ISOMETRIC");
 	else if (screen->settings->projection_mode == FRONT_VIEW)
@@ -56,7 +58,7 @@ static void	draw_main_view_info(t_screen *screen)
 		MAIN_L10);
 	mlx_string_put(screen->mlx, screen->mlx_win,
 		np_offset_x(screen->views->main_view),
-		np_offset_y(screen->views->main_view), TXT_C0, get_p_mode(screen));
+		np_offset_y(screen->views->main_view), TXT_C0, get_main_p_mode(screen));
 }
 
 static void	draw_multi_view_info(t_screen *screen)

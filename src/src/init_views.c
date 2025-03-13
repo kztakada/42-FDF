@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:04 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/12 13:31:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:44:03 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static t_multi_view	*init_multi_view(t_model_fdf *fdf)
 	if (!multi_view)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
 	multi_view->left_up = init_view(MULTI_VIEW_WIDTH, MULTI_VIEW_HEIGHT,
-			SIDE_VIEW, fdf);
+			FRONT_VIEW, fdf);
 	multi_view->right_up = init_view(MULTI_VIEW_WIDTH, MULTI_VIEW_HEIGHT,
 			TOP_VIEW, fdf);
 	multi_view->left_down = init_view(MULTI_VIEW_WIDTH, MULTI_VIEW_HEIGHT,
 			ISOMETRIC, fdf);
 	multi_view->right_down = init_view(MULTI_VIEW_WIDTH, MULTI_VIEW_HEIGHT,
-			FRONT_VIEW, fdf);
+			SIDE_VIEW, fdf);
 	set_console_offset(multi_view);
 	multi_view->right_up->offset_x -= MULTI_VIEW_WIDTH;
 	multi_view->left_down->offset_y -= MULTI_VIEW_HEIGHT;
