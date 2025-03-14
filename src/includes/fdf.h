@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 18:19:09 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:31:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,6 +445,7 @@ void				read_fdf_lines(t_model_fdf *fdf, int fd);
 // load_fdf__util.c
 int					open_or_exit(const char *path, const char *file, int line);
 t_model_fdf			get_empty_fdf(void);
+void				inspect_for_newlines_only(int fd, char **line);
 int					verify_empty_fdf(const char *fdf_path);
 // load_fdf.c
 t_model_fdf			load_fdf(const char *fdf_path);

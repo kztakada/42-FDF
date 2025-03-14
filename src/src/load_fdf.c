@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 19:21:58 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:31:33 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	calc_max_y_raw(const char *fdf_path)
 		size_y_raw++;
 		free(line);
 	}
+	inspect_for_newlines_only(fd, &line);
 	flush_get_next_line(fd);
 	free(line);
 	if (close(fd) < 0)
