@@ -6,13 +6,13 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/08 00:17:28 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:18:21 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	verify_not_empty_and_calc_max_x_raw(const char *fdf_path)
+static int	calc_max_x_raw(const char *fdf_path)
 {
 	int		fd;
 	char	*line;
@@ -23,7 +23,7 @@ static int	verify_not_empty_and_calc_max_x_raw(const char *fdf_path)
 	fd = open_or_exit(fdf_path, __FILE__, __LINE__);
 	line = custom_get_next_line(fd);
 	if (line == NULL || *line == '\0')
-		forced_error_exit("Invalid fdf file (empty file)", __FILE__, __LINE__);
+		forced_error_exit("Can not find line", __FILE__, __LINE__);
 	size_x_raw = 0;
 	z_and_color_collection = ft_split(line, ' ');
 	i = 0;
@@ -35,6 +35,7 @@ static int	verify_not_empty_and_calc_max_x_raw(const char *fdf_path)
 		i++;
 	}
 	flush_get_next_line(fd);
+	free(line);
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
 	return (size_x_raw - 1);
@@ -91,7 +92,9 @@ t_model_fdf	load_fdf(const char *fdf_path)
 	int			fd;
 	t_model_fdf	fdf;
 
-	fdf.max_x_raw = verify_not_empty_and_calc_max_x_raw(fdf_path);
+	if (verify_empty_fdf(fdf_path))
+		return (get_empty_fdf());
+	fdf.max_x_raw = calc_max_x_raw(fdf_path);
 	fdf.size_x_raw = fdf.max_x_raw + 1;
 	fdf.max_y_raw = calc_max_y_raw(fdf_path);
 	fdf.size_y_raw = fdf.max_y_raw + 1;

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 00:29:45 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:50:07 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:00:38 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	draw_view(t_view *view, t_screen *screen)
 	int				delta_x_raw;
 	int				delta_y_raw;
 
+	if (view->fdf->size_x_raw == 0 || view->fdf->size_y_raw == 0)
+		return ;
 	drawing_start_fdf = computed_deepest_corner(view, screen->z_scale);
 	delta_x_raw = (drawing_start_fdf.x_raw > 0) * -2 + 1;
 	delta_y_raw = (drawing_start_fdf.y_raw > 0) * -2 + 1;
