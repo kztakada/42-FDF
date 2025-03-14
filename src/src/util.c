@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 00:46:24 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/09 01:06:21 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:20:59 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	flush_get_next_line(int fd)
 
 	while (TRUE)
 	{
-		line = custom_get_next_line(fd);
+		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		free(line);
