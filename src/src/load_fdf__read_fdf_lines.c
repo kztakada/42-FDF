@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 19:43:18 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:23:10 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ static int	read_color(char *verified_altitude)
 		return (-1);
 }
 
+static void	set_empty_flag(t_vertex_fdf *vertex, int size_x_raw)
+{
+	int	i;
+
+	i = 0;
+	while (i < size_x_raw)
+	{
+		vertex[i].is_empty = TRUE;
+		i++;
+	}
+}
+
 static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 {
 	char	**z_and_color_collection;
@@ -43,6 +55,7 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 			* fdf->size_x_raw);
 	if (!fdf->yx_matrix[y])
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
+	set_empty_flag(fdf->yx_matrix[y], fdf->size_x_raw);
 	z_and_color_collection = ft_split(line, ' ');
 	x_i = 0;
 	while (z_and_color_collection[x_i] && x_i < fdf->size_x_raw)
@@ -54,11 +67,11 @@ static void	read_fdf_oneline(t_model_fdf *fdf, char *line, int y)
 		fdf->yx_matrix[y][x_i].z = ft_atoi(z_and_color_collection[x_i]);
 		fdf->yx_matrix[y][x_i].color = read_color(z_and_color_collection[x_i]);
 		free(z_and_color_collection[x_i]);
+		fdf->yx_matrix[y][x_i].is_empty = FALSE;
 		x_i++;
 	}
-	if (x_i != fdf->size_x_raw || z_and_color_collection[x_i] != NULL)
-		forced_error_exit("Invalid fdf file (missing line segmentation)",
-			__FILE__, __LINE__);
+	if (z_and_color_collection[x_i] != NULL)
+		forced_error_exit("Invalid fdf file", __FILE__, __LINE__);
 	free(z_and_color_collection);
 }
 

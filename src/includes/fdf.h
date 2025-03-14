@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 23:11:13 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 01:23:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ typedef struct s_vertex_fdf
 	// balanced Value (Center of Gravity Correction Value)
 	int				x;
 	int				y;
+	int				is_empty;
 }					t_vertex_fdf;
 typedef struct s_model_fdf
 {
