@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 21:45:30 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:19:49 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	app_main(int argc, char *argv[])
 	t_model_fdf	fdf;
 	t_screen	*screen;
 
-	ft_printf("FDF Start\n");
 	if (argc < 2)
 		forced_error_exit("No file name\n", __FILE__, __LINE__);
 	if (argc > 2)

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 22:30:03 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:20:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	key_hook(int keycode, void *param)
 {
 	t_screen	*screen;
 
-	ft_printf("keycode: %d\n", keycode);
 	screen = (t_screen *)param;
 	if (keycode == KEY_ESC)
 		close_window(screen);
