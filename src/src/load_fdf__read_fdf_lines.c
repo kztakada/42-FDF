@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:44:33 by katakada          #+#    #+#             */
-/*   Updated: 2025/02/08 00:15:29 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:43:18 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	read_color(char *verified_altitude)
 	char	*color;
 
 	verified_altitude = skip_z(verified_altitude);
-	if (verified_altitude[0] == ',')
+	if (verified_altitude[0] == ',' && verified_altitude[1] != '\0')
 	{
 		verified_altitude++;
 		color = verified_altitude;
