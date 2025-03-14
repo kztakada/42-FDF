@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 01:40:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 03:08:53 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@
 # define BLUE_SHIFT 0
 
 // model colors are 5 levels
-# define COLOR_L0 0x432371
-# define COLOR_L1 0x714674
-# define COLOR_L2 0x9F6976
-# define COLOR_L3 0xCC8B79
-# define COLOR_L4 0xFAAE7B
+# define COLOR_L0 0x550E94
+# define COLOR_L1 0x650081
+# define COLOR_L2 0xB241B2
+# define COLOR_L3 0xEE82EE
+# define COLOR_L4 0x90EE90
 
 // screen size
 # define SCREEN_WIDTH 1920
@@ -343,6 +343,13 @@ typedef struct s_rectangle
 	int				height;
 	int				color;
 }					t_rectangle;
+
+typedef struct s_tricromatic
+{
+	int				r;
+	int				g;
+	int				b;
+}					t_tricromatic;
 
 // draw_view__draw_line__calc_dot_color.c
 void				calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
