@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 19:31:09 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/14 23:11:13 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@
 # define GREEN_SHIFT 8
 # define BLUE_SHIFT 0
 
+// anti-aliasing
+# define BLEND 0.65 // color blend ratio(model & background)
+
 // model colors are 5 levels
 # define COLOR_L0 0x550E94
 # define COLOR_L1 0x650081
@@ -66,6 +69,9 @@
 
 // screen background color
 # define SCREEN_BG 0x040404
+# define SCREEN_BG_R 0x04
+# define SCREEN_BG_G 0x04
+# define SCREEN_BG_B 0x04
 # define CONSOLE_BG 0x222222
 # define NAMEPLATE_BG 0x161616
 
@@ -346,6 +352,7 @@ typedef struct s_rectangle
 
 typedef struct s_tricromatic
 {
+	int				hex;
 	int				r;
 	int				g;
 	int				b;
