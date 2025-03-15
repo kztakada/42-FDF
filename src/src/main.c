@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 14:19:49 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:56:37 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	reset_settings(t_screen *screen)
 	screen->settings->auto_rotate_x = STOP;
 	screen->settings->auto_rotate_y = STOP;
 	screen->settings->auto_rotate_z = STOP;
+	screen->settings->is_anti_aliasing = TRUE;
+	screen->settings->is_debug = FALSE;
+	screen->z_scale = Z_SCALE_DEFAULT;
 }
 
 int	app_main(int argc, char *argv[])

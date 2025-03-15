@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 15:24:12 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:58:10 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@
 # define KEY_X 120
 # define KEY_Y 121
 # define KEY_Z 122
+# define KEY_A 97
 
 // mouse code
 # define MOUSE_LEFT 1
@@ -241,6 +242,7 @@ typedef struct s_anti_aliased_dot
 	float			z_f;
 	int				top_color;
 	int				bottom_color;
+	int				base_color;
 }					t_anti_aliased_dot;
 typedef struct s_dot_on_view
 {
@@ -274,6 +276,7 @@ typedef struct s_settings
 	int				projection_mode;
 	int				is_moved;
 	int				screen_mode;
+	int				is_anti_aliasing;
 	int				auto_rotate_x;
 	int				auto_rotate_y;
 	int				auto_rotate_z;
@@ -360,12 +363,12 @@ typedef struct s_tricromatic
 }					t_tricromatic;
 
 // draw_view__draw_line__calc_dot_color.c
-void				calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
-						t_line_on_view *line);
+void				calc_dot_color(t_anti_aliased_dot *drawing_dot,
+						t_line_on_view *line, int is_antialiasing);
 
 // draw_view__draw_line__draw_dot_line.c
 void				draw_dot_line(t_line_on_view *line, t_view *view,
-						t_image *image);
+						t_screen *screen);
 // draw_view__draw_line__is_out_of_view__util.c
 int					is_dot_within_view(t_dot_on_view dot, t_view *view);
 int					is_crossing_view(t_line_on_view the_line, t_view *view);

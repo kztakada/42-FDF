@@ -6,13 +6,13 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:29:15 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 13:25:48 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:53:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	draw_line(t_line_on_view *line, t_view *view, t_image *image)
+static void	draw_line(t_line_on_view *line, t_view *view, t_screen *screen)
 {
 	if (is_out_of_view(line, view) == TRUE)
 		return ;
@@ -21,7 +21,7 @@ static void	draw_line(t_line_on_view *line, t_view *view, t_image *image)
 	if (line->start_dot.x > line->end_dot.x)
 		swap_start_end_xyz(line);
 	calc_yz_gradient(line);
-	draw_dot_line(line, view, image);
+	draw_dot_line(line, view, screen);
 }
 
 static void	draw_line_start_to_end(t_vertex_fdf start_raws,
@@ -47,7 +47,7 @@ static void	draw_line_start_to_end(t_vertex_fdf start_raws,
 			FALSE);
 	end_dot = convert_fdf_to_view_dot(*end_fdf, view, screen->z_scale, FALSE);
 	line = make_line_on_view(start_dot, end_dot);
-	draw_line(&line, view, screen->image);
+	draw_line(&line, view, screen);
 }
 
 void	draw_line_to_next_x(t_vertex_fdf start_raws, t_view *view,

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:17:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 14:20:04 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:59:29 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ static void	toggle_debug_mode(t_screen *screen)
 		screen->settings->is_debug = TRUE;
 }
 
+static void	toggle_antialiasing(t_screen *screen)
+{
+	if (screen->settings->is_anti_aliasing == TRUE)
+		screen->settings->is_anti_aliasing = FALSE;
+	else
+		screen->settings->is_anti_aliasing = TRUE;
+}
+
 int	key_hook(int keycode, void *param)
 {
 	t_screen	*screen;
@@ -55,6 +63,8 @@ int	key_hook(int keycode, void *param)
 		toggle_auto_rotate(screen, keycode);
 	else if (keycode == KEY_D)
 		toggle_debug_mode(screen);
+	else if (keycode == KEY_A)
+		toggle_antialiasing(screen);
 	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT || keycode == KEY_UP
 		|| keycode == KEY_DOWN)
 		translate_camera_pos(keycode, screen);

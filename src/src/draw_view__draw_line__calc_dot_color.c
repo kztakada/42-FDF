@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 22:31:48 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 23:23:15 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:56:07 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,12 @@ static int	get_anti_alias_color(t_tricromatic base_color)
 	return ((a_a_color.r << 16) | (a_a_color.g << 8) | a_a_color.b);
 }
 
-void	calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
-		t_line_on_view *line)
+static void	calc_antiailiased_color(t_anti_aliased_dot *drawing_dot,
+		t_tricromatic base_color)
 {
-	t_tricromatic	base_color;
-	float			top_occupied_ratio;
-	float			bottom_occupied_ratio;
+	float	top_occupied_ratio;
+	float	bottom_occupied_ratio;
 
-	drawing_dot->y = (int)drawing_dot->y_f;
-	drawing_dot->z = (int)drawing_dot->z_f;
-	base_color = get_base_color(drawing_dot, line);
 	if (drawing_dot->y_f > 0.f)
 		bottom_occupied_ratio = drawing_dot->y_f - (int)drawing_dot->y_f;
 	else
@@ -95,4 +91,18 @@ void	calc_anti_alias_dots(t_anti_aliased_dot *drawing_dot,
 		drawing_dot->top_color = get_anti_alias_color(base_color);
 		drawing_dot->bottom_color = base_color.hex;
 	}
+}
+
+void	calc_dot_color(t_anti_aliased_dot *drawing_dot, t_line_on_view *line,
+		int is_antialiasing)
+{
+	t_tricromatic	base_color;
+
+	drawing_dot->y = (int)drawing_dot->y_f;
+	drawing_dot->z = (int)drawing_dot->z_f;
+	base_color = get_base_color(drawing_dot, line);
+	drawing_dot->base_color = base_color.hex;
+	if (!is_antialiasing)
+		return ;
+	calc_antiailiased_color(drawing_dot, base_color);
 }
