@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 13:24:09 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:24:12 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,6 +463,9 @@ void				draw_multi_view(t_multi_view *multi_view, t_screen *screen);
 
 // projection_exec__auto_rotate_camera_angle.c
 void				auto_rotate_camera_angle(t_screen *screen);
+// projection_exec__draw_debag__draw_debag_fdf_info.c
+void				draw_debag_fdf_info(void *mlx, void *mlx_win,
+						t_model_fdf *fdf);
 // projection_exec__draw_debag.c
 void				draw_debag(t_screen *screen);
 // projection_exec__draw_info__util.c
@@ -495,6 +498,7 @@ char				*custom_get_next_line(int fd);
 
 // util.c
 t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
+char				*ft_dtoa(double n);
 int					get_int_abs(int n);
 void				flush_get_next_line(int fd);
 void				free_all(char **str_collection);

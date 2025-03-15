@@ -6,33 +6,11 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:48:52 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 01:41:41 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:24:19 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-char	*ft_dtoa(double n)
-{
-	char	*str;
-	char	*tmp;
-	char	*tmp2;
-
-	if (n < 0)
-	{
-		n = n * -1;
-		str = ft_strjoin("-", ft_dtoa(n));
-		return (str);
-	}
-	str = ft_itoa((int)n);
-	tmp = ft_strjoin(str, ".");
-	free(str);
-	str = ft_itoa((int)((n - (int)n) * 1000000000));
-	tmp2 = ft_strjoin(tmp, str);
-	free(tmp);
-	free(str);
-	return (tmp2);
-}
 
 void	put_camera_status(t_screen *screen, t_view *view, int x, int y)
 {
@@ -91,6 +69,8 @@ void	draw_debag_multi_view(t_screen *screen)
 
 void	draw_debag(t_screen *screen)
 {
+	draw_debag_fdf_info(screen->mlx, screen->mlx_win,
+		screen->views->main_view->fdf);
 	if (screen->settings->screen_mode == MAIN_SCREEN)
 		draw_debag_main_view(screen);
 	else if (screen->settings->screen_mode == MULTI_SCREEN)
