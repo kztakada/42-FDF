@@ -6,16 +6,12 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 23:24:15 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 00:44:46 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-
-# ifndef TEST
-#  include "./for_test.h"
-# endif // TEST
 
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
