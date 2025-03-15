@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 00:02:38 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/11 17:51:17 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:25:30 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static t_vertex_fdf	calc_deeper_corner(t_vertex_fdf deepest_temp,
 	t_dot_on_view	deepest_temp_dot;
 	t_dot_on_view	candidate_dot;
 
-	deepest_temp_dot = convert_fdf_to_view_dot(deepest_temp, view, z_scale);
-	candidate_dot = convert_fdf_to_view_dot(candidate, view, z_scale);
+	deepest_temp_dot = convert_fdf_to_view_dot(deepest_temp, view, z_scale,
+			TRUE);
+	candidate_dot = convert_fdf_to_view_dot(candidate, view, z_scale, TRUE);
 	if (candidate_dot.z < deepest_temp_dot.z)
 		return (candidate);
 	return (deepest_temp);

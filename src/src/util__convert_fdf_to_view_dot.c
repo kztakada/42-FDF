@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:58:49 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/13 19:34:52 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:23:51 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ static void	rotate_z(int *x, int *y, double z_angle)
 }
 
 t_dot_on_view	convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view,
-		int z_scale)
+		int z_scale, int is_z_accuracy_required)
 {
 	t_dot_on_view	view_dot;
 
-	view_dot.z = view->fdf->yx_matrix[v_fdf.y_raw][v_fdf.x_raw].z;
+	if (is_z_accuracy_required)
+		view_dot.z = 0;
+	else
+		view_dot.z = view->fdf->yx_matrix[v_fdf.y_raw][v_fdf.x_raw].z;
 	if (view->fdf->yx_matrix[v_fdf.y_raw][v_fdf.x_raw].color >= 0)
 		view_dot.color = view->fdf->yx_matrix[v_fdf.y_raw][v_fdf.x_raw].color;
 	else

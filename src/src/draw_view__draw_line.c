@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:29:15 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 02:06:48 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:25:48 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ static void	draw_line_start_to_end(t_vertex_fdf start_raws,
 		return ;
 	if (end_fdf == NULL)
 		forced_error_exit("fdf model data is invalid", __FILE__, __LINE__);
-	start_dot = convert_fdf_to_view_dot(*start_fdf, view, screen->z_scale);
-	end_dot = convert_fdf_to_view_dot(*end_fdf, view, screen->z_scale);
+	start_dot = convert_fdf_to_view_dot(*start_fdf, view, screen->z_scale,
+			FALSE);
+	end_dot = convert_fdf_to_view_dot(*end_fdf, view, screen->z_scale, FALSE);
 	line = make_line_on_view(start_dot, end_dot);
 	draw_line(&line, view, screen->image);
 }

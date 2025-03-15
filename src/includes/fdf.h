@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 01:23:37 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:24:09 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define SIDE_LEFT 2
 # define SIDE_RIGHT 3
 
-# define Z_SCALE_DEFAULT 10
+# define Z_SCALE_DEFAULT 1
 # define Z_HEIGHT_RATIO 10
 
 // hex base upper and lower
@@ -488,7 +488,7 @@ void				setup_user_action_hooks(t_screen *screen);
 
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view,
-						int z_scale);
+						int z_scale, int is_z_accuracy_required);
 
 // util__custom_get_next_line.c
 char				*custom_get_next_line(int fd);
