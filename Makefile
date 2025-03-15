@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2025/03/15 23:27:32 by katakada         ###   ########.fr        #
+#    Updated: 2025/03/15 23:54:08 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ SRCS			=	$(SRCS_PATH)draw_view.c \
 					$(SRCS_PATH)util__custom_get_next_line.c \
 					$(SRCS_PATH)util__setup.c 
 
+SRCS_BOUNS		=	$(SRCS_PATH)util__setup_bonus.c
+
 MAIN			=	$(SRCS_PATH)main.c
 MAIN_BONUS		=	$(SRCS_PATH)main_bonus.c
 
@@ -96,7 +98,7 @@ ISBOUNS = 0
 ISDEBUG = 0
 
 ifeq ($(ISBOUNS), 1)
-	SRCS += $(MAIN_BONUS)
+	SRCS += $(MAIN_BONUS) $(SRCS_BOUNS)
 else
 	SRCS += $(MAIN)
 endif

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 20:52:35 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 00:05:24 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	app_main(int argc, char *argv[])
 	t_screen	*screen;
 
 	if (argc < 2)
-		forced_error_exit("No file name\n", __FILE__, __LINE__);
+		forced_error_exit("No file name", __FILE__, __LINE__);
 	if (argc > 2)
-		forced_error_exit("Too many arguments\n", __FILE__, __LINE__);
+		forced_error_exit("Too many arguments", __FILE__, __LINE__);
 	screen = init_screen(argv[1]);
 	fdf = load_fdf(argv[1]);
 	screen->views = init_screen_views(&fdf);

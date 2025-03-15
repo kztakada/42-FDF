@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:59 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 23:11:21 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 00:02:07 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,6 @@ static void	setup_loop_exec_hook(t_screen *screen)
 	mlx_loop_hook(screen->mlx, loop_exec, screen);
 }
 
-int	is_nutural_numchar(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-')
-		return (FALSE);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
 static int	app_main(int argc, char *argv[])
 {
 	t_model_fdf	fdf;
@@ -75,13 +59,7 @@ static int	app_main(int argc, char *argv[])
 	screen->views = init_screen_views(&fdf);
 	reset_settings(screen);
 	if (argc == 3)
-	{
-		if (is_nutural_numchar(argv[2]) == TRUE)
-			screen->settings->frame_rate = ft_atoi(argv[2]);
-		else
-			forced_error_exit("Invalid framerate (nonnegative integer only)",
-				__FILE__, __LINE__);
-	}
+		setup_framerate(screen, argv[2]);
 	setup_user_action_hooks(screen);
 	setup_loop_exec_hook(screen);
 	mlx_loop(screen->mlx);
