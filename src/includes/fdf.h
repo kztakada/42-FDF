@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 18:19:15 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:39:50 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif // TEST
 
 # include "../libft/includes/libft.h"
-# include "./mlx.h"
+# include "../minilibx/mlx.h"
 # include <math.h>
 # include <stdio.h>
 # include <time.h>

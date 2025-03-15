@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2025/02/09 01:31:44 by katakada         ###   ########.fr        #
+#    Updated: 2025/03/15 18:37:57 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,9 @@
 
 NAME			=	fdf
 
-CC				=	cc 
-ifeq ($(IS_DEBUG),1)
-	CC +=  -g -fsanitize=address
-endif
+CC				=	cc
+DEBUG_CC		=	cc -g -fsanitize=address
+
 CFLAGS			=	-Wall -Wextra -Werror
 
 SRC_PATH		=	src/
@@ -49,7 +48,7 @@ endif
 
 all:	$(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
+$(NAME): $(MLX) $(OBJS) $(LIBFT) 
 	$(CC) $(CFLAGS) $(INCS) $(OBJS) $(LIBFT) $(MLX) $(FRAMEWORKS) -o $(NAME)
 
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
@@ -58,6 +57,9 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
 
 
 bonus:	all
+
+debug: $(OBJS) $(LIBFT) $(MLX)
+	$(DEBUG_CC) $(CFLAGS) $(INCS) $(OBJS) $(LIBFT) $(MLX) $(FRAMEWORKS) -o $(NAME)
 
 
 $(LIBFT):
