@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 18:39:50 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 23:24:15 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 # include <stdio.h>
-# include <time.h>
 
 # define TRUE 1
 # define FALSE 0
 
-# define IS_DEBUG 1
+# ifndef IS_DEBUG
+#  define IS_DEBUG 0
+# endif
 
 # define LOWER_CASE 0
 # define UPPER_CASE 1
@@ -300,6 +301,7 @@ typedef struct s_settings
 	int				auto_rotate_x;
 	int				auto_rotate_y;
 	int				auto_rotate_z;
+	int				frame_rate;
 	int				is_debug;
 }					t_settings;
 
@@ -511,16 +513,16 @@ void				draw_screen(t_screen *screen);
 // projection_exec.c
 void				projection_exec(t_screen *screen);
 
-// setup_mlx_hooks.c
-void				setup_loop_exec_hook(t_screen *screen);
-void				setup_user_action_hooks(t_screen *screen);
-
 // util__convert_fdf_to_view_dot.c
 t_dot_on_view		convert_fdf_to_view_dot(t_vertex_fdf v_fdf, t_view *view,
 						int z_scale, int is_z_accuracy_required);
 
 // util__custom_get_next_line.c
 char				*custom_get_next_line(int fd);
+
+// util__setup.c
+void				setup_user_action_hooks(t_screen *screen);
+void				reset_settings(t_screen *screen);
 
 // util.c
 t_vertex_fdf		*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf);
