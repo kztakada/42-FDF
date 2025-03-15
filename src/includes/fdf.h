@@ -6,15 +6,18 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 16:58:10 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:19:15 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# ifndef TEST
+#  include "./for_test.h"
+# endif // TEST
+
 # include "../libft/includes/libft.h"
-# include "./for_test.h"
 # include "./mlx.h"
 # include <math.h>
 # include <stdio.h>
@@ -77,11 +80,16 @@
 
 // screen text color
 # define TXT_C0 0xFFFFFF
+# define TXT_C1 0xcf1427
+# define TXT_C2 0x345cd6
+# define TXT_C3 0xd6860d
+# define TXT_C4 0x1db934
 
 // info text line settings
 # define INFO_BASE_OFFSET_Y 20
 # define LINE_SPACE 18
 # define BOL 5 // beginning of line
+# define BOL2 120
 # define G_L01 20
 # define G_M01 60
 # define G_M02 78
@@ -105,41 +113,53 @@
 # define G_K11 416
 # define G_K12 442
 # define G_K13 460
-# define G_K14 486
+# define G_K14 478
+# define G_K15 504
+
+# define G_S00 532
+# define G_S01 550
+# define G_S02 568
+# define G_S03 586
+# define G_S04 604
+# define G_S05 622
+# define G_S06 640
+# define G_S07 658
+# define G_S08 676
 
 // info text
-# define G_INFO_L01 "OPERATION EXPLANATION"
+# define G_INFO_L01 "OPERATING INSTRUCTIONS"
 
 # define G_INFO_M01 "MOUSE WHEEL"
-# define G_INFO_M02 "Up:     Zoom in"
-# define G_INFO_M03 "Down:   Zoom out"
+# define G_INFO_M02 "Up      Zoom in"
+# define G_INFO_M03 "Down    Zoom out"
 
 # define G_INFO_K01 "KEYBOARD"
-# define G_INFO_K02 "Space:  Switch view mode"
-# define G_INFO_K03 "Left:   Move camera to left"
-# define G_INFO_K04 "Right:  Move camera to right"
-# define G_INFO_K05 "Up:     Move camera to up"
-# define G_INFO_K06 "Down:   Move camera to down"
+# define G_INFO_K02 "Space   Switch view mode"
+# define G_INFO_K03 "Left    Move camera to left"
+# define G_INFO_K04 "Right   Move camera to right"
+# define G_INFO_K05 "Up      Move camera to up"
+# define G_INFO_K06 "Down    Move camera to down"
 
-# define G_INFO_K07 "+:      increment model z scale"
-# define G_INFO_K08 "-:      decrement model z scale"
+# define G_INFO_K07 "+       increment model z scale"
+# define G_INFO_K08 "-       decrement model z scale"
 
-# define G_INFO_K09 "X:      Toggle auto rotate x"
-# define G_INFO_K10 "Y:      Toggle auto rotate y"
-# define G_INFO_K11 "Z:      Toggle auto rotate z"
+# define G_INFO_K09 "X       Toggle auto rotate x"
+# define G_INFO_K10 "Y       Toggle auto rotate y"
+# define G_INFO_K11 "Z       Toggle auto rotate z"
 
-# define G_INFO_K12 "C:      Reset camera position"
-# define G_INFO_K13 "D:      Switch debug mode"
+# define G_INFO_K12 "A       Anti-aliasing on/off"
+# define G_INFO_K13 "C       Reset camera position"
+# define G_INFO_K14 "D       Switch debug mode"
 
-# define G_INFO_K14 "Esc:    Close window"
+# define G_INFO_K15 "Esc     Close window"
 
 # define MAIN_INFO_M01 "MOUSE DRAG"
-# define MAIN_INFO_M02 "Left:   Translate camera xy"
-# define MAIN_INFO_M03 "Middle: Rotate camera xy"
-# define MAIN_INFO_M04 "Right:  Rotate camera z"
+# define MAIN_INFO_M02 "Left    Translate camera xy"
+# define MAIN_INFO_M03 "Middle  Rotate camera xy"
+# define MAIN_INFO_M04 "Right   Rotate camera z"
 
 # define MULTI_INFO_M01 "MOUSE CLICK"
-# define MULTI_INFO_M02 "Left:   Select projection"
+# define MULTI_INFO_M02 "Left    Select projection"
 
 // view size
 # define CONSOLE_WIDTH 200
@@ -471,6 +491,9 @@ void				draw_debag_fdf_info(void *mlx, void *mlx_win,
 						t_model_fdf *fdf);
 // projection_exec__draw_debag.c
 void				draw_debag(t_screen *screen);
+// projection_exec__draw_info__global_info.c
+void				draw_global_instructions(void *mlx, void *win);
+void				draw_global_switch_status(t_screen *screen);
 // projection_exec__draw_info__util.c
 int					np_offset_x(t_view *view);
 int					np_offset_y(t_view *view);
