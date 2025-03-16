@@ -6,11 +6,17 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:10:05 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 19:31:33 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:23:13 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	free_two(char **z_and_color_collection, char *line)
+{
+	free(z_and_color_collection);
+	free(line);
+}
 
 static int	calc_max_x_raw(const char *fdf_path)
 {
@@ -34,8 +40,8 @@ static int	calc_max_x_raw(const char *fdf_path)
 		free(z_and_color_collection[i]);
 		i++;
 	}
+	free_two(z_and_color_collection, line);
 	flush_get_next_line(fd);
-	free(line);
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
 	return (size_x_raw - 1);

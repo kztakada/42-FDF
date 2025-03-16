@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:49:00 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 18:29:34 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:17:41 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	verify_empty_fdf(const char *fdf_path)
 	}
 	if (close(fd) < 0)
 		sys_func_error_exit("close failed", __FILE__, __LINE__);
+	free(line);
 	return (result);
 }
