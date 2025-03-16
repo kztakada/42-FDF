@@ -6,7 +6,7 @@
 #    By: katakada <katakada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 18:59:18 by katakada          #+#    #+#              #
-#    Updated: 2025/03/15 23:54:08 by katakada         ###   ########.fr        #
+#    Updated: 2025/03/16 12:04:39 by katakada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ DEBUG_CC		=	cc -D IS_DEBUG=1 -g -fsanitize=address
 
 CFLAGS			=	-Wall -Wextra -Werror
 
-SRC_PATH		=	src/
-INCS			=	-I $(SRC_PATH)includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 
-SRCS_PATH		=	$(SRC_PATH)src/
+INCS			=	-I includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
+
+SRCS_PATH		=	src/
 SRCS			=	$(SRCS_PATH)draw_view.c \
 					$(SRCS_PATH)draw_view__draw_line.c \
 					$(SRCS_PATH)draw_view__draw_line__calc_dot_color.c \
@@ -73,13 +73,13 @@ SRCS_BOUNS		=	$(SRCS_PATH)util__setup_bonus.c
 MAIN			=	$(SRCS_PATH)main.c
 MAIN_BONUS		=	$(SRCS_PATH)main_bonus.c
 
-OBJS_PATH		=	$(SRC_PATH)objs/
+OBJS_PATH		=	objs/
 OBJS			=	$(SRCS:src/src/%.c=src/objs/%.o)
 
-LIBFT_DIR		=	$(SRC_PATH)libft/
+LIBFT_DIR		=	libft/
 LIBFT			=	$(LIBFT_DIR)libft.a
 
-MLX_DIR			=	$(SRC_PATH)minilibx/
+MLX_DIR			=	minilibx/
 MLX				=	$(MLX_DIR)libmlx_Linux.a
 FRAMEWORKS		=	-lXext -lX11 -lm -lbsd
 
