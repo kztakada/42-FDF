@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:33:31 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 15:50:11 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:40:59 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_screen	*init_screen(const char *fdf_path)
 	t_screen	*screen;
 	char		*window_title;
 
-	screen = (t_screen *)malloc(sizeof(t_screen));
+	screen = ft_calloc(1, sizeof(t_screen));
 	if (!screen)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
 	window_title = ft_strjoin("fdf - ", fdf_path);
@@ -49,10 +49,10 @@ t_screen	*init_screen(const char *fdf_path)
 		sys_func_error_exit("mlx_new_window failed", __FILE__, __LINE__);
 	free(window_title);
 	screen->image = init_image(screen->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	screen->mouse = (t_mouse *)malloc(sizeof(t_mouse));
+	screen->mouse = ft_calloc(1, sizeof(t_mouse));
 	if (!screen->mouse)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
-	screen->settings = (t_settings *)malloc(sizeof(t_settings));
+	screen->settings = ft_calloc(1, sizeof(t_settings));
 	if (!screen->settings)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
 	return (screen);

@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 00:46:24 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 14:48:47 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:12:04 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,26 @@ t_vertex_fdf	*get_vertex_fdf(int x_raw, int y_raw, t_model_fdf *fdf)
 
 char	*ft_dtoa(double n)
 {
-	char	*str;
 	char	*tmp;
 	char	*tmp2;
+	char	*result;
 
 	if (n < 0)
 	{
 		n = n * -1;
-		str = ft_strjoin("-", ft_dtoa(n));
-		return (str);
+		tmp = ft_dtoa(n);
+		result = ft_strjoin("-", tmp);
+		free(tmp);
+		return (result);
 	}
-	str = ft_itoa((int)n);
-	tmp = ft_strjoin(str, ".");
-	free(str);
-	str = ft_itoa((int)((n - (int)n) * 1000000000));
-	tmp2 = ft_strjoin(tmp, str);
+	tmp = ft_itoa((int)n);
+	tmp2 = ft_strjoin(tmp, ".");
 	free(tmp);
-	free(str);
-	return (tmp2);
+	tmp = ft_itoa((int)((n - (int)n) * 1000000000));
+	result = ft_strjoin(tmp2, tmp);
+	free(tmp2);
+	free(tmp);
+	return (result);
 }
 
 int	get_int_abs(int n)

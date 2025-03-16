@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:04 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/14 01:36:54 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:32:03 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ static t_view	*init_view(int view_width, int view_height, int projection_mode,
 {
 	t_view	*view;
 
-	view = (t_view *)malloc(sizeof(t_view));
+	view = (t_view *)ft_calloc(1, sizeof(t_view));
 	if (!view)
 		sys_func_error_exit("malloc failed", __FILE__, __LINE__);
 	view->width = view_width;
 	view->height = view_height;
+	view->offset_x = 0;
+	view->offset_y = 0;
 	view->camera = init_camera(projection_mode, __FILE__, __LINE__);
 	setup_camera_zoom_to_fit_view_whole(view->camera, view_width, view_height,
 		fdf);

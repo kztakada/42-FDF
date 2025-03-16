@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:27:36 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/15 16:45:39 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:47:51 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void	put_pixel_to_image(int x, int y, int color, t_image *image)
 {
 	int	i;
 
+	if (!image || !image->addr)
+		return ;
+	i = 0;
 	if (x >= 2 && x < image->width && y >= 2 && y < image->height)
 	{
 		i = (x * image->bits_per_pixel / 8) + (y * image->line_length);
