@@ -6,7 +6,7 @@
 /*   By: katakada <katakada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:58:01 by katakada          #+#    #+#             */
-/*   Updated: 2025/03/16 00:44:46 by katakada         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:09:21 by katakada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@
 # define COLOR_L4 0x90EE90
 
 // screen size
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 2880
+# define SCREEN_HEIGHT 1800
 
 // screen background color
 # define SCREEN_BG 0x040404
@@ -213,23 +213,35 @@
 
 // .fdf format
 // Notice ////////////////////////////////////////////////////////////////////
-// Raw data in fdf format always has starting x and y values of 0 and		//
-// never takes negative values.												//
-//																			//
-// x and y in t_vertex_fdf are the corrected values of the center origin	//
-// from the respective raw data.											//
-// z does not need to be corrected.											//
-//																			//
-// If no color is specified, the color value is -1							//
+// Raw data in fdf format always has starting x and y values of 0 and
+// never takes negative values.
+//
+// x and y in t_vertex_fdf are the corrected values of the center origin
+// from the respective raw data.
+// z does not need to be corrected.
+//
+// If no color is specified, the color value is -1
+//
+//
+// typedef struct s_vertex_fdf
+// {
+// 	// inside fdf file
+// 	int				x_raw;
+// 	int				y_raw;
+// 	int				color;
+// 	int				z;
+// 	// balanced Value (Center of Gravity Correction Value)
+// 	int				x;
+// 	int				y;
+// 	int				is_empty;
+// }					t_vertex_fdf;
 //////////////////////////////////////////////////////////////////////////////
 typedef struct s_vertex_fdf
 {
-	// inside fdf file
 	int				x_raw;
 	int				y_raw;
 	int				color;
 	int				z;
-	// balanced Value (Center of Gravity Correction Value)
 	int				x;
 	int				y;
 	int				is_empty;
@@ -350,17 +362,28 @@ typedef struct s_image
 // The image is displayed on the screen.
 // The image is rendered in one or more views.
 // screen size = image size >= view size
+
+// typedef struct s_screen
+// {
+// 	//	MiniLibX instance
+// 	void			*mlx;
+// 	void			*mlx_win;
+// 	//	image data
+// 	t_image			*image;
+// 	// views
+// 	t_screen_views	*views;
+// 	int				z_scale;
+// 	//	user interface
+// 	t_mouse			*mouse;
+// 	t_settings		*settings;
+// }					t_screen;
 typedef struct s_screen
 {
-	//	MiniLibX instance
 	void			*mlx;
 	void			*mlx_win;
-	//	image data
 	t_image			*image;
-	// views
 	t_screen_views	*views;
 	int				z_scale;
-	//	user interface
 	t_mouse			*mouse;
 	t_settings		*settings;
 }					t_screen;
